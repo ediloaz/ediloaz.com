@@ -224,10 +224,10 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center max-w-3xl mx-auto">
             <a
               href="mailto:ediloaz@gmail.com"
-              className="flex items-center gap-3 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300 transform hover:scale-105"
+              className="flex items-center gap-3 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               <span className="text-xl">📧</span>
               Email
@@ -236,7 +236,7 @@ export default function Home() {
               href="https://linkedin.com/in/ediloaz"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-6 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300"
+              className="flex items-center gap-3 px-6 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:scale-105"
             >
               <span className="text-xl">💼</span>
               LinkedIn
@@ -245,10 +245,19 @@ export default function Home() {
               href="https://github.com/ediloaz"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-6 py-3 border-2 border-zinc-600 text-zinc-600 dark:text-zinc-400 rounded-full hover:bg-zinc-600 hover:text-white transition-all duration-300"
+              className="flex items-center gap-3 px-6 py-3 border-2 border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-full hover:bg-zinc-700 hover:text-white dark:hover:bg-zinc-600 transition-all duration-300 transform hover:scale-105"
             >
               <span className="text-xl">🐙</span>
               GitHub
+            </a>
+            <a
+              href="https://medium.com/@ediloaz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-6 py-3 border-2 border-emerald-600 text-emerald-600 dark:text-emerald-400 rounded-full hover:bg-emerald-600 hover:text-white transition-all duration-300 transform hover:scale-105"
+            >
+              <span className="text-xl">✍️</span>
+              Medium
             </a>
           </div>
         </div>
@@ -281,7 +290,7 @@ export default function Home() {
             </div>
             
             <div>
-              <h4 className="font-bold text-zinc-800 dark:text-zinc-200 mb-4">Contacto</h4>
+              <h4 className="font-bold text-zinc-800 dark:text-zinc-200 mb-4">Conéctate</h4>
               <div className="space-y-2">
                 <Link href="/contact" className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
                   Página de Contacto
@@ -290,7 +299,16 @@ export default function Home() {
                   Ver Mi CV
                 </Link>
                 <a href="mailto:ediloaz@gmail.com" className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
-                  ediloaz@gmail.com
+                  Email
+                </a>
+                <a href="https://linkedin.com/in/ediloaz" target="_blank" rel="noopener noreferrer" className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                  LinkedIn
+                </a>
+                <a href="https://github.com/ediloaz" target="_blank" rel="noopener noreferrer" className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                  GitHub
+                </a>
+                <a href="https://medium.com/@ediloaz" target="_blank" rel="noopener noreferrer" className="block text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 text-sm transition-colors">
+                  Medium
                 </a>
               </div>
             </div>
