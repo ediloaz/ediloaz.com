@@ -72,6 +72,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* JSON-LD Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Edisson López",
+              "alternateName": "ediloaz",
+              "url": "https://ediloaz.com",
+              "jobTitle": "Full Stack Developer",
+              "worksFor": {
+                "@type": "Organization",
+                "name": "Ibylit"
+              },
+              "sameAs": [
+                "https://www.linkedin.com/in/ediloaz",
+                "https://github.com/ediloaz"
+              ]
+            })
+          }}
+        />
         {children}
       </body>
     </html>
