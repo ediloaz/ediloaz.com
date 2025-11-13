@@ -6,7 +6,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ediloaz.com"),
+  metadataBase: new URL("https://www.ediloaz.com"),
   title: {
     default: "ediloaz — Edisson López",
     template: "%s · ediloaz",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: "https://ediloaz.com",
+    url: "https://www.ediloaz.com",
     title: "ediloaz — Edisson López",
     description: "Portafolio, proyectos y contacto.",
     images: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     site: "@ediloaz",
     creator: "@ediloaz",
   },
-  alternates: { canonical: "https://ediloaz.com" },
+  alternates: { canonical: "https://www.ediloaz.com" },
   robots: { index: true, follow: true },
   manifest: "/manifest.json",
   themeColor: "#000000",
