@@ -78,20 +78,78 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Edisson López",
-              "alternateName": "ediloaz",
-              "url": "https://ediloaz.com",
-              "jobTitle": "Full Stack Developer",
-              "worksFor": {
-                "@type": "Organization",
-                "name": "Ibylit"
-              },
-              "sameAs": [
-                "https://www.linkedin.com/in/ediloaz",
-                "https://github.com/ediloaz",
-                "https://medium.com/@ediloaz",
-                "https://dev.to/ediloaz"
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "@id": "https://ediloaz.com/#person",
+                  name: "Edisson López",
+                  alternateName: "ediloaz",
+                  url: "https://ediloaz.com",
+                  image: "https://ediloaz.com/og.png",
+                  jobTitle: "Full Stack Developer",
+                  description:
+                    "Edisson López es un desarrollador Full Stack en Costa Rica especializado en React, Next.js, .NET y arquitecturas modernas.",
+                  worksFor: {
+                    "@type": "Organization",
+                    name: "Ibylit"
+                  },
+                  nationality: {
+                    "@type": "Country",
+                    name: "Costa Rica"
+                  },
+                  homeLocation: {
+                    "@type": "Place",
+                    address: {
+                      "@type": "PostalAddress",
+                      addressCountry: "CR",
+                      addressLocality: "Costa Rica"
+                    }
+                  },
+                  knowsAbout: [
+                    "Desarrollo web",
+                    "Full Stack Development",
+                    "React",
+                    "Next.js",
+                    ".NET",
+                    "Arquitectura de software",
+                    "APIs REST",
+                    "SQL Server"
+                  ],
+                  sameAs: [
+                    "https://www.linkedin.com/in/ediloaz",
+                    "https://github.com/ediloaz",
+                    "https://medium.com/@ediloaz",
+                    "https://dev.to/ediloaz",
+                    "https://twitter.com/ediloaz"
+                  ]
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://ediloaz.com/#website",
+                  url: "https://ediloaz.com",
+                  name: "ediloaz — Edisson López",
+                  description:
+                    "Portafolio y sitio personal de Edisson López, desarrollador Full Stack en Costa Rica especializado en React, Next.js y .NET.",
+                  inLanguage: "es-CR",
+                  publisher: {
+                    "@id": "https://ediloaz.com/#person"
+                  }
+                },
+                {
+                  "@type": "WebPage",
+                  "@id": "https://ediloaz.com/#webpage",
+                  url: "https://ediloaz.com",
+                  name: "Inicio — ediloaz",
+                  isPartOf: {
+                    "@id": "https://ediloaz.com/#website"
+                  },
+                  about: {
+                    "@id": "https://ediloaz.com/#person"
+                  },
+                  description:
+                    "Página principal del portafolio de Edisson López, desarrollador Full Stack en Costa Rica.",
+                  inLanguage: "es-CR"
+                }
               ]
             })
           }}
