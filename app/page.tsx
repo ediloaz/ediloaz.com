@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const technologies = [
@@ -27,8 +28,44 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-black">
+      {/* Navigation Bar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800">
+        <div className="max-w-6xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+              Edisson López
+            </Link>
+            
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/" className="text-zinc-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
+                Inicio
+              </Link>
+              <Link href="/about-me" className="text-zinc-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
+                Sobre Mí
+              </Link>
+              <Link href="/projects" className="text-zinc-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
+                Proyectos
+              </Link>
+              <Link href="/contact" className="text-zinc-600 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
+                Contacto
+              </Link>
+              <Link href="/cv" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300 transform hover:scale-105 font-medium">
+                Ver CV
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <Link href="/projects" className="text-blue-600 dark:text-blue-400 font-medium">
+                Menú
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
-      <section className="flex min-h-screen items-center justify-center px-4">
+      <section className="flex min-h-screen items-center justify-center px-4 pt-20">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
@@ -44,18 +81,24 @@ export default function Home() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <a
-              href="#contacto"
+            <Link
+              href="/contact"
               className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               Contáctame
-            </a>
-            <a
-              href="#proyectos"
+            </Link>
+            <Link
+              href="/projects"
               className="px-8 py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-semibold rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300"
             >
               Ver Proyectos
-            </a>
+            </Link>
+            <Link
+              href="/cv"
+              className="px-8 py-4 border-2 border-purple-600 text-purple-600 dark:text-purple-400 font-semibold rounded-full hover:bg-purple-600 hover:text-white transition-all duration-300"
+            >
+              Ver Mi CV
+            </Link>
           </div>
         </div>
       </section>
@@ -118,6 +161,48 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Quick Navigation Cards */}
+      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-zinc-900 dark:to-zinc-800">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 text-zinc-800 dark:text-zinc-200">
+            Descubre Más
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Link href="/about-me" className="group">
+              <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-blue-500">
+                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">👨‍💻</div>
+                <h4 className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">Sobre Mí</h4>
+                <p className="text-zinc-600 dark:text-zinc-400">Conoce más sobre mi trayectoria y experiencia profesional</p>
+              </div>
+            </Link>
+
+            <Link href="/projects" className="group">
+              <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-purple-500">
+                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">🚀</div>
+                <h4 className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">Proyectos</h4>
+                <p className="text-zinc-600 dark:text-zinc-400">Explora mi portafolio de proyectos y aplicaciones</p>
+              </div>
+            </Link>
+
+            <Link href="/cv" className="group">
+              <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-green-500">
+                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">📄</div>
+                <h4 className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">Mi CV</h4>
+                <p className="text-zinc-600 dark:text-zinc-400">Revisa mi currículum completo y experiencia</p>
+              </div>
+            </Link>
+
+            <Link href="/contact" className="group">
+              <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-orange-500">
+                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">💬</div>
+                <h4 className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">Contacto</h4>
+                <p className="text-zinc-600 dark:text-zinc-400">¿Tienes una idea? ¡Hablemos!</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contacto" className="py-20 px-4 bg-white dark:bg-zinc-800">
         <div className="max-w-4xl mx-auto text-center">
@@ -129,6 +214,16 @@ export default function Home() {
             ¡Hablemos sobre cómo puedo ayudarte a hacer realidad tu próximo proyecto!
           </p>
           
+          <div className="mb-8">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl"
+            >
+              <span className="text-2xl">💬</span>
+              Ir a Página de Contacto
+            </Link>
+          </div>
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <a
               href="mailto:ediloaz@gmail.com"
@@ -160,11 +255,52 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-zinc-200 dark:border-zinc-700">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-zinc-600 dark:text-zinc-400">
-            © 2025 Edisson López. Desarrollado con Next.js y Tailwind CSS.
-          </p>
+      <footer className="py-12 px-4 border-t border-zinc-200 dark:border-zinc-700 bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-950 dark:to-black">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h4 className="font-bold text-zinc-800 dark:text-zinc-200 mb-4">Edisson López</h4>
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+                Desarrollador Full Stack especializado en crear soluciones web modernas y escalables.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-zinc-800 dark:text-zinc-200 mb-4">Navegación</h4>
+              <div className="space-y-2">
+                <Link href="/" className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                  Inicio
+                </Link>
+                <Link href="/about-me" className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                  Sobre Mí
+                </Link>
+                <Link href="/projects" className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                  Proyectos
+                </Link>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-zinc-800 dark:text-zinc-200 mb-4">Contacto</h4>
+              <div className="space-y-2">
+                <Link href="/contact" className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                  Página de Contacto
+                </Link>
+                <Link href="/cv" className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                  Ver Mi CV
+                </Link>
+                <a href="mailto:ediloaz@gmail.com" className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors">
+                  ediloaz@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center pt-8 border-t border-zinc-200 dark:border-zinc-800">
+            <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+              © 2025 Edisson López. Desarrollado con Next.js y Tailwind CSS.
+            </p>
+          </div>
         </div>
       </footer>
     </div>
