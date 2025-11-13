@@ -90,7 +90,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "sameAs": [
                 "https://www.linkedin.com/in/ediloaz",
                 "https://github.com/ediloaz",
-                "https://medium.com/@ediloaz"
+                "https://medium.com/@ediloaz",
+                "https://dev.to/ediloaz"
               ]
             })
           }}
