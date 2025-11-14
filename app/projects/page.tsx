@@ -1,5 +1,33 @@
 import PageLayout from "@/components/page-layout";
 
+const PROJECTS = [
+  {
+    title: "Proyecto 1",
+    description: "Descripción del proyecto 1",
+    technologies: ["React", "Next.js", "TypeScript"],
+    iframeUrl: "https://www.google.com",
+    imageUrl: "/.og.png",
+    githubLink: "https://www.github.com/ediloaz/",
+  },
+  {
+    title: "Proyecto 2",
+    description: "Descripción del proyecto 2",
+    technologies: ["React", "Next.js", "TypeScript"],
+    iframeUrl: "https://www.google.com",
+    imageUrl: "/.og.png",
+    githubLink: "https://www.github.com/ediloaz/",
+  },
+  
+  {
+    title: "Proyecto 3",
+    description: "Descripción del proyecto 3",
+    technologies: ["React", "Next.js", "TypeScript"],
+    iframeUrl: "https://www.google.com",
+    imageUrl: "/.og.png",
+    githubLink: "https://www.github.com/ediloaz/",
+  },
+];
+
 export default function Projects() {
   return (
     <PageLayout>
@@ -13,24 +41,52 @@ export default function Projects() {
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Placeholder para proyectos futuros */}
-            <div className="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-lg border border-zinc-200 dark:border-zinc-700">
-              <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg mb-4"></div>
-              <h3 className="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-2">
-                Proyecto 1
-              </h3>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm mb-4">
-                Descripción del proyecto aquí.
-              </p>
-              <div className="flex gap-2">
-                <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-xs">
-                  React
-                </span>
-                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 rounded-full text-xs">
-                  Next.js
-                </span>
-              </div>
-            </div>
+            {PROJECTS.map((project) => (
+              <article
+                key={project.title}
+                className="bg-white dark:bg-zinc-800 p-6 rounded-xl shadow-lg border border-zinc-200 dark:border-zinc-700 flex flex-col gap-4"
+              >
+                <div className="aspect-video bg-zinc-100 dark:bg-zinc-900 rounded-lg overflow-hidden">
+                  <iframe
+                    src={project.iframeUrl}
+                    title={project.title}
+                    loading="lazy"
+                    className="w-full h-full border-0"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className="text-xl font-semibold text-zinc-800 dark:text-zinc-200">
+                      {project.title}
+                    </h3>
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-sm font-medium text-blue-600 dark:text-blue-300 hover:underline"
+                    >
+                      GitHub
+                    </a>
+                  </div>
+
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={`${project.title}-${tech}`}
+                        className="px-3 py-1 bg-blue-100/70 dark:bg-blue-900/50 text-blue-700 dark:text-blue-200 rounded-full text-xs"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
