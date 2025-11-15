@@ -1,7 +1,87 @@
+"use client";
+
 import PageLayout from "@/components/page-layout";
 import Link from "next/link";
+import { useRef, useState } from "react";
+
+const certifications = [
+  {
+    id: "software-architect",
+    title: "Complete Guide to Becoming a Software Architect",
+    provider: "Udemy",
+    year: "2024",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHjz1PdbSuZ2f743KrdrQybzdH1EbwtVg2HQ&s",
+    credentialUrl: "https://www.udemy.com/certificate/UC-7bf1ef2b-13b8-4abc-b338-b1ad9d9a3abb/",
+  },
+  {
+    id: "scrum-soylider",
+    title: "SCRUM aplicado a cualquier industria",
+    provider: "soylider.net",
+    year: "2023",
+    logo: "https://www.soylider.net/cdn/shop/files/soylider.net_0e6d19d1-ed6b-4c3d-b580-235b61710105.png?v=1720915055&width=220",
+    credentialUrl:
+      "https://c.certifyem.com/?e=bgbcb2x1%60DrMlBw%7B%7BMZzerZ%5Bj1iVzeFKJtdp3ib-bdbcbQSJQRT.DF111932b-bobcbFEJTTPO!M%C3%94QF%5B!E%C3%8EB%5Bb-bjbcb32.21.3134b-b%3BbcbtpzmjefsofuAhn%23jm%2Fdpnb&h=fef8c11e0784&v=1",
+  },
+  {
+    id: "scrum-avanzado",
+    title: "Scrum avanzado",
+    provider: "LinkedIn Learning",
+    year: "2022",
+    logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
+    credentialUrl:
+      "https://www.linkedin.com/learning/certificates/05f3961576b01a57ea8ec1a153a0ea08664bc354224c26d81c054a04dd592844?trk=share_certificate",
+  },
+  {
+    id: "chrome-devtools",
+    title: "Chrome Web Developer Tools",
+    provider: "LinkedIn Learning",
+    year: "2021",
+    logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
+    credentialUrl:
+      "https://www.linkedin.com/learning/certificates/f089df9cfc561ef316ba64d423c03b9fb29986ae94c3bf2f4899c587bfd4b2ec?trk=share_certificate",
+  },
+  {
+    id: "fullstack-linkedin",
+    title: "Desarrollo Web Full Stack",
+    provider: "LinkedIn Learning",
+    year: "2020",
+    logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
+    credentialUrl: "https://drive.google.com/file/d/1Fu0v8QonQHC17gcCSLl5EFAnupISXoON/view?usp=sharing",
+  },
+  {
+    id: "equipos-virtuales",
+    title: "Liderar y dinamizar equipos virtuales",
+    provider: "LinkedIn Learning",
+    year: "2020",
+    logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
+    credentialUrl: "https://drive.google.com/file/d/1b9QJFhw1cEJ4V6T0EV0cxuPn91WV74Gt/view?usp=sharing",
+  },
+  {
+    id: "lenguaje-no-verbal",
+    title: "Lenguaje no verbal para líderes",
+    provider: "LinkedIn Learning",
+    year: "2019",
+    logo: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
+    credentialUrl: "https://drive.google.com/file/d/1O2zLAGp871WOO2jmKBLl7brD1oKOKNs7/view?usp=sharing",
+  },
+  {
+    id: "linux-ieee",
+    title: "Introducción a Linux, Nivel Intermedio",
+    provider: "IEEE Computer Society",
+    year: "2018",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9pFwvD5_NH_bzsmiNGhmjalH95Xc25tb6_w&s",
+    credentialUrl: "",
+  },
+];
 
 export default function CV() {
+  const [openCertification, setOpenCertification] = useState<string | null>(certifications[0]?.id ?? null);
+  const contentRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  const handleToggle = (id: string) => {
+    setOpenCertification((prev) => (prev === id ? null : id));
+  };
+
   return (
     <PageLayout>
       <section className="min-h-screen px-4 py-20">
@@ -21,7 +101,7 @@ export default function CV() {
           </div>
 
           {/* Información Personal */}
-          <div id="experiencia-profesional" className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 mb-8 border border-zinc-200 dark:border-zinc-700">
+          <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 mb-8 border border-zinc-200 dark:border-zinc-700">
             <h2 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200 mb-4 flex items-center gap-3">
               <span>👨‍💻</span>
               Perfil Profesional
@@ -34,7 +114,7 @@ export default function CV() {
           </div>
 
           {/* Experiencia Laboral */}
-          <div id="educacion" className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 mb-8 border border-zinc-200 dark:border-zinc-700">
+          <div id="experiencia-profesional" className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 mb-8 border border-zinc-200 dark:border-zinc-700">
             <h2 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200 mb-6 flex items-center gap-3">
               <span>💼</span>
               Experiencia Laboral
@@ -189,7 +269,7 @@ export default function CV() {
           </div>
 
           {/* Educación */}
-          <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 mb-8 border border-zinc-200 dark:border-zinc-700">
+          <div id="educacion" className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 mb-8 border border-zinc-200 dark:border-zinc-700">
             <h2 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200 mb-6 flex items-center gap-3">
               <span>🎓</span>
               Educación
@@ -225,6 +305,98 @@ export default function CV() {
                   <li>Diseño de interfaces gráficas de usuario.</li>
                 </ul>
               </div>
+            </div>
+          </div>
+
+          {/* Certificaciones */}
+          <div id="certificaciones" className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 mb-8 border border-zinc-200 dark:border-zinc-700">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-3xl">🎖️</span>
+              <div>
+                <h2 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200">Certificaciones</h2>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                  Explora los cursos y programas que respaldan mi crecimiento continuo.
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {certifications.map((cert) => {
+                const isOpen = openCertification === cert.id;
+                const contentHeight = contentRefs.current[cert.id]?.scrollHeight ?? 0;
+                return (
+                  <div
+                    key={cert.id}
+                    className="group border border-zinc-200 dark:border-zinc-700 rounded-2xl overflow-hidden bg-gradient-to-r from-white via-white to-zinc-50 dark:from-zinc-800 dark:via-zinc-800 dark:to-zinc-900 shadow-sm transition-shadow duration-300 hover:shadow-lg"
+                  >
+                    <button
+                      className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left cursor-pointer transition-colors duration-300 group-hover:bg-zinc-50/80 dark:group-hover:bg-zinc-900/70"
+                      onClick={() => handleToggle(cert.id)}
+                      aria-expanded={isOpen}
+                      aria-controls={`cert-content-${cert.id}`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center p-2">
+                          {cert.logo ? (
+                            <img
+                              src={cert.logo}
+                              alt={`Logo de ${cert.provider}`}
+                              className="max-h-8"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <span className="text-2xl">📜</span>
+                          )}
+                        </div>
+                        <div>
+                          <p className="font-semibold text-zinc-800 dark:text-zinc-100">{cert.title}</p>
+                          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                            {cert.provider} · {cert.year}
+                          </p>
+                        </div>
+                      </div>
+                      <span
+                        className={`text-2xl font-light transition-transform duration-300 ${
+                          isOpen ? "rotate-45 text-blue-600" : "text-zinc-400"
+                        }`}
+                        aria-hidden
+                      >
+                        +
+                      </span>
+                    </button>
+                    <div
+                      id={`cert-content-${cert.id}`}
+                      ref={(el) => {
+                        contentRefs.current[cert.id] = el;
+                      }}
+                      style={{
+                        maxHeight: isOpen ? contentHeight : 0,
+                      }}
+                      className={`px-6 py-2 text-zinc-600 dark:text-zinc-300 overflow-hidden transition-all duration-300 ease-out ${
+                        isOpen ? "opacity-100 pb-6" : "opacity-0 pb-0"
+                      }`}
+                    >
+                      <p className="mb-6 mt-1">
+                        Certificado emitido por <span className="font-medium">{cert.provider}</span> en {cert.year}.
+                      </p>
+                      {cert.credentialUrl ? (
+                        <Link
+                          href={cert.credentialUrl}
+                          target="_blank"
+                          className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-full transition-colors duration-200 shadow-sm"
+                        >
+                          Ver credencial
+                          <span aria-hidden>↗</span>
+                        </Link>
+                      ) : (
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                          Credencial disponible bajo solicitud.
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
