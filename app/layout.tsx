@@ -3,6 +3,24 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
+const themeInitScript = `
+(function() {
+  try {
+    const storageKey = "ediloaz-theme";
+    const prefersDarkQuery = "(prefers-color-scheme: dark)";
+    const root = document.documentElement;
+    const stored = window.localStorage.getItem(storageKey);
+    const prefersDark = window.matchMedia(prefersDarkQuery).matches;
+    const theme = stored === "light" || stored === "dark" ? stored : (prefersDark ? "dark" : "light");
+    root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+    root.classList.toggle("dark", theme === "dark");
+  } catch (error) {
+    console.warn("No se pudo inicializar el tema", error);
+  }
+})();
+`;
+
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
@@ -153,6 +171,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 }
               ]
             })
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: themeInitScript,
           }}
         />
         <ThemeProvider>{children}</ThemeProvider>
