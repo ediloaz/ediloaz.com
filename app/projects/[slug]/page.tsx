@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeft, Github, Sparkles } from "lucide-react";
 import PageLayout from "@/components/page-layout";
 import { PROJECTS, getProjectBySlug } from "../projects-data";
 
@@ -53,21 +54,39 @@ export default async function ProjectDemoPage({ params }: ProjectPageProps) {
             </p>
           </div>
 
-          <div className="flex flex-col w-full gap-3 md:w-auto md:flex-row">
-            <Link
-              href="/projects"
-              className="inline-flex items-center justify-center rounded-full border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 px-4 py-2.5 text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
-            >
-              ← Volver a proyectos
-            </Link>
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-zinc-900 text-white px-4 py-2.5 text-sm font-medium hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white transition-colors"
-            >
-              &lt;/&gt; Ver código
-            </a>
+          <div className="w-full md:w-auto">
+            <div className="rounded-2xl border border-zinc-200/80 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur px-4 py-4 shadow-lg shadow-zinc-900/5">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                <Sparkles className="h-4 w-4 text-amber-500" strokeWidth={1.5} />
+                Explora más
+              </div>
+              <div className="mt-4 flex flex-col gap-3 md:flex-row">
+                <Link
+                  href="/projects"
+                  className="group relative flex-1 overflow-hidden rounded-xl border border-zinc-200/80 dark:border-white/15 bg-gradient-to-r from-zinc-50 to-white dark:from-white/5 dark:to-white/10 px-5 py-3 text-center font-semibold text-zinc-900 dark:text-white transition-all hover:-translate-y-0.5 hover:shadow-xl"
+                >
+                  <div className="pointer-events-none absolute inset-x-0 -top-6 h-12 bg-gradient-to-b from-amber-200/40 via-amber-200/0 to-transparent blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
+                  <div className="flex items-center justify-center gap-2">
+                    <ArrowLeft className="h-4 w-4" />
+                    <span>Volver al catálogo</span>
+                  </div>
+                </Link>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex flex-1 items-center justify-center gap-3 rounded-xl border border-transparent bg-zinc-900 text-white px-5 py-3 text-center font-semibold transition-all hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-50"
+                >
+                  <Github className="h-5 w-5" />
+                  <div className="leading-tight">
+                    <p className="text-sm font-semibold">Ver en GitHub</p>
+                    <p className="text-[11px] text-white/70 dark:text-zinc-500">
+                      Código abierto y documentación
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
