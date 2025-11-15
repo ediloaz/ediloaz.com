@@ -1,4 +1,5 @@
 import PageLayout from "@/components/page-layout";
+import Link from "next/link";
 
 export default function AboutMe() {
   return (
@@ -35,7 +36,10 @@ export default function AboutMe() {
                   Experiencia Profesional
                 </h3>
                 <p className="text-zinc-600 dark:text-zinc-400">
-                  Detalles de tu experiencia profesional aquí.
+                  He liderado iniciativas full stack para empresas como Ibylit, Advision Development y Data GIS, entregando plataformas B2B seguras, experiencias digitales de alto tráfico y herramientas para valuadores inmobiliarios, además de colaborar en Workana y el TEC.{" "}
+                  <Link href="/cv#experiencia-profesional" className="text-blue-600 dark:text-blue-400 font-semibold underline underline-offset-4">
+                    Ver en detalle
+                  </Link>
                 </p>
               </div>
               
@@ -44,7 +48,10 @@ export default function AboutMe() {
                   Educación
                 </h3>
                 <p className="text-zinc-600 dark:text-zinc-400">
-                  Detalles de tu educación aquí.
+                  Soy egresado del Tecnológico de Costa Rica, donde desarrollé el Sistema de Movilidad Internacional en ASP.NET, apoyé cursos de Administración de Proyectos y cursé electivas avanzadas de recuperación de información, desarrollo web e interfaces gráficas.{" "}
+                  <Link href="/cv#educacion" className="text-blue-600 dark:text-blue-400 font-semibold underline underline-offset-4">
+                    Ver en detalle
+                  </Link>
                 </p>
               </div>
             </div>
