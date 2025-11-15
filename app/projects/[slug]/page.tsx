@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Github, Sparkles } from "lucide-react";
 import PageLayout from "@/components/page-layout";
 import { PROJECTS, getProjectBySlug } from "../projects-data";
+import DemoFrame from "../components/demo-frame";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -41,7 +42,7 @@ export default async function ProjectDemoPage({ params }: ProjectPageProps) {
   return (
     <PageLayout showFooter={false} className="flex flex-col min-h-screen">
       <section className="w-full px-4 py-10 md:py-14">
-        <div className="max-w-5xl mx-auto flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div className="max-w-5xl mx-auto flex flex-col gap-6">
           <div className="space-y-3">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
               Demo del proyecto
@@ -92,14 +93,8 @@ export default async function ProjectDemoPage({ params }: ProjectPageProps) {
       </section>
 
       <section className="px-4 pb-16 flex-1 w-full">
-        <div className="max-w-6xl mx-auto h-[90vh] md:h-[80vh] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl overflow-hidden">
-          <iframe
-            src={project.demoUrl}
-            title={`Demo de ${project.name}`}
-            loading="lazy"
-            className="w-full h-full"
-            allowFullScreen
-          />
+        <div className="max-w-6xl mx-auto">
+          <DemoFrame demoUrl={project?.demoUrl} name={project?.name} />
         </div>
       </section>
     </PageLayout>

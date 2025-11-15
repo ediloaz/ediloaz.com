@@ -1,0 +1,256 @@
+.demoShell {
+  --demo-radius: clamp(32px, 5vw, 48px);
+  --demo-padding: clamp(1rem, 2vw, 1.75rem);
+  position: relative;
+  border-radius: var(--demo-radius);
+  padding: 3px;
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(255, 255, 255, 0.7), transparent 55%),
+    radial-gradient(100% 120% at 100% 0%, rgba(59, 130, 246, 0.55), transparent 50%),
+    linear-gradient(120deg, rgba(255, 133, 51, 0.8), rgba(79, 70, 229, 0.75), rgba(16, 185, 129, 0.8));
+  box-shadow:
+    0 40px 80px rgba(15, 23, 42, 0.35),
+    0 10px 30px rgba(15, 23, 42, 0.2),
+    0 0 40px rgba(14, 165, 233, 0.25);
+  overflow: visible;
+  isolation: isolate;
+}
+
+.demoShell::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(59, 130, 246, 0.6),
+    rgba(99, 102, 241, 0.7),
+    rgba(236, 72, 153, 0.65),
+    rgba(59, 130, 246, 0.6),
+    rgba(255, 255, 255, 0.8)
+  );
+  filter: blur(18px);
+  opacity: 0.3;
+  z-index: 0;
+  animation: demoGlowSweep 18s linear infinite;
+  pointer-events: none;
+}
+
+.demoShell::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.25), transparent 60%);
+  opacity: 0.45;
+  filter: blur(30px);
+  z-index: 0;
+  mix-blend-mode: screen;
+  animation: demoPulse 6s ease-in-out infinite;
+}
+
+.demoBody {
+  position: relative;
+  border-radius: calc(var(--demo-radius) - 6px);
+  padding: var(--demo-padding);
+  background: linear-gradient(145deg, rgba(2, 6, 23, 0.97), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    inset 0 20px 60px rgba(255, 255, 255, 0.05);
+  z-index: 1;
+}
+
+:global(:root[data-theme="light"]) :local(.demoBody) {
+  background: linear-gradient(160deg, #f9fafb, #f3f4f6 60%, #e5e7eb);
+  border-color: rgba(148, 163, 184, 0.4);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6),
+    inset 0 12px 48px rgba(255, 255, 255, 0.5);
+}
+
+.demoStatus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: clamp(0.75rem, 1.3vw, 1.25rem);
+}
+
+.demoStatusLeft {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.8);
+  cursor: default;
+}
+
+:global(:root[data-theme="light"]) :local(.demoStatusLeft) {
+  color: rgba(71, 85, 105, 0.9);
+}
+
+.demoLed {
+  display: inline-flex;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(248, 113, 113, 0.35);
+  box-shadow:
+    0 0 4px rgba(248, 113, 113, 0.4),
+    0 0 12px rgba(248, 113, 113, 0.35),
+    0 0 24px rgba(248, 113, 113, 0.25);
+  animation: demoPulse 3s ease-in-out infinite;
+}
+
+.demoLedAmber {
+  background: rgba(251, 191, 36, 0.6);
+  box-shadow:
+    0 0 6px rgba(251, 191, 36, 0.45),
+    0 0 18px rgba(251, 191, 36, 0.45);
+}
+
+.demoStatusCaption {
+  font-weight: 600;
+}
+
+.demoStatusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: rgba(59, 130, 246, 0.12);
+  color: rgba(191, 219, 254, 0.95);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(8px);
+  cursor: default;
+}
+
+:global(:root[data-theme="light"]) :local(.demoStatusPill) {
+  background: rgba(147, 197, 253, 0.25);
+  color: rgb(30, 64, 175);
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.demoScreen {
+  position: relative;
+  border-radius: calc(var(--demo-radius) - 16px);
+  padding: clamp(0.4rem, 1vw, 0.75rem);
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(11, 16, 33, 0.9));
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow:
+    inset 0 2px 6px rgba(255, 255, 255, 0.08),
+    0 25px 60px rgba(2, 6, 23, 0.75);
+  overflow: hidden;
+}
+
+:global(:root[data-theme="light"]) :local(.demoScreen) {
+  background: linear-gradient(145deg, rgba(248, 250, 252, 0.95), rgba(226, 232, 240, 0.8));
+  border-color: rgba(148, 163, 184, 0.35);
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.7),
+    0 25px 40px rgba(15, 23, 42, 0.2);
+}
+
+.demoScreen::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: calc(var(--demo-radius) - 20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.demoScreenGlare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.12), transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.25), transparent 45%);
+  mix-blend-mode: screen;
+  opacity: 0.3;
+  animation: demoSweep 14s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.demoScreenIframe {
+  position: relative;
+  width: 100%;
+  height: clamp(65vh, 75vh, 82vh);
+  border: 0;
+  border-radius: calc(var(--demo-radius) - 26px);
+  background: #0f172a;
+  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.4);
+}
+
+.demoScreenBadge {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.75rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.1);
+  color: rgba(191, 219, 254, 0.95);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  backdrop-filter: blur(10px);
+  animation: demoBadge 12s ease-in-out infinite;
+  cursor: default;
+}
+
+:global(:root[data-theme="light"]) :local(.demoScreenBadge) {
+  background: rgba(59, 130, 246, 0.12);
+  color: rgba(30, 64, 175, 0.95);
+}
+
+@keyframes demoGlowSweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes demoPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+
+@keyframes demoSweep {
+  0% {
+    transform: translateX(-30%);
+  }
+  50% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(40%);
+  }
+}
+
+@keyframes demoBadge {
+  0%,
+  100% {
+    opacity: 0.65;
+    letter-spacing: 0.35em;
+  }
+  50% {
+    opacity: 1;
+    letter-spacing: 0.45em;
+  }
+}
+
