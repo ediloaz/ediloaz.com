@@ -67,14 +67,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.ediloaz.com" },
   robots: { index: true, follow: true },
   manifest: "/manifest.json",
-  themeColor: "#000000",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-    viewportFit: "cover",
-  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
