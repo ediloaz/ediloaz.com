@@ -10,6 +10,15 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    slug: "world-flags-quiz",
+    name: "World Flags Quiz",
+    shortDescription: "Videojuego web educativo para adivinar el país de una bandera",
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    githubUrl: "https://github.com/ediloaz/world-flags-quiz",
+    demoUrl: "https://world-flags-quiz.ediloaz.com",
+    imageUrl: "/.og.png",
+  },
+  {
     slug: "plataforma-de-registro-y-listado-de-usuarios",
     name: "Plataforma de registro y listado de usuarios",
     shortDescription: "Es una aplicación web para registro y listado de usuarios, te permite crear, editar y eliminar usuarios",
