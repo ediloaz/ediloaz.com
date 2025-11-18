@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Github, Sparkles } from "lucide-react";
+import { ArrowLeft, Github, Sparkles, ExternalLink } from "lucide-react";
 import PageLayout from "@/components/page-layout";
 import { PROJECTS, getProjectBySlug } from "../projects-data";
 import DemoFrame from "../components/demo-frame";
@@ -84,6 +84,18 @@ export default async function ProjectDemoPage({ params }: ProjectPageProps) {
                     <p className="text-[11px] text-white/70 dark:text-zinc-500">
                       Código abierto y documentación
                     </p>
+                  </div>
+                </a>
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group relative flex-1 overflow-hidden rounded-xl border border-transparent bg-gradient-to-r from-blue-600 to-blue-500 text-white px-5 py-3 text-center font-semibold transition-all hover:-translate-y-0.5 hover:shadow-xl hover:from-blue-700 hover:to-blue-600"
+                >
+                  <div className="pointer-events-none absolute inset-x-0 -top-6 h-12 bg-gradient-to-b from-blue-300/40 via-blue-300/0 to-transparent blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
+                  <div className="flex items-center justify-center gap-2">
+                    <ExternalLink className="h-4 w-4" />
+                    <span>Visitar aplicación</span>
                   </div>
                 </a>
               </div>
