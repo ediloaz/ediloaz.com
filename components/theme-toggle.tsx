@@ -1,10 +1,36 @@
  "use client";
 
+import { useEffect, useState } from "react";
 import { useTheme } from "./theme-provider";
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const isDark = theme === "dark";
+
+  // Evitar mismatch de hidratación
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Renderizar un placeholder durante el SSR para evitar el mismatch
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        aria-label="Cambiar tema"
+        onClick={toggleTheme}
+        title="Cambiar tema"
+        className="relative inline-flex h-10 w-24 items-center rounded-full border border-zinc-200 bg-white px-2 text-sm font-medium text-zinc-600 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200"
+      >
+        <span className="flex w-full items-center justify-between">
+          <span>☀️</span>
+          <span>🌙</span>
+        </span>
+        <span className="sr-only">Tema</span>
+      </button>
+    );
+  }
 
   return (
     <button
