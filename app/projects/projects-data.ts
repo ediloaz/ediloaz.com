@@ -10,6 +10,15 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    slug: "calculadora-laboral",
+    name: "Calculadora Laboral Costa Rica",
+    shortDescription: "Calculadora Laboral Costa Rica es una aplicación web con 8 calculadoras laborales.",
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    githubUrl: "https://github.com/ediloaz/calculadora-laboral-costa-rica",
+    demoUrl: "https://calculadora-laboral-costa-rica.ediloaz.com",
+    imageUrl: "/.og.png",
+  },
+  {
     slug: "world-flags-quiz",
     name: "World Flags Quiz",
     shortDescription: "Videojuego web educativo para adivinar el país de una bandera",
