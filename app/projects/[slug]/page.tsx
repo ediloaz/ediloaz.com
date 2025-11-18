@@ -64,7 +64,7 @@ export default async function ProjectDemoPage({ params }: ProjectPageProps) {
               <div className="mt-4 flex flex-col gap-3 md:flex-row">
                 <Link
                   href="/projects"
-                  className="group relative flex-1 overflow-hidden rounded-xl border border-zinc-200/80 dark:border-white/15 bg-gradient-to-r from-zinc-50 to-white dark:from-white/5 dark:to-white/10 px-5 py-3 text-center font-semibold text-zinc-900 dark:text-white transition-all hover:-translate-y-0.5 hover:shadow-xl"
+                  className="group relative flex flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-200/80 dark:border-white/15 bg-gradient-to-r from-zinc-50 to-white dark:from-white/5 dark:to-white/10 px-5 py-3 text-center font-semibold text-zinc-900 dark:text-white transition-all hover:-translate-y-0.5 hover:shadow-xl"
                 >
                   <div className="pointer-events-none absolute inset-x-0 -top-6 h-12 bg-gradient-to-b from-amber-200/40 via-amber-200/0 to-transparent blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
                   <div className="flex items-center justify-center gap-2">
@@ -90,7 +90,7 @@ export default async function ProjectDemoPage({ params }: ProjectPageProps) {
                   href={project.demoUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="group relative flex-1 overflow-hidden rounded-xl border border-transparent bg-gradient-to-r from-blue-600 to-blue-500 text-white px-5 py-3 text-center font-semibold transition-all hover:-translate-y-0.5 hover:shadow-xl hover:from-blue-700 hover:to-blue-600"
+                  className="group relative flex flex-1 items-center justify-center overflow-hidden rounded-xl border border-transparent bg-gradient-to-r from-blue-600 to-blue-500 text-white px-5 py-3 text-center font-semibold transition-all hover:-translate-y-0.5 hover:shadow-xl hover:from-blue-700 hover:to-blue-600"
                 >
                   <div className="pointer-events-none absolute inset-x-0 -top-6 h-12 bg-gradient-to-b from-blue-300/40 via-blue-300/0 to-transparent blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
                   <div className="flex items-center justify-center gap-2">

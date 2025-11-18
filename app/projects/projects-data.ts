@@ -15,7 +15,7 @@ export const PROJECTS: Project[] = [
     shortDescription: "Calculadora Laboral Costa Rica es una aplicación web con 8 calculadoras laborales.",
     technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     githubUrl: "https://github.com/ediloaz/calculadora-laboral-costa-rica",
-    demoUrl: "https://calculadora-laboral-costa-rica.ediloaz.com",
+    demoUrl: "https://calculadora-laboral.ediloaz.com",
     imageUrl: "/.og.png",
   },
   {
