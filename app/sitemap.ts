@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { PROJECTS } from './projects/projects-data'
  
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://ediloaz.com'
@@ -6,7 +7,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Fecha de última modificación
   const lastModified = new Date()
   
-  return [
+  // Páginas principales
+  const mainPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified,
@@ -38,5 +40,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
   ]
+
+  // Páginas de proyectos
+  const projectPages: MetadataRoute.Sitemap = PROJECTS.map((project) => ({
+    url: `${baseUrl}/projects/${project.slug}`,
+    lastModified,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }))
+
+  return [...mainPages, ...projectPages]
 }
 
