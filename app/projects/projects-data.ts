@@ -17,7 +17,7 @@ export const PROJECTS: Project[] = [
     // githubUrl: "https://github.com/ediloaz/calculadora-laboral-costa-rica",
     githubUrl: "",
     demoUrl: "https://calculadora-laboral.ediloaz.com",
-    imageUrl: "/.og.png",
+    imageUrl: "/projects/calculadora-laboral.png",
   },
   {
     slug: "world-flags-quiz",
@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
     technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     githubUrl: "https://github.com/ediloaz/world-flags-quiz",
     demoUrl: "https://world-flags-quiz.ediloaz.com",
-    imageUrl: "/.og.png",
+    imageUrl: "/projects/world-flags-quiz.png",
   },
   {
     slug: "plataforma-de-registro-y-listado-de-usuarios",
@@ -35,7 +35,7 @@ export const PROJECTS: Project[] = [
     technologies: ["React", "Next.js", "TypeScript"],
     githubUrl: "https://github.com/ediloaz/Plataforma-de-registro-y-listado-de-usuarios",
     demoUrl: "https://plataforma-de-registro-y-listado-de-usuarios.vercel.app/",
-    imageUrl: "/.og.png",
+    imageUrl: "/projects/plataforma-de-registro-y-listado-de-usuarios.png",
   },
   {
     slug: "nutri-counter",
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
     technologies: ["React", "Next.js", "TypeScript"],
     githubUrl: "https://github.com/ediloaz/nutri-counter",
     demoUrl: "https://nutri-counter.vercel.app/",
-    imageUrl: "/.og.png",
+    imageUrl: "/projects/nutri-counter.png",
   },
   {
     slug: "tienda-de-perfumes",
@@ -53,7 +53,7 @@ export const PROJECTS: Project[] = [
     technologies: ["React", "Next.js", "TypeScript"],
     githubUrl: "https://github.com/ediloaz/nextjs-fragrance-hub",
     demoUrl: "https://react-market-pi.vercel.app/",
-    imageUrl: "/.og.png",
+    imageUrl: "/projects/tienda-de-perfumes.png",
   },
 ];
 
