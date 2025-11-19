@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: [],
     },
-    sitemap: 'https://ediloaz.com/sitemap.xml',
+    sitemap: 'https://www.ediloaz.com/sitemap.xml',
   }
 }
 

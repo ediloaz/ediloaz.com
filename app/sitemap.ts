@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { PROJECTS } from './projects/projects-data'
  
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://ediloaz.com'
+  const baseUrl = 'https://www.ediloaz.com'
   
   // Fecha de última modificación
   const lastModified = new Date()

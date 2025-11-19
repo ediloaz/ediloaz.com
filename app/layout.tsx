@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     title: "ediloaz — Edisson López",
     // startupImage: [{ url: "/apple-splash-1170-2532.png", media: "(device-width: 390px)" }], // opcional
   },
-  authors: [{ name: "Edisson López", url: "https://ediloaz.com" }],
+  authors: [{ name: "Edisson López", url: "https://www.ediloaz.com" }],
   creator: "Edisson López",
   publisher: "Edisson López",
   applicationName: "ediloaz",
@@ -92,11 +92,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@graph": [
                 {
                   "@type": "Person",
-                  "@id": "https://ediloaz.com/#person",
+                  "@id": "https://www.ediloaz.com/#person",
                   name: "Edisson López",
                   alternateName: "ediloaz",
-                  url: "https://ediloaz.com",
-                  image: "https://ediloaz.com/og.png",
+                  url: "https://www.ediloaz.com",
+                  image: "https://www.ediloaz.com/og.png",
                   jobTitle: "Full Stack Developer",
                   description:
                     "Edisson López es un desarrollador Full Stack en Costa Rica especializado en React, Next.js, .NET y arquitecturas modernas.",
@@ -136,26 +136,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://ediloaz.com/#website",
-                  url: "https://ediloaz.com",
+                  "@id": "https://www.ediloaz.com/#website",
+                  url: "https://www.ediloaz.com",
                   name: "ediloaz — Edisson López",
                   description:
                     "Portafolio y sitio personal de Edisson López, desarrollador Full Stack en Costa Rica especializado en React, Next.js y .NET.",
                   inLanguage: "es-CR",
                   publisher: {
-                    "@id": "https://ediloaz.com/#person"
+                    "@id": "https://www.ediloaz.com/#person"
                   }
                 },
                 {
                   "@type": "WebPage",
-                  "@id": "https://ediloaz.com/#webpage",
-                  url: "https://ediloaz.com",
+                  "@id": "https://www.ediloaz.com/#webpage",
+                  url: "https://www.ediloaz.com",
                   name: "Inicio — ediloaz",
                   isPartOf: {
-                    "@id": "https://ediloaz.com/#website"
+                    "@id": "https://www.ediloaz.com/#website"
                   },
                   about: {
-                    "@id": "https://ediloaz.com/#person"
+                    "@id": "https://www.ediloaz.com/#person"
                   },
                   description:
                     "Página principal del portafolio de Edisson López, desarrollador Full Stack en Costa Rica.",
