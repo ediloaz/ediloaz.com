@@ -1,4 +1,37 @@
+import { Metadata } from "next";
 import PageLayout from "@/components/page-layout";
+
+export const metadata: Metadata = {
+  title: "Contacto",
+  description:
+    "Contacta con Edisson López para proyectos de desarrollo web, colaboraciones o consultoría. Email, LinkedIn, GitHub y más formas de contacto.",
+  keywords: [
+    "contacto",
+    "Edisson López",
+    "desarrollador full stack",
+    "contratar desarrollador",
+    "colaboración",
+    "consultoría",
+  ],
+  openGraph: {
+    title: "Contacto · ediloaz",
+    description:
+      "Contacta con Edisson López para proyectos de desarrollo web, colaboraciones o consultoría.",
+    url: "https://www.ediloaz.com/contact",
+    type: "website",
+    siteName: "ediloaz",
+  },
+  twitter: {
+    card: "summary",
+    title: "Contacto · ediloaz",
+    description:
+      "Contacta con Edisson López para proyectos de desarrollo web.",
+    creator: "@ediloaz",
+  },
+  alternates: {
+    canonical: "https://www.ediloaz.com/contact",
+  },
+};
 
 export default function Contact() {
   return (

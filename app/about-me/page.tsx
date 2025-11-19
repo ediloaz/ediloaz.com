@@ -1,5 +1,40 @@
+import { Metadata } from "next";
 import PageLayout from "@/components/page-layout";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Sobre Mí",
+  description:
+    "Conoce más sobre Edisson López, desarrollador Full Stack apasionado por crear soluciones tecnológicas innovadoras. Experiencia en React, Next.js, .NET y más.",
+  keywords: [
+    "sobre mí",
+    "Edisson López",
+    "desarrollador full stack",
+    "Costa Rica",
+    "React",
+    "Next.js",
+    ".NET",
+    "portafolio",
+  ],
+  openGraph: {
+    title: "Sobre Mí · ediloaz",
+    description:
+      "Conoce más sobre Edisson López, desarrollador Full Stack apasionado por crear soluciones tecnológicas innovadoras.",
+    url: "https://www.ediloaz.com/about-me",
+    type: "profile",
+    siteName: "ediloaz",
+  },
+  twitter: {
+    card: "summary",
+    title: "Sobre Mí · ediloaz",
+    description:
+      "Conoce más sobre Edisson López, desarrollador Full Stack.",
+    creator: "@ediloaz",
+  },
+  alternates: {
+    canonical: "https://www.ediloaz.com/about-me",
+  },
+};
 
 export default function AboutMe() {
   return (
