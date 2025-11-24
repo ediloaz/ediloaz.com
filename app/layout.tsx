@@ -78,6 +78,9 @@ export const metadata: Metadata = {
   creator: "Edisson López",
   publisher: "Edisson López",
   applicationName: "ediloaz",
+  other: {
+    "google-adsense-account": "ca-pub-7409361152440830",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
