@@ -116,7 +116,7 @@ export default function Home() {
           <ScrollReveal>
             <div className="text-center mb-12">
               <h3 className="text-3xl md:text-4xl font-bold mb-4 text-zinc-800 dark:text-zinc-200">
-                Proyectos Destacados
+                Proyectos Públicos
               </h3>
               <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
                 Proyectos hechos en mi tiempo libre para demostrar habilidades y aprender nuevas tecnologías
