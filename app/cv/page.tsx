@@ -95,9 +95,13 @@ export default function CV() {
                 Desarrollador Full Stack
               </p>
             </div>
-            <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+            <a
+              href="/cv/cv.pdf"
+              download="Edisson-Lopez-CV.pdf"
+              className="inline-flex px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
               Descargar CV
-            </button>
+            </a>
           </div>
 
           {/* Información Personal */}
