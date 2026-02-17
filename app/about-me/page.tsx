@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import PageLayout from "@/components/page-layout";
+import TechnologiesSection from "@/components/technologies-section";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -91,6 +92,8 @@ export default function AboutMe() {
               </div>
             </div>
           </div>
+
+          <TechnologiesSection sectionId="tecnologias" />
         </div>
       </section>
     </PageLayout>
