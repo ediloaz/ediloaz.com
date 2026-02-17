@@ -22,6 +22,8 @@ export default function Home() {
     { name: "CSS3", icon: "🎨", category: "Frontend" },
   ];
 
+  const yearsOfExperience = new Date().getFullYear() - 2018;
+
   const skills = [
     "Desarrollo de aplicaciones web completas",
     "APIs RESTful y GraphQL",
@@ -106,9 +108,9 @@ export default function Home() {
               </div>
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                  100%
+                  {yearsOfExperience}+
                 </div>
-                <div className="text-zinc-600 dark:text-zinc-400 font-medium">Comprometido</div>
+                <div className="text-zinc-600 dark:text-zinc-400 font-medium">Años de experiencia</div>
               </div>
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
@@ -130,7 +132,7 @@ export default function Home() {
                 Proyectos Destacados
               </h3>
               <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Algunos de mis proyectos más recientes y destacados
+                Proyectos hechos en mi tiempo libre para demostrar habilidades y aprender nuevas tecnologías
               </p>
             </div>
           </ScrollReveal>
@@ -213,11 +215,15 @@ export default function Home() {
                   Soy Edisson López, un desarrollador Full Stack apasionado por crear soluciones 
                   tecnológicas innovadoras que mejoren la vida de las personas. Con experiencia 
                   en múltiples lenguajes y frameworks, me especializo en desarrollar aplicaciones 
-                  web completas desde el frontend hasta el backend.
+                  web completas.
+                </p>
+                <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
+                  Mi enfoque se centra en escribir código limpio, mantenible y escalable, siempre 
+                  buscando las mejores prácticas. 
                 </p>
                 <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed">
-                  Mi enfoque se centra en escribir código limpio, mantenible y escalable, siempre 
-                  buscando las mejores prácticas y las tecnologías más actuales del mercado.
+                  &quot;Done is better than perfect&quot;: equilibro tiempos para entregar 
+                  funcionalidad sólida en plazos razonables para favorecer el avance del proyecto.
                 </p>
               </div>
             </ScrollReveal>
