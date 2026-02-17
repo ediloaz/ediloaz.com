@@ -206,9 +206,8 @@ export default function Home() {
                 <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
                   Mi enfoque se centra en escribir{" "}
                   <span className="bg-amber-200/80 dark:bg-amber-400/40 px-1 py-0.5 rounded-sm">
-                    código limpio, mantenible y escalable
-                  </span>
-                  , siempre buscando las mejores prácticas.
+                    código limpio</span>
+                    , mantenible y escalable, siempre buscando las mejores prácticas.
                 </p>
                 <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed">
                   <span className="bg-amber-200/80 dark:bg-amber-400/40 px-1 py-0.5 rounded-sm">
