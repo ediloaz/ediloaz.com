@@ -51,11 +51,11 @@ export default function Home() {
           <ScrollReveal delay={200}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Link
-                href="/contact"
+                href="/about-me"
                 className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                aria-label="Ir a la página de contacto"
+                aria-label="Ir a la página de sobre mí"
               >
-                Contáctame
+                Sobre Mí
               </Link>
               <Link
                 href="/projects"
@@ -219,67 +219,6 @@ export default function Home() {
             </ScrollReveal>
           </div>
 
-          {/* Specialties Section */}
-          <ScrollReveal delay={300}>
-            <div className="mb-16">
-              <h4 className="text-2xl md:text-3xl font-bold text-center mb-8 text-zinc-800 dark:text-zinc-200">
-                Especialidades
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {skills.map((skill, index) => {
-                  // Íconos para cada especialidad
-                  const icons = [
-                    <svg key="web" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                    </svg>,
-                    <svg key="api" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>,
-                    <svg key="db" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-                    </svg>,
-                    <svg key="arch" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>,
-                    <svg key="devops" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                    </svg>,
-                    <svg key="test" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  ];
-                  
-                  const colors = [
-                    "from-blue-500 to-blue-600",
-                    "from-purple-500 to-purple-600",
-                    "from-green-500 to-green-600",
-                    "from-orange-500 to-orange-600",
-                    "from-pink-500 to-pink-600",
-                    "from-cyan-500 to-cyan-600"
-                  ];
-                  
-                  return (
-                    <div
-                      key={index}
-                      className="group bg-white dark:bg-zinc-800 rounded-xl p-6 border border-zinc-200 dark:border-zinc-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${colors[index % colors.length]} flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300`}>
-                          {icons[index % icons.length]}
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-zinc-800 dark:text-zinc-200 font-medium leading-relaxed group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                            {skill}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </ScrollReveal>
-
           {/* Experience and Education */}
           <div className="grid md:grid-cols-2 gap-8">
             <ScrollReveal delay={100}>
@@ -340,6 +279,67 @@ export default function Home() {
               </div>
             </ScrollReveal>
           </div>
+
+          {/* Specialties Section */}
+          <ScrollReveal delay={300}>
+            <div className="mb-4 mt-16">
+              <h4 className="text-2xl md:text-3xl font-bold text-center mb-8 text-zinc-800 dark:text-zinc-200">
+                Especialidades
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {skills.map((skill, index) => {
+                  // Íconos para cada especialidad
+                  const icons = [
+                    <svg key="web" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>,
+                    <svg key="api" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>,
+                    <svg key="db" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                    </svg>,
+                    <svg key="arch" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>,
+                    <svg key="devops" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                    </svg>,
+                    <svg key="test" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  ];
+                  
+                  const colors = [
+                    "from-blue-500 to-blue-600",
+                    "from-purple-500 to-purple-600",
+                    "from-green-500 to-green-600",
+                    "from-orange-500 to-orange-600",
+                    "from-pink-500 to-pink-600",
+                    "from-cyan-500 to-cyan-600"
+                  ];
+                  
+                  return (
+                    <div
+                      key={index}
+                      className="group bg-white dark:bg-zinc-800 rounded-xl p-6 border border-zinc-200 dark:border-zinc-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${colors[index % colors.length]} flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                          {icons[index % icons.length]}
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-zinc-800 dark:text-zinc-200 font-medium leading-relaxed group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            {skill}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -402,7 +402,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal>
             <h3 className="text-3xl md:text-4xl font-bold mb-8 text-zinc-800 dark:text-zinc-200">
-              Disponible para freelance y contratación
+              Disponible para freelance o contratación
             </h3>
             <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-12 max-w-2xl mx-auto">
               Trabajo en remoto para empresas y equipos que necesitan desarrollo web. 

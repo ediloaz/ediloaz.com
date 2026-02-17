@@ -87,7 +87,7 @@ export default function Footer() {
         
         <div className="text-center pt-8 border-t border-zinc-200 dark:border-zinc-800">
           <p className="text-zinc-600 dark:text-zinc-400 text-sm">
-            © {new Date().getFullYear()} Edisson López. Desarrollado con Next.js y Tailwind CSS.
+            © {new Date().getFullYear()} Ingeniero Edisson López
           </p>
         </div>
       </div>

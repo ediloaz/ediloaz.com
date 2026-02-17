@@ -26,7 +26,7 @@ export const MASTERY_OPTIONS: Record<
   { label: string; icon: string; tooltip: string }
 > = {
   domino: {
-    label: "Domino",
+    label: "Domino actualmente",
     icon: "✓",
     tooltip: "Actualmente domino esta tecnología",
   },
