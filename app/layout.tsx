@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import CursorSpotlight from "@/components/cursor-spotlight";
 import Script from "next/script";
 
 const themeInitScript = `
@@ -186,7 +187,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: themeInitScript,
           }}
         />
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <CursorSpotlight />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
