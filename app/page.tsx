@@ -200,17 +200,21 @@ export default function Home() {
                 </h4>
                 <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
                   Soy Edisson López, un desarrollador Full Stack apasionado por crear soluciones 
-                  tecnológicas innovadoras que mejoren la vida de las personas. Con experiencia 
-                  en múltiples lenguajes y frameworks, me especializo en desarrollar aplicaciones 
-                  web completas.
+                  tecnológicas innovadoras. Con experiencia en múltiples lenguajes y frameworks, 
+                  me especializo en desarrollar aplicaciones web completas.
                 </p>
                 <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
-                  Mi enfoque se centra en escribir código limpio, mantenible y escalable, siempre 
-                  buscando las mejores prácticas. 
+                  Mi enfoque se centra en escribir{" "}
+                  <span className="bg-amber-200/80 dark:bg-amber-400/40 px-1 py-0.5 rounded-sm">
+                    código limpio, mantenible y escalable
+                  </span>
+                  , siempre buscando las mejores prácticas.
                 </p>
                 <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed">
-                  &quot;Done is better than perfect&quot;: equilibro tiempos para entregar 
-                  funcionalidad sólida en plazos razonables para favorecer el avance del proyecto.
+                  <span className="bg-amber-200/80 dark:bg-amber-400/40 px-1 py-0.5 rounded-sm">
+                    &quot;Done is better than perfect&quot;
+                  </span>
+                  : equilibro tiempos para entregar funcionalidad sólida en plazos razonables para favorecer el avance del proyecto.
                 </p>
               </div>
             </ScrollReveal>
