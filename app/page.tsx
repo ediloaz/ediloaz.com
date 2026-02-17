@@ -89,7 +89,7 @@ export default function Home() {
               </div>
               <div className="text-center">
                 <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                  {technologies.length}+
+                  {technologies.filter((t) => t.mastery === "domino").length}+
                 </div>
                 <div className="text-zinc-600 dark:text-zinc-400 font-medium">Tecnologías</div>
               </div>
