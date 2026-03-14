@@ -407,7 +407,7 @@ export default function Home() {
             <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-12 max-w-2xl mx-auto">
               Trabajo en remoto para empresas y equipos que necesitan desarrollo web. 
               Si tienes un proyecto con alcance definido o buscas sumar a alguien 
-              de forma estable, escríbeme y vemos si hacemos match.
+              a tu equipo, escríbeme y vemos si hacemos match.
             </p>
           </ScrollReveal>
           
