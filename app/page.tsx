@@ -402,7 +402,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal>
             <h3 className="text-3xl md:text-4xl font-bold mb-8 text-zinc-800 dark:text-zinc-200">
-              Disponible para freelance o contratación
+              Disponible para freelance
             </h3>
             <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-12 max-w-2xl mx-auto">
               Trabajo en remoto para empresas y equipos que necesitan desarrollo web. 
