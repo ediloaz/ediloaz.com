@@ -42,6 +42,12 @@ export default function Navbar() {
               Proyectos
             </Link>
             <Link
+              href="/blog"
+              className="font-medium text-zinc-600 transition-colors hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+            >
+              Blog
+            </Link>
+            <Link
               href="/contact"
               className="font-medium text-zinc-600 transition-colors hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
             >
@@ -108,6 +114,13 @@ export default function Navbar() {
                 onClick={closeMenu}
               >
                 Proyectos
+              </Link>
+              <Link
+                href="/blog"
+                className="font-medium text-zinc-600 transition-colors hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400 py-2"
+                onClick={closeMenu}
+              >
+                Blog
               </Link>
               <Link
                 href="/contact"

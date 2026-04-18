@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { PROJECTS } from './projects/projects-data'
+import { blogPosts } from '@/lib/blog-data'
  
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.ediloaz.com'
@@ -39,6 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.5,
     },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
   ]
 
   // Páginas de proyectos
@@ -49,6 +56,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  return [...mainPages, ...projectPages]
+  const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified,
+    changeFrequency: 'monthly',
+    priority: 0.75,
+  }))
+
+  return [...mainPages, ...projectPages, ...blogPages]
 }
 

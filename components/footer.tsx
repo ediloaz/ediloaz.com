@@ -33,6 +33,12 @@ export default function Footer() {
               >
                 Proyectos
               </Link>
+              <Link 
+                href="/blog" 
+                className="block text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors"
+              >
+                Blog
+              </Link>
             </div>
           </div>
           

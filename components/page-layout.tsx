@@ -16,7 +16,7 @@ export default function PageLayout({
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-black">
       <Navbar />
-      <main className={`pt-20 ${className}`}>
+      <main className={`pt-28 ${className}`}>
         {children}
       </main>
       {showFooter && <Footer />}
