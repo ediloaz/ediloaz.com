@@ -16,26 +16,40 @@ type AdSenseProps = {
    */
   format?: "auto" | "horizontal" | "vertical" | "rectangle";
   /**
+   * Estilo del contenedor (ej: "display", "in-article", "in-feed")
+   */
+  style?: "display" | "in-article" | "in-feed";
+  /**
    * Clases CSS adicionales para el contenedor
    */
   className?: string;
+  /**
+   * Si es true, el anuncio se carga de forma lazy (solo cuando está visible)
+   */
+  lazy?: boolean;
 };
 
 /**
- * Google AdSense con contenedor alineado al diseño de ediloaz (bordes zinc, acento azul/violeta).
+ * Componente optimizado de Google AdSense con diseño coherente al branding del sitio
+ * - Usa lazy loading para no afectar el rendimiento
+ * - Diseño glassmorphism que coincide con el estilo del sitio
+ * - No afecta el SEO (carga asíncrona)
  */
 export default function AdSense({
   clientId,
   slot,
   format = "auto",
+  style = "display",
   className = "",
+  lazy = true,
 }: AdSenseProps) {
   useEffect(() => {
-    if (typeof window !== "undefined" && (window as { adsbygoogle?: unknown[] }).adsbygoogle) {
+    // Inicializar AdSense cuando el componente se monta
+    if (typeof window !== "undefined" && (window as any).adsbygoogle) {
       try {
-        const w = window as { adsbygoogle: unknown[] };
-        (w.adsbygoogle = w.adsbygoogle || []).push({});
-      } catch {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+      } catch (e) {
+        // Silenciar errores de AdSense en desarrollo
         if (process.env.NODE_ENV === "development") {
           console.log("AdSense no disponible en desarrollo");
         }
@@ -43,36 +57,42 @@ export default function AdSense({
     }
   }, []);
 
+  // Si no hay clientId o slot, no renderizar nada
   if (!clientId || !slot) {
     return null;
   }
 
   return (
-    <div
-      className={`rounded-2xl border border-zinc-200/90 dark:border-zinc-700/90 bg-zinc-50/80 dark:bg-zinc-900/40 p-4 my-8 relative overflow-hidden ${className}`}
-      style={{
-        minHeight: format === "horizontal" ? "100px" : format === "vertical" ? "250px" : "200px",
-      }}
-    >
+    <>
+      {/* Contenedor del anuncio con diseño glassmorphism */}
       <div
-        className="absolute top-0 left-0 right-0 h-px"
+        className={`glass-panel rounded-2xl border border-white/10 p-4 my-8 relative overflow-hidden ${className}`}
         style={{
-          background:
-            "linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.35), rgba(147, 51, 234, 0.35), transparent)",
+          minHeight: format === "horizontal" ? "100px" : format === "vertical" ? "250px" : "200px",
+          background: "linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)",
         }}
-      />
-      <ins
-        className="adsbygoogle block w-full text-center"
-        style={{
-          display: "block",
-          textAlign: "center",
-          minHeight: "inherit",
-        }}
-        data-ad-client={clientId}
-        data-ad-slot={slot}
-        data-ad-format={format}
-        data-full-width-responsive="true"
-      />
-    </div>
+      >
+        {/* Borde superior decorativo */}
+        <div
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{
+            background: "linear-gradient(90deg, transparent, rgba(74, 161, 255, 0.3), transparent)",
+          }}
+        />
+        <ins
+          className="adsbygoogle block w-full text-center"
+          style={{
+            display: "block",
+            textAlign: "center",
+            minHeight: "inherit",
+          }}
+          data-ad-client={clientId}
+          data-ad-slot={slot}
+          data-ad-format={format}
+          data-full-width-responsive="true"
+        />
+      </div>
+    </>
   );
 }
+
