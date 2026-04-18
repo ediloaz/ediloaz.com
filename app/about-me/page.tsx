@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import PageLayout from "@/components/page-layout";
 import TechnologiesSection from "@/components/technologies-section";
+import AdSenseBanner from "@/components/adsense/AdSenseBanner";
+import AdSenseInFeed from "@/components/adsense/AdSenseInFeed";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -62,6 +64,14 @@ export default function AboutMe() {
             </p>
           </div>
 
+          {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST && (
+            <AdSenseBanner
+              clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}
+              slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST}
+              className="mb-8"
+            />
+          )}
+
           <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 border border-zinc-200 dark:border-zinc-700">
             <h2 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200 mb-6">
               Mi Trayectoria
@@ -95,6 +105,17 @@ export default function AboutMe() {
 
           <TechnologiesSection sectionId="tecnologias" />
         </div>
+
+        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_LIST && (
+          <div className="w-full mt-16 border-t border-zinc-200/80 dark:border-zinc-700/80 pt-12 pb-4">
+            <div className="max-w-7xl mx-auto px-4 w-full">
+              <AdSenseInFeed
+                clientId={process?.env?.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''}
+                slot={process?.env?.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_LIST || ''}
+              />
+            </div>
+          </div>
+        )}
       </section>
     </PageLayout>
   );

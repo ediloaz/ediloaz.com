@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import PageLayout from "@/components/page-layout";
+import AdSenseBanner from "@/components/adsense/AdSenseBanner";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -44,6 +45,14 @@ export default function Contact() {
           <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-12">
             ¿Tienes un proyecto en mente? ¡Hablemos! Estoy siempre interesado en nuevos desafíos y oportunidades de colaboración.
           </p>
+
+          {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST && (
+            <AdSenseBanner
+              clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}
+              slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST}
+              className="mb-12"
+            />
+          )}
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {/* Información de Contacto */}
