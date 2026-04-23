@@ -8,460 +8,840 @@ import ProjectCard from "./projects/project-card";
 import { technologies } from "@/constants/technologies";
 import TechnologiesSection from "@/components/technologies-section";
 
+// ===== ICON PRIMITIVES =====
+
+function IconEmail({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  );
+}
+
+function IconLinkedIn({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
+}
+
+function IconGitHub({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+    </svg>
+  );
+}
+
+function IconMedium({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+    </svg>
+  );
+}
+
+function IconArrow({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+  );
+}
+
+function IconUser({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  );
+}
+
+function IconBriefcase({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+      <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+    </svg>
+  );
+}
+
+function IconBook({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+    </svg>
+  );
+}
+
+function IconGlobe({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="2" y1="12" x2="22" y2="12" />
+      <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+    </svg>
+  );
+}
+
+function IconCode({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </svg>
+  );
+}
+
+function IconDatabase({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="5" rx="9" ry="3" />
+      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+    </svg>
+  );
+}
+
+function IconLayers({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+      <polyline points="2 17 12 22 22 17" />
+      <polyline points="2 12 12 17 22 12" />
+    </svg>
+  );
+}
+
+function IconCloud({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" />
+    </svg>
+  );
+}
+
+function IconCheck({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+  );
+}
+
+function IconFile({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+      <line x1="16" y1="17" x2="8" y2="17" />
+    </svg>
+  );
+}
+
+function IconMessage({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+    </svg>
+  );
+}
+
+function IconRocket({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
+      <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
+      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+    </svg>
+  );
+}
+
+// ===== SECTION HEADING =====
+function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
+  return (
+    <div className="mb-12">
+      <span
+        className="text-xs font-semibold tracking-widest uppercase mb-3 block"
+        style={{ color: "var(--accent)" }}
+      >
+        {eyebrow}
+      </span>
+      <h2
+        className="text-3xl md:text-4xl font-bold tracking-tight"
+        style={{ color: "var(--fg)" }}
+      >
+        {title}
+        <span
+          className="block h-[3px] w-12 rounded-full mt-3 bg-gradient-to-r from-blue-500 to-violet-500"
+        />
+      </h2>
+    </div>
+  );
+}
+
+// ===== HOME PAGE =====
 export default function Home() {
   const yearsOfExperience = new Date().getFullYear() - 2018;
 
-  const skills = [
-    "Desarrollo de aplicaciones web completas",
-    "APIs RESTful y GraphQL",
-    "Bases de datos relacionales y NoSQL",
-    "Arquitectura de software",
-    "DevOps y despliegue en la nube",
-    "Testing y calidad de código"
+  const stats = [
+    { value: `${PROJECTS.length}+`, label: "Proyectos" },
+    { value: `${technologies.filter((t) => t.mastery === "domino").length}+`, label: "Tecnologías" },
+    { value: `${yearsOfExperience}+`, label: "Años exp." },
+    { value: "Full", label: "Stack" },
+  ];
+
+  const specialties = [
+    { label: "Aplicaciones web completas", Icon: IconGlobe },
+    { label: "APIs RESTful y GraphQL", Icon: IconCode },
+    { label: "Bases de datos relacionales y NoSQL", Icon: IconDatabase },
+    { label: "Arquitectura de software", Icon: IconLayers },
+    { label: "DevOps y despliegue en la nube", Icon: IconCloud },
+    { label: "Testing y calidad de código", Icon: IconCheck },
+  ];
+
+  const navCards = [
+    {
+      href: "/about-me",
+      label: "Sobre Mí",
+      desc: "Trayectoria y experiencia profesional",
+      Icon: IconUser,
+      colorClass: "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40",
+    },
+    {
+      href: "/projects",
+      label: "Proyectos",
+      desc: "Portafolio de aplicaciones",
+      Icon: IconRocket,
+      colorClass: "text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-950/40",
+    },
+    {
+      href: "/cv",
+      label: "Mi CV",
+      desc: "Currículum vitae completo",
+      Icon: IconFile,
+      colorClass: "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40",
+    },
+    {
+      href: "/contact",
+      label: "Contacto",
+      desc: "¿Tienes una idea? Hablemos",
+      Icon: IconMessage,
+      colorClass: "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40",
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-black">
+    <div className="min-h-screen" style={{ background: "var(--bg)" }}>
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative flex min-h-screen items-center justify-center px-4 pt-20 overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </div>
-        
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <ScrollReveal>
-            <div className="mb-8">
-              <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6 animate-gradient">
-                Edisson López
-              </h1>
-              <h2 className="text-2xl md:text-3xl font-semibold text-zinc-700 dark:text-zinc-300 mb-4">
-                Desarrollador Full Stack
-              </h2>
-              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-                Especializado en crear soluciones web robustas y escalables utilizando tecnologías modernas. 
-                Transformo ideas en aplicaciones funcionales y experiencias digitales excepcionales.
-              </p>
+      {/* ===== HERO ===== */}
+      <section
+        className="relative min-h-screen flex items-center px-5 pt-24 pb-20 overflow-hidden hero-grid"
+      >
+        {/* Soft fade over grid at bottom */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, color-mix(in srgb, var(--bg) 30%, transparent) 0%, transparent 30%, var(--bg) 100%)",
+          }}
+        />
+        {/* Ambient glow */}
+        <div
+          className="absolute top-1/3 right-1/3 w-[600px] h-[600px] rounded-full blur-[140px] pointer-events-none"
+          style={{ background: "var(--accent-glow)" }}
+        />
+
+        <div className="relative z-10 max-w-6xl mx-auto w-full">
+          <div className="grid lg:grid-cols-[1fr_400px] gap-16 items-center">
+
+            {/* Left: Content */}
+            <div>
+              <ScrollReveal>
+                {/* Available badge */}
+                <div
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium mb-8 shadow-sm"
+                  style={{
+                    border: "1px solid var(--border)",
+                    background: "var(--surface)",
+                    color: "var(--fg-muted)",
+                  }}
+                >
+                  <span
+                    className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"
+                    style={{ animation: "pulse-glow 2.5s ease infinite" }}
+                  />
+                  Disponible para freelance
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal delay={100}>
+                <h1
+                  className="font-bold leading-[1.0] tracking-tight mb-5"
+                  style={{ fontSize: "clamp(3rem, 8vw, 5.5rem)" }}
+                >
+                  <span className="block" style={{ color: "var(--fg)" }}>
+                    Edisson
+                  </span>
+                  <span className="block gradient-text-animated">López</span>
+                </h1>
+              </ScrollReveal>
+
+              <ScrollReveal delay={200}>
+                <p
+                  className="text-lg leading-relaxed max-w-lg mb-8"
+                  style={{ color: "var(--fg-muted)" }}
+                >
+                  Desarrollador{" "}
+                  <strong style={{ color: "var(--fg)", fontWeight: 600 }}>
+                    Full Stack
+                  </strong>{" "}
+                  especializado en crear soluciones web robustas y escalables.
+                  Transformo ideas en aplicaciones funcionales con tecnologías
+                  modernas.
+                </p>
+              </ScrollReveal>
+
+              <ScrollReveal delay={300}>
+                <div className="flex flex-wrap gap-3 mb-12">
+                  <Link
+                    href="/projects"
+                    className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-200 shadow-md hover:opacity-85 hover:-translate-y-0.5"
+                    style={{ background: "var(--fg)", color: "var(--bg)" }}
+                    aria-label="Ver todos los proyectos"
+                  >
+                    Ver Proyectos
+                    <IconArrow className="w-4 h-4" />
+                  </Link>
+                  <a
+                    href="/cv/cv.pdf"
+                    download
+                    className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:opacity-90"
+                    style={{
+                      border: "1px solid var(--border-strong)",
+                      color: "var(--fg)",
+                      background: "transparent",
+                    }}
+                    aria-label="Descargar curriculum vitae en PDF"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Descargar CV
+                  </a>
+                </div>
+              </ScrollReveal>
+
+              {/* Inline stats */}
+              <ScrollReveal delay={400}>
+                <div
+                  className="flex flex-wrap gap-8 pt-8"
+                  style={{ borderTop: "1px solid var(--border)" }}
+                >
+                  {stats.map(({ value, label }) => (
+                    <div key={label}>
+                      <div
+                        className="text-2xl font-bold tracking-tight leading-none mb-1"
+                        style={{ color: "var(--fg)" }}
+                      >
+                        {value}
+                      </div>
+                      <div className="text-xs" style={{ color: "var(--fg-muted)" }}>
+                        {label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </ScrollReveal>
             </div>
-          </ScrollReveal>
-          
-          <ScrollReveal delay={200}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Link
-                href="/about-me"
-                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                aria-label="Ir a la página de sobre mí"
-              >
-                Sobre Mí
-              </Link>
-              <Link
-                href="/projects"
-                className="px-8 py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-semibold rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:scale-105"
-                aria-label="Ver todos los proyectos"
-              >
-                Ver Proyectos
-              </Link>
-              <Link
-                href="/cv"
-                className="px-8 py-4 border-2 border-purple-600 text-purple-600 dark:text-purple-400 font-semibold rounded-full hover:bg-purple-600 hover:text-white transition-all duration-300 transform hover:scale-105"
-                aria-label="Ver mi currículum vitae"
-              >
-                Ver Mi CV
-              </Link>
-            </div>
-          </ScrollReveal>
+
+            {/* Right: Photo (desktop only) */}
+            <ScrollReveal delay={150} className="hidden lg:block">
+              <div className="relative mx-auto" style={{ width: "380px" }}>
+                {/* Wide ambient halo */}
+                <div
+                  className="absolute -inset-8 rounded-full blur-[80px] pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at 50% 60%, rgba(79,142,247,0.22) 0%, rgba(124,58,237,0.12) 50%, transparent 75%)",
+                  }}
+                />
+                {/* Floor glow — accent pool under the photo */}
+                <div
+                  className="absolute bottom-0 left-4 right-4 h-24 blur-3xl pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at 50% 100%, rgba(79,142,247,0.35) 0%, transparent 70%)",
+                  }}
+                />
+
+                {/* Photo — no container, transparent PNG floats freely */}
+                <img
+                  src="/images/profile-photo.png"
+                  alt="Edisson López - Desarrollador Full Stack"
+                  className="relative z-10 w-full object-contain object-bottom"
+                  style={{ maxHeight: "420px" }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                    const parent = target.parentElement;
+                    if (parent) {
+                      parent.innerHTML = `
+                        <div style="width:380px;height:420px;display:flex;align-items:center;justify-content:center">
+                          <svg width="72" height="72" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" style="color:#7a8499">
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                          </svg>
+                        </div>`;
+                    }
+                  }}
+                />
+
+                {/* Floating code tag */}
+                <div
+                  className="absolute -bottom-4 -right-5 z-20 px-3 py-2 rounded-xl shadow-xl text-xs font-mono"
+                  style={{
+                    background: "var(--surface)",
+                    border: "1px solid var(--border)",
+                    color: "var(--fg-muted)",
+                  }}
+                >
+                  <span style={{ color: "#4ade80" }}>const</span>{" "}
+                  dev{" "}
+                  <span style={{ color: "var(--fg-muted)" }}>=</span>{" "}
+                  <span style={{ color: "var(--accent)" }}>&quot;fullstack&quot;</span>
+                  <span style={{ color: "var(--fg-muted)" }}>;</span>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Scroll indicator */}
+          <div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 scroll-indicator"
+            aria-hidden="true"
+          >
+            <span
+              className="text-[10px] tracking-widest uppercase"
+              style={{ color: "var(--fg-muted)" }}
+            >
+              Scroll
+            </span>
+            <svg
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              viewBox="0 0 24 24"
+              style={{ color: "var(--fg-muted)" }}
+            >
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </div>
         </div>
       </section>
 
-      {/* Statistics Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-zinc-900 dark:to-zinc-800">
+      {/* ===== PROJECTS ===== */}
+      <section
+        className="py-24 px-5"
+        style={{ background: "var(--bg-subtle)" }}
+      >
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                  {PROJECTS.length}+
-                </div>
-                <div className="text-zinc-600 dark:text-zinc-400 font-medium">Proyectos</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                  {technologies.filter((t) => t.mastery === "domino").length}+
-                </div>
-                <div className="text-zinc-600 dark:text-zinc-400 font-medium">Tecnologías</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                  {yearsOfExperience}+
-                </div>
-                <div className="text-zinc-600 dark:text-zinc-400 font-medium">Años de experiencia</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                  Full
-                </div>
-                <div className="text-zinc-600 dark:text-zinc-400 font-medium">Stack</div>
-              </div>
-            </div>
+            <SectionHeading eyebrow="Portafolio" title="Proyectos Públicos" />
+            <p
+              className="text-base leading-relaxed max-w-xl -mt-6 mb-12"
+              style={{ color: "var(--fg-muted)" }}
+            >
+              Desarrollados en tiempo libre para explorar tecnologías y demostrar habilidades.
+            </p>
           </ScrollReveal>
-        </div>
-      </section>
 
-      {/* Featured Projects Section */}
-      <section className="py-20 px-4 bg-white dark:bg-zinc-800">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal>
-            <div className="text-center mb-12">
-              <h3 className="text-3xl md:text-4xl font-bold mb-4 text-zinc-800 dark:text-zinc-200">
-                Proyectos Públicos
-              </h3>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Proyectos hechos en mi tiempo libre para demostrar habilidades y aprender nuevas tecnologías
-              </p>
-            </div>
-          </ScrollReveal>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
             {PROJECTS.slice(0, 3).map((project, index) => (
-              <ScrollReveal key={project.slug} delay={index * 100}>
+              <ScrollReveal key={project.slug} delay={index * 80}>
                 <ProjectCard project={project} index={index} />
               </ScrollReveal>
             ))}
           </div>
-          
+
           <ScrollReveal delay={300}>
-            <div className="text-center">
-              <Link
-                href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 font-semibold rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:scale-105"
-                aria-label="Ver todos los proyectos"
-              >
-                Ver Todos los Proyectos
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:opacity-75"
+              style={{
+                color: "var(--accent)",
+                border: "1px solid var(--border-strong)",
+                background: "transparent",
+              }}
+              aria-label="Ver todos los proyectos"
+            >
+              Ver todos los proyectos
+              <IconArrow className="w-4 h-4" />
+            </Link>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="sobre-mi" className="py-20 px-4 bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800">
+      {/* ===== ABOUT ===== */}
+      <section
+        id="sobre-mi"
+        className="py-24 px-5"
+        style={{ background: "var(--bg)" }}
+      >
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 text-zinc-800 dark:text-zinc-200">
-              Sobre Mí
-            </h3>
+            <SectionHeading eyebrow="Acerca de mí" title="¿Quién soy?" />
           </ScrollReveal>
-          
-          {/* Photo and Introduction */}
-          <div className="grid md:grid-cols-2 gap-12 items-start mb-16">
+
+          <div className="grid md:grid-cols-2 gap-14 items-start">
+            {/* Bio */}
             <ScrollReveal>
-              <div className="relative">
-                {/* Photo Professional */}
-                <div className="relative w-full max-w-md mx-auto">
-                  <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-zinc-800 dark:via-zinc-900 dark:to-zinc-800 p-4">
-                    <div className="w-full h-full rounded-xl overflow-hidden bg-transparent">
-                      <img
-                        src="/images/profile-photo.png"
-                        alt="Edisson López - Desarrollador Full Stack"
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          // Fallback si la imagen no existe
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const parent = target.parentElement;
-                          if (parent) {
-                            parent.innerHTML = `
-                              <div class="w-full h-full flex items-center justify-center">
-                                <div class="text-6xl">👨‍💻</div>
-                              </div>
-                            `;
-                          }
-                        }}
-                      />
-                    </div>
-                  </div>
-                  {/* Decorative elements */}
-                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl"></div>
-                  <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl"></div>
-                </div>
-              </div>
-            </ScrollReveal>
-            
-            <ScrollReveal delay={200}>
-              <div>
-                <h4 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200 mb-4">
-                  ¿Quién soy?
-                </h4>
-                <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
-                  Soy Edisson López, un desarrollador Full Stack apasionado por crear soluciones 
-                  tecnológicas innovadoras. Con experiencia en múltiples lenguajes y frameworks, 
-                  me especializo en desarrollar aplicaciones web completas.
-                </p>
-                <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
-                  Mi enfoque se centra en escribir{" "}
-                  <span className="bg-amber-200/80 dark:bg-amber-400/40 px-1 py-0.5 rounded-sm">
-                    código limpio</span>
-                    , mantenible y escalable, siempre buscando las mejores prácticas.
-                </p>
-                <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-8 leading-relaxed">
-                  <span className="bg-amber-200/80 dark:bg-amber-400/40 px-1 py-0.5 rounded-sm">
-                    &quot;Done is better than perfect&quot;
-                  </span>
-                  : equilibro tiempos para entregar funcionalidad sólida en plazos razonables para favorecer el avance del proyecto.
-                </p>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          {/* Experience and Education */}
-          <div className="grid md:grid-cols-2 gap-8">
-            <ScrollReveal delay={100}>
-              <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 border border-zinc-200 dark:border-zinc-700">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <h4 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200">
-                    Experiencia Profesional
-                  </h4>
-                </div>
-                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
-                  He liderado iniciativas full stack para empresas como Ibylit, Advision Development y Data GIS, 
-                  entregando plataformas B2B seguras, experiencias digitales de alto tráfico y herramientas para 
-                  valuadores inmobiliarios, además de colaborar en Workana y el TEC.
-                </p>
-                <Link
-                  href="/cv#experiencia-profesional"
-                  className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+              <p
+                className="text-base leading-relaxed mb-4"
+                style={{ color: "var(--fg-muted)" }}
+              >
+                Soy Edisson López, un desarrollador Full Stack apasionado por crear
+                soluciones tecnológicas innovadoras. Con experiencia en múltiples
+                lenguajes y frameworks, me especializo en desarrollar aplicaciones
+                web completas.
+              </p>
+              <p
+                className="text-base leading-relaxed mb-4"
+                style={{ color: "var(--fg-muted)" }}
+              >
+                Mi enfoque se centra en escribir{" "}
+                <mark
+                  className="not-italic font-semibold px-1 py-0.5 rounded"
+                  style={{
+                    background: "rgba(250,204,21,0.2)",
+                    color: "var(--fg)",
+                  }}
                 >
-                  Ver en detalle
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={200}>
-              <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 border border-zinc-200 dark:border-zinc-700">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                  </div>
-                  <h4 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200">
-                    Educación
-                  </h4>
-                </div>
-                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
-                  Soy egresado del Tecnológico de Costa Rica, donde desarrollé el Sistema de Movilidad Internacional 
-                  en ASP.NET, apoyé cursos de Administración de Proyectos y cursé electivas avanzadas de recuperación 
-                  de información, desarrollo web e interfaces gráficas.
-                </p>
-                <Link
-                  href="/cv#educacion"
-                  className="inline-flex items-center gap-2 text-purple-600 dark:text-purple-400 font-semibold hover:underline"
+                  código limpio
+                </mark>
+                , mantenible y escalable, siempre buscando las mejores prácticas.
+              </p>
+              <p
+                className="text-base leading-relaxed mb-8"
+                style={{ color: "var(--fg-muted)" }}
+              >
+                <mark
+                  className="not-italic font-semibold px-1 py-0.5 rounded"
+                  style={{
+                    background: "rgba(250,204,21,0.2)",
+                    color: "var(--fg)",
+                  }}
                 >
-                  Ver en detalle
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-            </ScrollReveal>
-          </div>
+                  &quot;Done is better than perfect&quot;
+                </mark>
+                : equilibro tiempos para entregar funcionalidad sólida en plazos
+                razonables y favorecer el avance del proyecto.
+              </p>
 
-          {/* Specialties Section */}
-          <ScrollReveal delay={300}>
-            <div className="mb-4 mt-16">
-              <h4 className="text-2xl md:text-3xl font-bold text-center mb-8 text-zinc-800 dark:text-zinc-200">
+              {/* Specialties grid */}
+              <h4
+                className="text-sm font-semibold tracking-wide uppercase mb-4"
+                style={{ color: "var(--fg-muted)" }}
+              >
                 Especialidades
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {skills.map((skill, index) => {
-                  // Íconos para cada especialidad
-                  const icons = [
-                    <svg key="web" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                    </svg>,
-                    <svg key="api" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>,
-                    <svg key="db" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-                    </svg>,
-                    <svg key="arch" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>,
-                    <svg key="devops" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                    </svg>,
-                    <svg key="test" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  ];
-                  
-                  const colors = [
-                    "from-blue-500 to-blue-600",
-                    "from-purple-500 to-purple-600",
-                    "from-green-500 to-green-600",
-                    "from-orange-500 to-orange-600",
-                    "from-pink-500 to-pink-600",
-                    "from-cyan-500 to-cyan-600"
-                  ];
-                  
-                  return (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {specialties.map(({ label, Icon }) => (
+                  <div
+                    key={label}
+                    className="group flex items-center gap-3 p-3 rounded-xl transition-all duration-200"
+                    style={{
+                      border: "1px solid var(--border)",
+                      background: "var(--surface)",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.borderColor = "color-mix(in srgb, var(--accent) 30%, transparent)";
+                      (e.currentTarget as HTMLElement).style.background = "var(--surface-hover)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+                      (e.currentTarget as HTMLElement).style.background = "var(--surface)";
+                    }}
+                  >
                     <div
-                      key={index}
-                      className="group bg-white dark:bg-zinc-800 rounded-xl p-6 border border-zinc-200 dark:border-zinc-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                      className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center"
+                      style={{ background: "var(--accent-glow)", color: "var(--accent)" }}
                     >
-                      <div className="flex items-start gap-4">
-                        <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br ${colors[index % colors.length]} flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300`}>
-                          {icons[index % icons.length]}
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-zinc-800 dark:text-zinc-200 font-medium leading-relaxed group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                            {skill}
-                          </p>
-                        </div>
-                      </div>
+                      <Icon className="w-3.5 h-3.5" />
                     </div>
-                  );
-                })}
+                    <span
+                      className="text-xs font-medium leading-snug"
+                      style={{ color: "var(--fg-muted)" }}
+                    >
+                      {label}
+                    </span>
+                  </div>
+                ))}
               </div>
+            </ScrollReveal>
+
+            {/* Experience + Education */}
+            <div className="space-y-4">
+              <ScrollReveal delay={100}>
+                <div
+                  className="p-6 rounded-2xl glow-card transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    border: "1px solid var(--border)",
+                    background: "var(--surface)",
+                  }}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-blue-50 dark:bg-blue-950/40">
+                      <IconBriefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <h4
+                      className="text-base font-semibold"
+                      style={{ color: "var(--fg)" }}
+                    >
+                      Experiencia Profesional
+                    </h4>
+                  </div>
+                  <p
+                    className="text-sm leading-relaxed mb-4"
+                    style={{ color: "var(--fg-muted)" }}
+                  >
+                    He liderado iniciativas full stack para empresas como Ibylit,
+                    Advision Development y Data GIS, entregando plataformas B2B
+                    seguras, experiencias digitales de alto tráfico y herramientas
+                    para valuadores inmobiliarios.
+                  </p>
+                  <Link
+                    href="/cv#experiencia-profesional"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold transition-opacity hover:opacity-60"
+                    style={{ color: "var(--accent)" }}
+                  >
+                    Ver en detalle
+                    <IconArrow className="w-3 h-3" />
+                  </Link>
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal delay={200}>
+                <div
+                  className="p-6 rounded-2xl glow-card transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    border: "1px solid var(--border)",
+                    background: "var(--surface)",
+                  }}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-violet-50 dark:bg-violet-950/40">
+                      <IconBook className="w-5 h-5 text-violet-600 dark:text-violet-400" />
+                    </div>
+                    <h4
+                      className="text-base font-semibold"
+                      style={{ color: "var(--fg)" }}
+                    >
+                      Educación
+                    </h4>
+                  </div>
+                  <p
+                    className="text-sm leading-relaxed mb-4"
+                    style={{ color: "var(--fg-muted)" }}
+                  >
+                    Egresado del Tecnológico de Costa Rica, donde desarrollé el
+                    Sistema de Movilidad Internacional en ASP.NET, apoyé cursos de
+                    Administración de Proyectos y cursé electivas avanzadas en
+                    recuperación de información y desarrollo web.
+                  </p>
+                  <Link
+                    href="/cv#educacion"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold transition-opacity hover:opacity-60"
+                    style={{ color: "var(--accent)" }}
+                  >
+                    Ver en detalle
+                    <IconArrow className="w-3 h-3" />
+                  </Link>
+                </div>
+              </ScrollReveal>
+
+              {/* Photo card (mobile-first, visible inside about on all sizes) */}
+              <ScrollReveal delay={300}>
+                <div
+                  className="relative overflow-hidden rounded-2xl lg:hidden"
+                  style={{
+                    border: "1px solid var(--border)",
+                    background: "var(--surface)",
+                  }}
+                >
+                  <img
+                    src="/images/profile-photo.png"
+                    alt="Edisson López"
+                    className="w-full aspect-[4/3] object-cover object-top"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.parentElement!.style.display = "none";
+                    }}
+                  />
+                </div>
+              </ScrollReveal>
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </section>
 
       <TechnologiesSection />
 
-      {/* Quick Navigation Cards */}
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-zinc-900 dark:to-zinc-800">
+      {/* ===== QUICK NAV ===== */}
+      <section
+        className="py-24 px-5"
+        style={{ background: "var(--bg-subtle)" }}
+      >
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 text-zinc-800 dark:text-zinc-200">
-              Descubre Más
-            </h3>
+            <h2
+              className="text-2xl font-bold tracking-tight text-center mb-10"
+              style={{ color: "var(--fg)" }}
+            >
+              Explora más
+            </h2>
           </ScrollReveal>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <ScrollReveal delay={0}>
-              <Link href="/about-me" className="group block" aria-label="Ir a la página sobre mí">
-                <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-blue-500">
-                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">👨‍💻</div>
-                  <h4 className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">Sobre Mí</h4>
-                  <p className="text-zinc-600 dark:text-zinc-400">Conoce más sobre mi trayectoria y experiencia profesional</p>
-                </div>
-              </Link>
-            </ScrollReveal>
-
-            <ScrollReveal delay={100}>
-              <Link href="/projects" className="group block" aria-label="Ver todos los proyectos">
-                <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-purple-500">
-                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">🚀</div>
-                  <h4 className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">Proyectos</h4>
-                  <p className="text-zinc-600 dark:text-zinc-400">Explora mi portafolio de proyectos y aplicaciones</p>
-                </div>
-              </Link>
-            </ScrollReveal>
-
-            <ScrollReveal delay={200}>
-              <Link href="/cv" className="group block" aria-label="Ver mi currículum vitae">
-                <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-green-500">
-                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">📄</div>
-                  <h4 className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">Mi CV</h4>
-                  <p className="text-zinc-600 dark:text-zinc-400">Revisa mi currículum completo y experiencia</p>
-                </div>
-              </Link>
-            </ScrollReveal>
-
-            <ScrollReveal delay={300}>
-              <Link href="/contact" className="group block" aria-label="Ir a la página de contacto">
-                <div className="bg-white dark:bg-zinc-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-orange-500">
-                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">💬</div>
-                  <h4 className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">Contacto</h4>
-                  <p className="text-zinc-600 dark:text-zinc-400">¿Tienes una idea? ¡Hablemos!</p>
-                </div>
-              </Link>
-            </ScrollReveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {navCards.map(({ href, label, desc, Icon, colorClass }, i) => (
+              <ScrollReveal key={href} delay={i * 70}>
+                <Link
+                  href={href}
+                  className="group flex flex-col p-5 rounded-2xl glow-card transition-all duration-200 hover:-translate-y-1"
+                  style={{
+                    border: "1px solid var(--border)",
+                    background: "var(--surface)",
+                  }}
+                  aria-label={`Ir a ${label}`}
+                >
+                  <div className={`w-10 h-10 rounded-xl mb-4 flex items-center justify-center ${colorClass}`}>
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h4
+                    className="font-semibold text-sm mb-1.5 transition-colors duration-200 group-hover:text-[var(--accent)]"
+                    style={{ color: "var(--fg)" }}
+                  >
+                    {label}
+                  </h4>
+                  <p className="text-xs leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                    {desc}
+                  </p>
+                </Link>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contacto" className="py-20 px-4 bg-white dark:bg-zinc-800">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* ===== CONTACT CTA ===== */}
+      <section
+        id="contacto"
+        className="py-24 px-5"
+        style={{ background: "var(--bg)" }}
+      >
+        <div className="max-w-3xl mx-auto text-center">
           <ScrollReveal>
-            <h3 className="text-3xl md:text-4xl font-bold mb-8 text-zinc-800 dark:text-zinc-200">
-              Disponible para freelance
-            </h3>
-            <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-12 max-w-2xl mx-auto">
-              Trabajo en remoto para empresas y equipos que necesitan desarrollo web. 
-              Si tienes un proyecto con alcance definido o buscas sumar a alguien 
+            <span
+              className="text-xs font-semibold tracking-widest uppercase mb-4 block"
+              style={{ color: "var(--accent)" }}
+            >
+              Disponible ahora
+            </span>
+            <h2
+              className="text-3xl md:text-4xl font-bold tracking-tight mb-5"
+              style={{ color: "var(--fg)" }}
+            >
+              ¿Tienes un proyecto?
+            </h2>
+            <p
+              className="leading-relaxed mb-10 max-w-md mx-auto"
+              style={{ color: "var(--fg-muted)" }}
+            >
+              Trabajo en remoto para empresas y equipos que necesitan desarrollo web.
+              Si tienes un proyecto con alcance definido o buscas sumar a alguien
               a tu equipo, escríbeme y vemos si hacemos match.
             </p>
           </ScrollReveal>
-          
-          <ScrollReveal delay={200}>
-            <div className="mb-8">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
-                aria-label="Ir a la página de contacto"
-              >
-                <span className="text-2xl">💬</span>
-                Ir a Página de Contacto
-              </Link>
-            </div>
+
+          <ScrollReveal delay={100}>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold rounded-xl transition-all duration-200 shadow-md hover:opacity-85 hover:-translate-y-0.5 mb-10"
+              style={{ background: "var(--fg)", color: "var(--bg)" }}
+              aria-label="Ir a la página de contacto"
+            >
+              Ir a Página de Contacto
+              <IconArrow className="w-4 h-4" />
+            </Link>
           </ScrollReveal>
 
-          <ScrollReveal delay={300}>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center max-w-3xl mx-auto">
+          <ScrollReveal delay={200}>
+            <div className="flex flex-wrap gap-3 justify-center">
               <a
                 href="mailto:ediloaz@gmail.com"
-                className="flex items-center gap-3 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 hover:opacity-75"
+                style={{
+                  border: "1px solid var(--border)",
+                  color: "var(--fg-muted)",
+                  background: "transparent",
+                }}
                 aria-label="Enviar un correo electrónico"
               >
-                <span className="text-xl">📧</span>
+                <IconEmail className="w-4 h-4" />
                 Email
               </a>
               <a
                 href="https://linkedin.com/in/ediloaz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 rounded-full hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 hover:opacity-75"
+                style={{
+                  border: "1px solid var(--border)",
+                  color: "var(--fg-muted)",
+                  background: "transparent",
+                }}
                 aria-label="Visitar mi perfil de LinkedIn"
               >
-                <span className="text-xl">💼</span>
+                <IconLinkedIn className="w-4 h-4" />
                 LinkedIn
               </a>
               <a
                 href="https://github.com/ediloaz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-3 border-2 border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-full hover:bg-zinc-700 hover:text-white dark:hover:bg-zinc-600 transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 hover:opacity-75"
+                style={{
+                  border: "1px solid var(--border)",
+                  color: "var(--fg-muted)",
+                  background: "transparent",
+                }}
                 aria-label="Visitar mi perfil de GitHub"
               >
-                <span className="text-xl">🐙</span>
+                <IconGitHub className="w-4 h-4" />
                 GitHub
               </a>
               <a
                 href="https://medium.com/@ediloaz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-3 border-2 border-emerald-600 text-emerald-600 dark:text-emerald-400 rounded-full hover:bg-emerald-600 hover:text-white transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-150 hover:opacity-75"
+                style={{
+                  border: "1px solid var(--border)",
+                  color: "var(--fg-muted)",
+                  background: "transparent",
+                }}
                 aria-label="Visitar mi perfil de Medium"
               >
-                <span className="text-xl">✍️</span>
+                <IconMedium className="w-4 h-4" />
                 Medium
               </a>
             </div>
@@ -473,3 +853,4 @@ export default function Home() {
     </div>
   );
 }
+
