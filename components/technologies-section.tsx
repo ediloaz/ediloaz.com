@@ -148,11 +148,11 @@ export default function TechnologiesSection({ sectionId = "tecnologias" }: Techn
                               <p className="mb-4 text-sm leading-snug text-zinc-200 dark:text-zinc-800">
                                 {details.usadaPara}
                               </p>
-                              <div className="space-y-1 text-xs">
+                              {/* <div className="space-y-1 text-xs">
                                 <p>
                                   <span className="font-semibold">Área:</span> {tech.category}
                                 </p>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </button>
