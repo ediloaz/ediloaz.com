@@ -1,6 +1,7 @@
 import type { BlogPost } from "./blog-types";
 import { blogPostsWave2Part1 } from "./blog-posts-wave-2-part1";
 import { blogPostsWave2Part2 } from "./blog-posts-wave-2-part2";
+import { blogPostsWave3 } from "./blog-posts-wave-3";
 
 export type { BlogPost, BlogCategory } from "./blog-types";
 export { blogCategories } from "./blog-types";
@@ -333,4 +334,5 @@ export const blogPosts: BlogPost[] = [
   ...blogPostsCore,
   ...blogPostsWave2Part1,
   ...blogPostsWave2Part2,
+  ...blogPostsWave3,
 ];

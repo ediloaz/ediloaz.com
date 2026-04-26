@@ -5,13 +5,15 @@ import BlogContent from "@/components/blog/BlogContent";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Artículos sobre arquitectura de software, legal-tech, cloud AWS, mobile-first, documentación técnica, carrera y cultura de ingeniería — por Edisson López (Costa Rica).",
+    "Artículos extensos sobre arquitectura de software, legal-tech, cloud AWS, mobile-first, documentación técnica, carrera y cultura de ingeniería — por Edisson López (Costa Rica).",
   keywords: [
     "blog desarrollo software",
     "arquitectura software español",
     "Next.js Costa Rica",
     "AWS legal tech",
     "ingeniería de software LATAM",
+    "artículos técnicos largos",
+    "blog arquitectura y frontend",
   ],
   openGraph: {
     title: "Blog · ediloaz",
@@ -23,6 +25,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://www.ediloaz.com/blog",
+    types: {
+      "application/rss+xml": "https://www.ediloaz.com/blog/rss.xml",
+    },
   },
 };
 
