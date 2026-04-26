@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import {
   technologies,
   TECHNOLOGY_CATEGORY_ORDER,
   MASTERY_OPTIONS,
   MASTERY_ORDER,
+  type TechnologyMastery,
 } from "@/constants/technologies";
 
 type TechnologiesSectionProps = {
@@ -14,6 +16,17 @@ type TechnologiesSectionProps = {
 };
 
 export default function TechnologiesSection({ sectionId = "tecnologias" }: TechnologiesSectionProps) {
+  const [selectedMasteries, setSelectedMasteries] = useState<TechnologyMastery[]>(["domino"]);
+
+  const toggleMastery = (mastery: TechnologyMastery) => {
+    setSelectedMasteries((prev) => {
+      const isSelected = prev.includes(mastery);
+      if (!isSelected) return [...prev, mastery];
+      if (prev.length === 1) return prev;
+      return prev.filter((item) => item !== mastery);
+    });
+  };
+
   return (
     <section
       id={sectionId}
@@ -25,35 +38,46 @@ export default function TechnologiesSection({ sectionId = "tecnologias" }: Techn
             Tecnologías
           </h3>
           <p className="text-center text-zinc-600 dark:text-zinc-400 mb-6 max-w-2xl mx-auto">
-            Organizadas por área. El icono en cada tarjeta indica el nivel de dominio.
+            Organizadas por area. Filtra por nivel para ver solo las tecnologias de esa categoria.
           </p>
           <p className="text-center text-xs font-medium text-zinc-500 dark:text-zinc-500 uppercase tracking-wider mb-3">
-            Simbología
+            Filtrar por dominio
           </p>
-          <div className="flex flex-wrap justify-center gap-6 mb-12 text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="flex flex-wrap justify-center gap-3 mb-12 text-sm text-zinc-600 dark:text-zinc-400">
             {MASTERY_ORDER.map((key) => {
               const { label, icon, tooltip } = MASTERY_OPTIONS[key];
+              const isActive = selectedMasteries.includes(key);
               return (
-                <span
+                <button
                   key={key}
-                  className="inline-flex items-center gap-2"
+                  type="button"
+                  onClick={() => toggleMastery(key)}
+                  aria-pressed={isActive}
+                  className={[
+                    "inline-flex items-center gap-2 rounded-full border px-4 py-2 transition-colors",
+                    isActive
+                      ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+                      : "border-zinc-300 bg-white text-zinc-700 hover:bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700",
+                  ].join(" ")}
                   title={tooltip}
                 >
                   <span
-                    className="inline-flex h-6 w-6 items-center justify-center rounded border border-zinc-300 dark:border-zinc-600 font-medium"
+                    className="inline-flex h-6 w-6 items-center justify-center rounded border border-current font-medium"
                     aria-hidden
                   >
                     {icon}
                   </span>
                   <span>{label}</span>
-                </span>
+                </button>
               );
             })}
           </div>
         </ScrollReveal>
         <div className="space-y-14">
           {TECHNOLOGY_CATEGORY_ORDER.map((category) => {
-            const categoryTechs = technologies.filter((t) => t.category === category);
+            const categoryTechs = technologies.filter(
+              (t) => t.category === category && selectedMasteries.includes(t.mastery)
+            );
             if (categoryTechs.length === 0) return null;
             return (
               <ScrollReveal key={category}>
