@@ -152,13 +152,7 @@ export default function TechnologiesSection({ sectionId = "tecnologias" }: Techn
                                 <p>
                                   <span className="font-semibold">Área:</span> {tech.category}
                                 </p>
-                                <p>
-                                  <span className="font-semibold">Nivel:</span> {label}
-                                </p>
                               </div>
-                              <p className="mt-4 text-xs uppercase tracking-wider text-zinc-300 dark:text-zinc-700">
-                                Click para volver
-                              </p>
                             </div>
                           </div>
                         </button>
