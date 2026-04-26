@@ -97,7 +97,7 @@ export default function Navbar() {
 
           {/* Right actions */}
           <div className="flex items-center gap-2">
-            <Link
+            {/* <Link
               href="/cv"
               className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg transition-all duration-150 shadow-sm hover:opacity-80"
               style={{ background: "var(--fg)", color: "var(--bg)" }}
@@ -108,7 +108,7 @@ export default function Navbar() {
                 <polyline points="14 2 14 8 20 8" />
               </svg>
               Ver CV
-            </Link>
+            </Link> */}
 
             <ThemeToggle />
 
@@ -175,14 +175,14 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            <Link
+            {/* <Link
               href="/cv"
               onClick={() => setIsMenuOpen(false)}
               className="flex items-center justify-center gap-2 mx-1 mt-3 py-2.5 text-sm font-semibold rounded-xl transition-opacity hover:opacity-80"
               style={{ background: "var(--fg)", color: "var(--bg)" }}
             >
               Ver CV
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
