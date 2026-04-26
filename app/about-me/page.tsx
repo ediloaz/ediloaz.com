@@ -72,7 +72,7 @@ export default function AboutMe() {
             />
           )}
 
-          <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 border border-zinc-200 dark:border-zinc-700">
+          <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 border border-zinc-200 dark:border-zinc-700 mb-8">
             <h2 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200 mb-6">
               Mi Trayectoria
             </h2>
