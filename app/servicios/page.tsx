@@ -414,7 +414,7 @@ export default function ServiciosPage() {
           <section className="py-12 border-y" style={{ borderColor: "var(--border)" }}>
             <div className="max-w-5xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[
-                { value: `${projects}+`, label: "Proyectos entregados" },
+                { value: `${projects}+`, label: "Sitios web entregados" },
                 { value: `${satisfaction}%`, label: "Clientes satisfechos" },
                 { value: `${(uptime / 10).toFixed(1)}%`, label: "Uptime garantizado" },
                 { value: "1-2", label: "Semanas de entrega" },
