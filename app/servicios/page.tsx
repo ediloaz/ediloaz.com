@@ -259,6 +259,7 @@ export default function ServiciosPage() {
   });
   const [statsVisible, setStatsVisible] = useState(false);
   const statsRef = useRef<HTMLDivElement>(null);
+  const [previewPulse, setPreviewPulse] = useState(false);
 
   useEffect(() => {
     const el = statsRef.current;
@@ -267,6 +268,13 @@ export default function ServiciosPage() {
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!formData.businessType && !formData.packageId && !formData.businessName && !formData.palette) return;
+    const tOn  = setTimeout(() => setPreviewPulse(true),  0);
+    const tOff = setTimeout(() => setPreviewPulse(false), 900);
+    return () => { clearTimeout(tOn); clearTimeout(tOff); };
+  }, [formData.businessType, formData.packageId, formData.palette, formData.businessName]);
 
   const projects = useCountUp(25, 1300, statsVisible);
   const satisfaction = useCountUp(100, 1300, statsVisible);
@@ -1027,10 +1035,41 @@ export default function ServiciosPage() {
               </div>
 
               {/* ── LIVE PREVIEW COLUMN ── */}
-              <div className="hidden lg:flex flex-col gap-4 lg:sticky lg:top-24">
+              <div className="flex flex-col gap-4 lg:sticky lg:top-24 max-w-sm mx-auto w-full lg:max-w-none">
+
+                {/* Mobile / tablet live header */}
+                <div className="lg:hidden flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="w-2 h-2 rounded-full shrink-0"
+                      style={{ background: "#25d366", animation: "pulse-glow 1.8s ease-in-out infinite" }}
+                      aria-hidden="true"
+                    />
+                    <span className="text-sm font-bold" style={{ color: "var(--fg)" }}>Vista previa en vivo</span>
+                  </div>
+                  <span className="text-xs" style={{ color: "var(--fg-muted)" }}>↑ los cambios se reflejan aquí ↓</span>
+                </div>
 
                 {/* Browser mockup */}
-                <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ border: "1px solid var(--border-strong)" }}>
+                <div
+                  className="rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 relative"
+                  style={{
+                    border: `1px solid ${previewPulse ? previewAccent + "80" : "var(--border-strong)"}`,
+                    boxShadow: previewPulse
+                      ? `0 0 0 3px ${previewAccent}30, 0 8px 32px ${previewAccent}18`
+                      : "0 4px 24px rgba(0,0,0,0.10)",
+                  }}
+                >
+                  {/* "Actualizado" flash badge — mobile only */}
+                  {previewPulse && (
+                    <div
+                      className="lg:hidden absolute top-2 right-2 z-10 flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold text-white"
+                      style={{ background: "#059669", animation: "scaleIn 0.2s ease" }}
+                      aria-live="polite"
+                    >
+                      ✓ Actualizado
+                    </div>
+                  )}
                   {/* Chrome bar */}
                   <div className="flex items-center gap-1.5 px-3 py-2.5" style={{ background: "var(--bg-subtle)", borderBottom: "1px solid var(--border)" }}>
                     <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#ff5f57" }} />
