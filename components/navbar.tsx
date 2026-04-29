@@ -9,6 +9,7 @@ const navLinks = [
   { href: "/", label: "Inicio" },
   { href: "/about-me", label: "Sobre mí" },
   { href: "/projects", label: "Proyectos" },
+  { href: "/servicios", label: "Servicios" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contacto" },
 ];
@@ -110,6 +111,14 @@ export default function Navbar() {
               Ver CV
             </Link> */}
 
+            <Link
+              href="/servicios#configurar"
+              className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-lg transition-all duration-150 hover:opacity-85 hover:scale-[1.03]"
+              style={{ background: "linear-gradient(135deg, var(--accent), #7c3aed)", color: "white" }}
+            >
+              Crear mi web →
+            </Link>
+
             <ThemeToggle />
 
             {/* Hamburger */}
@@ -175,14 +184,14 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            {/* <Link
-              href="/cv"
+            <Link
+              href="/servicios#configurar"
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center justify-center gap-2 mx-1 mt-3 py-2.5 text-sm font-semibold rounded-xl transition-opacity hover:opacity-80"
-              style={{ background: "var(--fg)", color: "var(--bg)" }}
+              className="flex items-center justify-center gap-1.5 mx-1 mt-3 py-2.5 text-sm font-bold rounded-xl transition-opacity hover:opacity-85"
+              style={{ background: "linear-gradient(135deg, var(--accent), #7c3aed)", color: "white" }}
             >
-              Ver CV
-            </Link> */}
+              Crear mi web →
+            </Link>
           </div>
         </div>
       </div>
