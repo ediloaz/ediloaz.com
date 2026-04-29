@@ -748,6 +748,18 @@ export default function ServiciosPage() {
               </ScrollReveal>
             ))}
           </div>
+
+          {/* <ScrollReveal delay={200}>
+            <div className="mt-8 text-center">
+              <Link
+                href="/servicios/adicionales"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-150 hover:opacity-85 hover:scale-[1.02]"
+                style={{ background: "var(--bg-subtle)", color: "var(--fg)", border: "1px solid var(--border-strong)" }}
+              >
+                Ver todos los servicios en detalle →
+              </Link>
+            </div>
+          </ScrollReveal> */}
         </div>
       </section>
 
