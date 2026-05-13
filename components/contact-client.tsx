@@ -185,15 +185,43 @@ export default function ContactClient() {
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const [focusedTextarea, setFocusedTextarea] = useState(false);
   const [submitState, setSubmitState] = useState<"idle" | "sending" | "sent">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (submitState !== "idle") return;
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = (data.get("name") as string)?.trim();
+    const email = (data.get("email") as string)?.trim();
+    const message = (data.get("message") as string)?.trim();
+
+    setErrorMessage("");
     setSubmitState("sending");
-    setTimeout(() => {
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        setErrorMessage(json.error ?? "Error al enviar el mensaje.");
+        setSubmitState("idle");
+        return;
+      }
+
       setSubmitState("sent");
-      setTimeout(() => setSubmitState("idle"), 3000);
-    }, 1500);
+      form.reset();
+      setTimeout(() => setSubmitState("idle"), 4000);
+    } catch {
+      setErrorMessage("Error de red. Verifica tu conexión e intenta de nuevo.");
+      setSubmitState("idle");
+    }
   }
 
   return (
@@ -334,6 +362,13 @@ export default function ContactClient() {
                   />
                 </motion.div>
               </motion.div>
+
+              {/* Error message */}
+              {errorMessage && (
+                <p className="text-sm px-4 py-2 rounded-lg" style={{ color: "#ef4444", background: "rgba(239,68,68,0.08)" }}>
+                  {errorMessage}
+                </p>
+              )}
 
               {/* Submit */}
               <motion.div
