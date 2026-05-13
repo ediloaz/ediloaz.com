@@ -3,7 +3,7 @@ import PageLayout from "@/components/page-layout";
 import TechnologiesSection from "@/components/technologies-section";
 import AdSenseBanner from "@/components/adsense/AdSenseBanner";
 import AdSenseInFeed from "@/components/adsense/AdSenseInFeed";
-import Link from "next/link";
+import { ExperienceTimeline } from "@/components/experience-timeline";
 
 export const metadata: Metadata = {
   title: "Sobre Mí",
@@ -30,8 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Sobre Mí · ediloaz",
-    description:
-      "Conoce más sobre Edisson López, desarrollador Full Stack.",
+    description: "Conoce más sobre Edisson López, desarrollador Full Stack.",
     creator: "@ediloaz",
   },
   alternates: {
@@ -42,80 +41,77 @@ export const metadata: Metadata = {
 export default function AboutMe() {
   return (
     <PageLayout>
-      <section className="min-h-screen px-4 py-20">
+      <section className="min-h-screen px-4 py-20" style={{ background: "var(--bg)" }}>
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
+
+          {/* Header */}
+          <h1 className="text-4xl md:text-5xl font-bold gradient-text-animated mb-6">
             Sobre Mí
           </h1>
-          
-          <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 mb-8 border border-zinc-200 dark:border-zinc-700">
-            <h2 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200 mb-4">
+
+          {/* Bio card */}
+          <div
+            className="rounded-2xl p-8 mb-8"
+            style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+            }}
+          >
+            <h2 className="text-2xl font-semibold mb-4" style={{ color: "var(--fg)" }}>
               ¿Quién soy?
             </h2>
-            <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
-              Soy Edisson López, un desarrollador Full Stack apasionado por crear soluciones 
-              tecnológicas innovadoras que mejoren la vida de las personas. Con experiencia 
-              en múltiples lenguajes y frameworks, me especializo en desarrollar aplicaciones 
+            <p className="text-base leading-relaxed mb-4" style={{ color: "var(--fg-muted)" }}>
+              Soy Edisson López, un desarrollador Full Stack apasionado por crear soluciones
+              tecnológicas innovadoras que mejoren la vida de las personas. Con experiencia
+              en múltiples lenguajes y frameworks, me especializo en desarrollar aplicaciones
               web completas desde el frontend hasta el backend.
             </p>
-            <p className="text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
-              Mi enfoque se centra en escribir código limpio, mantenible y escalable, siempre 
+            <p className="text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+              Mi enfoque se centra en escribir código limpio, mantenible y escalable, siempre
               buscando las mejores prácticas y las tecnologías más actuales del mercado.
             </p>
           </div>
 
-          {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST && (
-            <AdSenseBanner
-              clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}
-              slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST}
-              className="mb-8"
-            />
-          )}
+          {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID &&
+            process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST && (
+              <AdSenseBanner
+                clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}
+                slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST}
+                className="mb-8"
+              />
+            )}
 
-          <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow-xl p-8 border border-zinc-200 dark:border-zinc-700 mb-8">
-            <h2 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200 mb-6">
+          {/* Timeline card */}
+          <div
+            className="rounded-2xl p-8 mb-8"
+            style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+            }}
+          >
+            <h2 className="text-2xl font-semibold mb-8" style={{ color: "var(--fg)" }}>
               Mi Trayectoria
             </h2>
-            <div className="space-y-6">
-              <div className="border-l-4 border-blue-600 pl-6">
-                <h3 className="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-2">
-                  Experiencia Profesional
-                </h3>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  He liderado iniciativas full stack para empresas como Ibylit, Advision Development y Data GIS, entregando plataformas B2B seguras, experiencias digitales de alto tráfico y herramientas para valuadores inmobiliarios, además de colaborar en Workana y el TEC.{" "}
-                  <Link href="/cv#experiencia-profesional" className="text-blue-600 dark:text-blue-400 font-semibold underline underline-offset-4">
-                    Ver en detalle
-                  </Link>
-                </p>
-              </div>
-              
-              <div className="border-l-4 border-purple-600 pl-6">
-                <h3 className="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-2">
-                  Educación
-                </h3>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  Soy egresado del Tecnológico de Costa Rica, donde desarrollé el Sistema de Movilidad Internacional en ASP.NET, apoyé cursos de Administración de Proyectos y cursé electivas avanzadas de recuperación de información, desarrollo web e interfaces gráficas.{" "}
-                  <Link href="/cv#educacion" className="text-blue-600 dark:text-blue-400 font-semibold underline underline-offset-4">
-                    Ver en detalle
-                  </Link>
-                </p>
-              </div>
-            </div>
+            <ExperienceTimeline />
           </div>
 
           <TechnologiesSection sectionId="tecnologias" />
         </div>
 
-        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_LIST && (
-          <div className="w-full mt-16 border-t border-zinc-200/80 dark:border-zinc-700/80 pt-12 pb-4">
-            <div className="max-w-7xl mx-auto px-4 w-full">
-              <AdSenseInFeed
-                clientId={process?.env?.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''}
-                slot={process?.env?.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_LIST || ''}
-              />
+        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID &&
+          process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_LIST && (
+            <div
+              className="w-full mt-16 pt-12 pb-4"
+              style={{ borderTop: "1px solid var(--border)" }}
+            >
+              <div className="max-w-7xl mx-auto px-4 w-full">
+                <AdSenseInFeed
+                  clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ""}
+                  slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_LIST || ""}
+                />
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </section>
     </PageLayout>
   );

@@ -7,6 +7,9 @@ import { PROJECTS } from "./projects/projects-data";
 import ProjectCard from "./projects/project-card";
 import { technologies } from "@/constants/technologies";
 import TechnologiesSection from "@/components/technologies-section";
+import { NeuralNetworkBg } from "@/components/neural-network-bg";
+import { TechFlowSection } from "@/components/tech-flow-section";
+import { ExperienceTimeline } from "@/components/experience-timeline";
 
 // ===== ICON PRIMITIVES =====
 
@@ -59,23 +62,6 @@ function IconUser({ className }: { className?: string }) {
   );
 }
 
-function IconBriefcase({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-      <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
-    </svg>
-  );
-}
-
-function IconBook({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-      <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
-      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
-    </svg>
-  );
-}
 
 function IconGlobe({ className }: { className?: string }) {
   return (
@@ -244,17 +230,21 @@ export default function Home() {
       <section
         className="relative min-h-screen flex items-center px-5 pt-24 pb-20 overflow-hidden hero-grid"
       >
+        {/* Code-driven SVG particle network — zero-latency, interactive */}
+        <NeuralNetworkBg />
+
         {/* Soft fade over grid at bottom */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: "linear-gradient(to bottom, color-mix(in srgb, var(--bg) 30%, transparent) 0%, transparent 30%, var(--bg) 100%)",
+            zIndex: 1,
           }}
         />
         {/* Ambient glow */}
         <div
           className="absolute top-1/3 right-1/3 w-[600px] h-[600px] rounded-full blur-[140px] pointer-events-none"
-          style={{ background: "var(--accent-glow)" }}
+          style={{ background: "var(--accent-glow)", zIndex: 1 }}
         />
 
         <div className="relative z-10 max-w-6xl mx-auto w-full">
@@ -450,10 +440,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== TECH FLOW (code-driven SVG architecture animation) ===== */}
+      <TechFlowSection />
+
       {/* ===== PROJECTS ===== */}
       <section
         className="py-24 px-5"
-        style={{ background: "var(--bg-subtle)" }}
+        style={{ background: "var(--bg)" }}
       >
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
@@ -590,90 +583,14 @@ export default function Home() {
               </div>
             </ScrollReveal>
 
-            {/* Experience + Education */}
-            <div className="space-y-4">
-              <ScrollReveal delay={100}>
-                <div
-                  className="p-6 rounded-2xl glow-card transition-all duration-300 hover:-translate-y-0.5"
-                  style={{
-                    border: "1px solid var(--border)",
-                    background: "var(--surface)",
-                  }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-blue-50 dark:bg-blue-950/40">
-                      <IconBriefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <h4
-                      className="text-base font-semibold"
-                      style={{ color: "var(--fg)" }}
-                    >
-                      Experiencia Profesional
-                    </h4>
-                  </div>
-                  <p
-                    className="text-sm leading-relaxed mb-4"
-                    style={{ color: "var(--fg-muted)" }}
-                  >
-                    He liderado iniciativas full stack para empresas como Ibylit,
-                    Advision Development y Data GIS, entregando plataformas B2B
-                    seguras, experiencias digitales de alto tráfico y herramientas
-                    para valuadores inmobiliarios.
-                  </p>
-                  <Link
-                    href="/cv#experiencia-profesional"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold transition-opacity hover:opacity-60"
-                    style={{ color: "var(--accent)" }}
-                  >
-                    Ver en detalle
-                    <IconArrow className="w-3 h-3" />
-                  </Link>
-                </div>
-              </ScrollReveal>
+            {/* Experience + Education — animated timeline */}
+            <div>
+              <ExperienceTimeline />
 
-              <ScrollReveal delay={200}>
+              {/* Photo card (mobile only) */}
+              <ScrollReveal delay={300} className="mt-4 lg:hidden">
                 <div
-                  className="p-6 rounded-2xl glow-card transition-all duration-300 hover:-translate-y-0.5"
-                  style={{
-                    border: "1px solid var(--border)",
-                    background: "var(--surface)",
-                  }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-violet-50 dark:bg-violet-950/40">
-                      <IconBook className="w-5 h-5 text-violet-600 dark:text-violet-400" />
-                    </div>
-                    <h4
-                      className="text-base font-semibold"
-                      style={{ color: "var(--fg)" }}
-                    >
-                      Educación
-                    </h4>
-                  </div>
-                  <p
-                    className="text-sm leading-relaxed mb-4"
-                    style={{ color: "var(--fg-muted)" }}
-                  >
-                    Egresado del Tecnológico de Costa Rica, donde desarrollé el
-                    Sistema de Movilidad Internacional en ASP.NET, apoyé cursos de
-                    Administración de Proyectos y cursé electivas avanzadas en
-                    recuperación de información y desarrollo web.
-                  </p>
-                  <Link
-                    href="/cv#educacion"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold transition-opacity hover:opacity-60"
-                    style={{ color: "var(--accent)" }}
-                  >
-                    Ver en detalle
-                    <IconArrow className="w-3 h-3" />
-                  </Link>
-                </div>
-              </ScrollReveal>
-
-              {/* Photo card (mobile-first, visible inside about on all sizes) */}
-              <ScrollReveal delay={300}>
-                <div
-                  className="relative overflow-hidden rounded-2xl lg:hidden"
+                  className="relative overflow-hidden rounded-2xl"
                   style={{
                     border: "1px solid var(--border)",
                     background: "var(--surface)",
