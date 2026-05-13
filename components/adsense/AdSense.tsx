@@ -62,6 +62,8 @@ export default function AdSense({
     return null;
   }
 
+  return null;
+
   return (
     <>
       {/* Contenedor del anuncio con diseño glassmorphism */}

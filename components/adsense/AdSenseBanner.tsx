@@ -12,6 +12,7 @@ type AdSenseBannerProps = {
  * Banner horizontal para colocar entre secciones de contenido (equivalente a posts del blog).
  */
 export default function AdSenseBanner({ clientId, slot, className = "" }: AdSenseBannerProps) {
+  return null;
   return (
     <div className={`w-full ${className}`}>
       <AdSense clientId={clientId} slot={slot} format="horizontal" className="w-full" />
