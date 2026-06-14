@@ -135,6 +135,49 @@ export const ADVANCED_FEATURES_SECTION = {
   description: "Herramientas técnicas con integraciones listas para usar.",
 } as const;
 
+/** Capturas en public/armar-mi-web/showcase/ — recomendado 1200×750 px (.png o .webp) */
+export const SHOWCASE_SECTION = {
+  title: "Sitios reales que ya entregamos",
+  description:
+    "Negocios locales con web profesional de Ediloaz. El tuyo puede verse incluso mejor.",
+} as const;
+
+export interface ShowcaseSite {
+  id: string;
+  name: string;
+  niche: string;
+  highlight: string;
+  url: string;
+  image: string;
+}
+
+export const SHOWCASE_SITES: ShowcaseSite[] = [
+  {
+    id: "alma-libre",
+    name: "Alma Libre Studio",
+    niche: "Yoga & bienestar · San José",
+    highlight: "Servicios, testimonios y reservas por WhatsApp",
+    url: "https://alma-libre-studio.ediloaz.com/",
+    image: "/armar-mi-web/showcase/alma-libre-studio.png",
+  },
+  {
+    id: "octane",
+    name: "Octane Mecánica",
+    niche: "Taller automotriz · Escazú",
+    highlight: "Galería antes/después y cotización vía WhatsApp",
+    url: "https://octane.ediloaz.com/",
+    image: "/armar-mi-web/showcase/octane-mecanica.png",
+  },
+  {
+    id: "presagio",
+    name: "Presagio",
+    niche: "Experiencias & picnic · Puriscal",
+    highlight: "Experiencias, galería, y reservaciones",
+    url: "https://presagio.ediloaz.com/",
+    image: "/armar-mi-web/showcase/presagio.png",
+  },
+];
+
 export const DOMAIN_STEP = {
   deferHint:
     "¿No tenés claro el dominio todavía? No te quedes acá pensándolo — podés definirlo después. Seguí configurando tu web.",

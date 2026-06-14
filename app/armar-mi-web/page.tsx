@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import PageLayout from "@/components/page-layout";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -18,6 +19,8 @@ import {
   ADVANCED_FEATURES_SECTION,
   BRIDGE_ESSENTIAL_ONLY,
   MODULE_INCLUDES,
+  SHOWCASE_SECTION,
+  SHOWCASE_SITES,
   HIDDEN_DETAILS,
   formatCRC,
   formatCRCShort,
@@ -132,6 +135,69 @@ function ModuleIncludesBanner() {
         </div>
       ))}
     </div>
+  );
+}
+
+function ShowcaseCard({ site }: { site: (typeof SHOWCASE_SITES)[number] }) {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <motion.a
+      href={site.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block rounded-2xl overflow-hidden glow-card transition-all duration-300 hover:-translate-y-1"
+      style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
+      whileHover={{ y: -4 }}
+    >
+      <div className="relative aspect-[16/10] overflow-hidden" style={{ background: "var(--bg-subtle)" }}>
+        {!imgError ? (
+          <Image
+            src={site.image}
+            alt={`Captura del sitio web ${site.name}`}
+            fill
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+            sizes="(max-width: 768px) 100vw, 33vw"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 text-center"
+            style={{ background: "linear-gradient(135deg, var(--accent-glow), var(--bg-subtle))" }}
+          >
+            <span className="text-2xl" aria-hidden="true">🌐</span>
+            <p className="text-xs font-semibold" style={{ color: "var(--fg-muted)" }}>
+              Subí la captura en
+              <br />
+              <code className="text-[10px]">{site.image}</code>
+            </p>
+          </div>
+        )}
+        <div
+          className="absolute inset-x-0 top-0 flex items-center gap-1.5 px-3 py-2"
+          style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.45), transparent)" }}
+        >
+          <span className="w-2 h-2 rounded-full bg-red-400/90" />
+          <span className="w-2 h-2 rounded-full bg-yellow-400/90" />
+          <span className="w-2 h-2 rounded-full bg-green-400/90" />
+        </div>
+      </div>
+      <div className="p-4">
+        <p className="text-[11px] font-semibold uppercase tracking-wider mb-1" style={{ color: "var(--accent)" }}>
+          {site.niche}
+        </p>
+        <p className="font-bold text-sm mb-1" style={{ color: "var(--fg)" }}>{site.name}</p>
+        <p className="text-xs leading-relaxed mb-3" style={{ color: "var(--fg-muted)" }}>
+          {site.highlight}
+        </p>
+        <span className="inline-flex items-center gap-1 text-xs font-bold" style={{ color: "var(--accent)" }}>
+          Ver sitio
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </span>
+      </div>
+    </motion.a>
   );
 }
 
@@ -359,6 +425,36 @@ export default function ArmarMiWebPage() {
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
         </div>
+      </section>
+
+      {/* Showcase */}
+      <section className="max-w-5xl mx-auto px-5 pb-4">
+        <ScrollReveal>
+          <div className="text-center mb-8">
+            <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--accent)" }}>
+              Portafolio Ediloaz
+            </p>
+            <h2 className="text-xl md:text-2xl font-black tracking-tight mb-2" style={{ color: "var(--fg)" }}>
+              {SHOWCASE_SECTION.title}
+            </h2>
+            <p className="text-sm max-w-xl mx-auto" style={{ color: "var(--fg-muted)" }}>
+              {SHOWCASE_SECTION.description}
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4 md:gap-5">
+            {SHOWCASE_SITES.map((site, i) => (
+              <motion.div
+                key={site.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+              >
+                <ShowcaseCard site={site} />
+              </motion.div>
+            ))}
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* Configurator */}
