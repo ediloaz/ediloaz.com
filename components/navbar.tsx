@@ -9,7 +9,6 @@ const navLinks = [
   { href: "/", label: "Inicio" },
   { href: "/about-me", label: "Sobre mí" },
   { href: "/projects", label: "Proyectos" },
-  { href: "/servicios", label: "Servicios" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contacto" },
 ];
@@ -112,7 +111,7 @@ export default function Navbar() {
             </Link> */}
 
             <Link
-              href="/servicios#configurar"
+              href="/armar-mi-web"
               className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-lg transition-all duration-150 hover:opacity-85 hover:scale-[1.03]"
               style={{ background: "linear-gradient(135deg, var(--accent), #7c3aed)", color: "white" }}
             >
@@ -185,7 +184,7 @@ export default function Navbar() {
               );
             })}
             <Link
-              href="/servicios#configurar"
+              href="/armar-mi-web"
               onClick={() => setIsMenuOpen(false)}
               className="flex items-center justify-center gap-1.5 mx-1 mt-3 py-2.5 text-sm font-bold rounded-xl transition-opacity hover:opacity-85"
               style={{ background: "linear-gradient(135deg, var(--accent), #7c3aed)", color: "white" }}
