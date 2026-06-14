@@ -198,6 +198,14 @@ export const SHOWCASE_SITES: ShowcaseSite[] = [
     url: "https://presagio.ediloaz.com/",
     image: "/armar-mi-web/showcase/presagio.png",
   },
+  {
+    id: "jgconextions",
+    name: "JG CONEXTIONS",
+    niche: "Reparación & servicios IT · Heredia y Puriscal",
+    highlight: "Servicios, trabajos realizados y contacto por WhatsApp",
+    url: "https://www.jgconextions.com/",
+    image: "/armar-mi-web/showcase/jgconextions.png",
+  },
 ];
 
 export const DOMAIN_STEP = {

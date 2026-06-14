@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useMemo, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import PageLayout from "@/components/page-layout";
@@ -203,6 +203,196 @@ function ModuleIncludesTooltips() {
   );
 }
 
+function useSlidesPerView() {
+  const [slidesPerView, setSlidesPerView] = useState(1);
+
+  useEffect(() => {
+    const update = () => {
+      if (window.matchMedia("(min-width: 1024px)").matches) setSlidesPerView(3);
+      else if (window.matchMedia("(min-width: 640px)").matches) setSlidesPerView(2);
+      else setSlidesPerView(1);
+    };
+    update();
+    window.addEventListener("resize", update, { passive: true });
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return slidesPerView;
+}
+
+function ShowcaseCarousel({ sites }: { sites: typeof SHOWCASE_SITES }) {
+  const count = sites.length;
+  const loopedSites = useMemo(() => [...sites, ...sites, ...sites], [sites]);
+  const [index, setIndex] = useState(count);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const indexRef = useRef(count);
+  const isJumpingRef = useRef(false);
+  const prevIndexRef = useRef<number | null>(null);
+  const slidesPerView = useSlidesPerView();
+  const gap = slidesPerView >= 3 ? 20 : 16;
+  const activeDot = ((index % count) + count) % count;
+
+  useEffect(() => {
+    indexRef.current = index;
+  }, [index]);
+
+  useEffect(() => {
+    setIndex(count);
+    indexRef.current = count;
+    prevIndexRef.current = null;
+  }, [count, slidesPerView]);
+
+  useEffect(() => {
+    const node = containerRef.current;
+    if (!node) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      setContainerWidth(entry.contentRect.width);
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  const slideWidth =
+    containerWidth > 0 ? (containerWidth - gap * (slidesPerView - 1)) / slidesPerView : 0;
+  const step = slideWidth + gap;
+
+  const applyTransform = useCallback(
+    (targetIndex: number, animate: boolean) => {
+      const track = trackRef.current;
+      if (!track || step <= 0) return;
+      track.style.transition = animate
+        ? "transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1)"
+        : "none";
+      track.style.transform = `translate3d(${-targetIndex * step}px, 0, 0)`;
+    },
+    [step],
+  );
+
+  useLayoutEffect(() => {
+    if (isJumpingRef.current || step <= 0) return;
+    applyTransform(index, false);
+  }, [step]);
+
+  useEffect(() => {
+    if (isJumpingRef.current || step <= 0) return;
+    const shouldAnimate = prevIndexRef.current !== null && prevIndexRef.current !== index;
+    prevIndexRef.current = index;
+    applyTransform(index, shouldAnimate);
+  }, [index, applyTransform, step]);
+
+  const snapTo = useCallback(
+    (targetIndex: number) => {
+      isJumpingRef.current = true;
+      indexRef.current = targetIndex;
+      setIndex(targetIndex);
+      applyTransform(targetIndex, false);
+      requestAnimationFrame(() => {
+        isJumpingRef.current = false;
+      });
+    },
+    [applyTransform],
+  );
+
+  const goPrev = () => setIndex((i) => i - 1);
+  const goNext = () => setIndex((i) => i + 1);
+
+  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    if (e.propertyName !== "transform" || e.target !== trackRef.current) return;
+    if (isJumpingRef.current) return;
+
+    const current = indexRef.current;
+    if (current >= count * 2) snapTo(current - count);
+    else if (current < count) snapTo(current + count);
+  };
+
+  return (
+    <div className="relative px-10 sm:px-12">
+      <button
+        type="button"
+        onClick={goPrev}
+        aria-label="Sitio anterior"
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-10 h-10 rounded-full transition-transform hover:scale-105 active:scale-95"
+        style={{
+          background: "var(--surface)",
+          border: "1px solid var(--border-strong)",
+          color: "var(--fg)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.12)",
+        }}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        onClick={goNext}
+        aria-label="Sitio siguiente"
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-10 h-10 rounded-full transition-transform hover:scale-105 active:scale-95"
+        style={{
+          background: "var(--surface)",
+          border: "1px solid var(--border-strong)",
+          color: "var(--fg)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.12)",
+        }}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+
+      <div
+        ref={containerRef}
+        className="overflow-hidden touch-pan-y"
+        onTouchStart={(e) => {
+          touchStartX.current = e.touches[0].clientX;
+        }}
+        onTouchEnd={(e) => {
+          if (touchStartX.current === null) return;
+          const delta = touchStartX.current - e.changedTouches[0].clientX;
+          if (delta > 48) goNext();
+          else if (delta < -48) goPrev();
+          touchStartX.current = null;
+        }}
+      >
+        <div
+          ref={trackRef}
+          className="flex will-change-transform"
+          style={{ gap }}
+          onTransitionEnd={handleTransitionEnd}
+        >
+          {loopedSites.map((site, i) => (
+            <div key={`${site.id}-${i}`} className="shrink-0" style={{ width: slideWidth || "100%" }}>
+              <ShowcaseCard site={site} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex justify-center gap-1.5 mt-5">
+        {sites.map((site, i) => (
+          <button
+            key={site.id}
+            type="button"
+            onClick={() => setIndex(count + i)}
+            aria-label={`Ir a ${site.name}`}
+            aria-current={i === activeDot ? "true" : undefined}
+            className="h-1.5 rounded-full transition-all duration-200"
+            style={{
+              width: i === activeDot ? 20 : 6,
+              background: i === activeDot ? "var(--accent)" : "var(--border-strong)",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ShowcaseCard({ site }: { site: (typeof SHOWCASE_SITES)[number] }) {
   const [imgError, setImgError] = useState(false);
 
@@ -222,7 +412,7 @@ function ShowcaseCard({ site }: { site: (typeof SHOWCASE_SITES)[number] }) {
             alt={`Captura del sitio web ${site.name}`}
             fill
             className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             onError={() => setImgError(true)}
           />
         ) : (
@@ -1042,7 +1232,7 @@ export default function ArmarMiWebPage() {
         </ScrollReveal>
 
         {/* Showcase */}
-        <ScrollReveal>
+        <ScrollReveal className="pt-10 md:pt-14">
           <div className="text-center mb-8">
             <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--accent)" }}>
               Portafolio Ediloaz
@@ -1054,19 +1244,7 @@ export default function ArmarMiWebPage() {
               {SHOWCASE_SECTION.description}
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-4 md:gap-5">
-            {SHOWCASE_SITES.map((site, i) => (
-              <motion.div
-                key={site.id}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-              >
-                <ShowcaseCard site={site} />
-              </motion.div>
-            ))}
-          </div>
+          <ShowcaseCarousel sites={SHOWCASE_SITES} />
         </ScrollReveal>
 
         {/* Hidden details */}
