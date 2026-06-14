@@ -427,36 +427,6 @@ export default function ArmarMiWebPage() {
         </div>
       </section>
 
-      {/* Showcase */}
-      <section className="max-w-5xl mx-auto px-5 pb-4">
-        <ScrollReveal>
-          <div className="text-center mb-8">
-            <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--accent)" }}>
-              Portafolio Ediloaz
-            </p>
-            <h2 className="text-xl md:text-2xl font-black tracking-tight mb-2" style={{ color: "var(--fg)" }}>
-              {SHOWCASE_SECTION.title}
-            </h2>
-            <p className="text-sm max-w-xl mx-auto" style={{ color: "var(--fg-muted)" }}>
-              {SHOWCASE_SECTION.description}
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-4 md:gap-5">
-            {SHOWCASE_SITES.map((site, i) => (
-              <motion.div
-                key={site.id}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-              >
-                <ShowcaseCard site={site} />
-              </motion.div>
-            ))}
-          </div>
-        </ScrollReveal>
-      </section>
-
       {/* Configurator */}
       <section ref={configuratorRef} id="configurador" className="max-w-4xl mx-auto px-5 py-16 space-y-16">
         {/* Step 1: Essential */}
@@ -905,6 +875,34 @@ export default function ArmarMiWebPage() {
               {selectedCount} módulos en tu configuración · Sin compromiso hasta que confirmes
             </p>
           </motion.div>
+        </ScrollReveal>
+
+        {/* Showcase */}
+        <ScrollReveal>
+          <div className="text-center mb-8">
+            <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--accent)" }}>
+              Portafolio Ediloaz
+            </p>
+            <h2 className="text-xl md:text-2xl font-black tracking-tight mb-2" style={{ color: "var(--fg)" }}>
+              {SHOWCASE_SECTION.title}
+            </h2>
+            <p className="text-sm max-w-xl mx-auto" style={{ color: "var(--fg-muted)" }}>
+              {SHOWCASE_SECTION.description}
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4 md:gap-5">
+            {SHOWCASE_SITES.map((site, i) => (
+              <motion.div
+                key={site.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+              >
+                <ShowcaseCard site={site} />
+              </motion.div>
+            ))}
+          </div>
         </ScrollReveal>
 
         {/* Hidden details */}
