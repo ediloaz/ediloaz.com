@@ -46,8 +46,15 @@ export default function Navbar() {
             className="group flex items-center gap-2.5 shrink-0"
             aria-label="Inicio - Edisson López"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center text-white text-xs font-bold tracking-tight shadow-md group-hover:shadow-blue-500/30 transition-shadow duration-300">
-              EL
+            <div
+              className="relative w-8 h-8 shrink-0 overflow-hidden rounded-full shadow-md ring-2 ring-blue-500/15 transition-all duration-300 group-hover:shadow-blue-500/25 group-hover:ring-blue-500/35"
+              aria-hidden="true"
+            >
+              <img
+                src="/images/profile-photo.png"
+                alt=""
+                className="h-full w-full object-cover object-top"
+              />
             </div>
             <span
               className="font-semibold text-sm tracking-tight hidden sm:block transition-colors duration-200"

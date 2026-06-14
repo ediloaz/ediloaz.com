@@ -6,25 +6,28 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import PageLayout from "@/components/page-layout";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import {
-  WA_PHONE,
   BUILDER_META,
   BUILDER_PRICES,
   SUBDOMAIN_BASE,
-  ESSENTIAL_PACKAGE,
+  SITE_BASE,
   DOMAIN_OPTIONS,
-  DOMAIN_STEP,
   EXTRA_PAGES,
   EXTRA_PAGES_SECTION,
   ADVANCED_FEATURES,
   ADVANCED_FEATURES_SECTION,
-  BRIDGE_ESSENTIAL_ONLY,
+  SUMMARY_LABELS,
+  BRIDGE_SITE_BASE,
+  HERO_CTAS,
+  WA_MESSAGES,
+  buildWaLink,
   MODULE_INCLUDES,
   SHOWCASE_SECTION,
   SHOWCASE_SITES,
   HIDDEN_DETAILS,
   formatCRC,
   formatCRCShort,
-  getMaintenanceAnnualText,
+  getMaintenanceAnnualSummary,
+  getMaintenanceAnnualTooltip,
   type DomainOptionId,
 } from "@/constants/website-builder";
 
@@ -86,7 +89,15 @@ function PriceTag({ price, selected }: { price: number; selected?: boolean }) {
   );
 }
 
-function InfoChip({ label, detail }: { label: string; detail: string }) {
+function InfoChip({
+  label,
+  detail,
+  example,
+}: {
+  label: string;
+  detail: string;
+  example?: string;
+}) {
   return (
     <span
       tabIndex={0}
@@ -103,38 +114,92 @@ function InfoChip({ label, detail }: { label: string; detail: string }) {
       </span>
       <span
         role="tooltip"
-        className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 px-3 py-2 rounded-xl text-[11px] font-normal leading-relaxed opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-focus-within:opacity-100 group-focus-within:scale-100 transition-all duration-200 z-20 shadow-lg"
+        className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 px-3 py-2 rounded-xl text-[11px] font-normal leading-relaxed opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-focus-within:opacity-100 group-focus-within:scale-100 transition-all duration-200 z-20 shadow-lg"
         style={{ background: "var(--surface)", border: "1px solid var(--border-strong)", color: "var(--fg-muted)" }}
       >
+        {example && (
+          <span className="block font-semibold mb-1" style={{ color: "var(--accent)" }}>
+            {example}
+          </span>
+        )}
         {detail}
       </span>
     </span>
   );
 }
 
-function ModuleIncludesBanner() {
+function IncludeHint({
+  label,
+  example,
+  detail,
+}: {
+  label: string;
+  example: string;
+  detail: string;
+}) {
   return (
-    <div
-      className="mb-6 p-4 md:p-5 rounded-2xl grid sm:grid-cols-2 gap-3"
-      style={{
-        background: "linear-gradient(135deg, var(--accent-glow), transparent)",
-        border: "1px solid color-mix(in srgb, var(--accent) 22%, transparent)",
-      }}
+    <button
+      type="button"
+      className="group relative inline-flex items-center gap-1 text-xs font-medium outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-sm"
+      style={{ color: "var(--fg)" }}
     >
-      <p className="sm:col-span-2 text-xs font-bold uppercase tracking-wider" style={{ color: "var(--accent)" }}>
+      <span
+        className="border-b border-dashed transition-colors"
+        style={{ borderColor: "color-mix(in srgb, var(--fg-muted) 55%, transparent)" }}
+      >
+        {label}
+      </span>
+      <svg
+        width="13"
+        height="13"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        className="shrink-0 opacity-60 group-hover:opacity-100 transition-opacity"
+        style={{ color: "var(--accent)" }}
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 16v-4M12 8h.01" />
+      </svg>
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute bottom-full left-0 mb-2 w-56 px-3 py-2.5 rounded-xl text-[11px] font-normal leading-relaxed text-left opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-focus-visible:opacity-100 group-focus-visible:scale-100 transition-all duration-200 z-20 shadow-lg"
+        style={{ background: "var(--surface)", border: "1px solid var(--border-strong)", color: "var(--fg-muted)" }}
+      >
+        <span className="block font-semibold mb-1" style={{ color: "var(--accent)" }}>
+          {example}
+        </span>
+        {detail}
+      </span>
+    </button>
+  );
+}
+
+function ModuleIncludesTooltips() {
+  return (
+    <p
+      className="mb-6 -mt-3 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs leading-relaxed"
+      style={{ color: "var(--fg-muted)" }}
+    >
+      <span className="font-semibold shrink-0" style={{ color: "var(--fg)" }}>
         {MODULE_INCLUDES.title}
-      </p>
-      {MODULE_INCLUDES.items.map((item) => (
-        <div key={item.label} className="flex gap-3 items-start">
-          <span className="text-lg shrink-0" aria-hidden="true">{item.icon}</span>
-          <div>
-            <p className="text-sm font-bold" style={{ color: "var(--fg)" }}>{item.label}</p>
-            <p className="text-xs mt-0.5 font-medium" style={{ color: "var(--accent)" }}>{item.example}</p>
-            <p className="text-[11px] mt-1 leading-relaxed" style={{ color: "var(--fg-muted)" }}>{item.detail}</p>
-          </div>
-        </div>
+      </span>
+      <span aria-hidden="true" style={{ color: "var(--border-strong)" }}>
+        —
+      </span>
+      {MODULE_INCLUDES.items.map((item, i) => (
+        <span key={item.label} className="inline-flex items-center gap-x-2">
+          {i > 0 && (
+            <span aria-hidden="true" style={{ color: "var(--border-strong)" }}>
+              ·
+            </span>
+          )}
+          <IncludeHint label={item.label} example={item.example} detail={item.detail} />
+        </span>
       ))}
-    </div>
+    </p>
   );
 }
 
@@ -201,13 +266,7 @@ function ShowcaseCard({ site }: { site: (typeof SHOWCASE_SITES)[number] }) {
   );
 }
 
-function buildWhatsAppMessage(
-  domainId: DomainOptionId,
-  domainInput: string,
-  pages: PageSelection,
-  features: FeatureSelection,
-  total: number,
-): string {
+function formatDomainLine(domainId: DomainOptionId, domainInput: string): string {
   const domain = DOMAIN_OPTIONS.find((d) => d.id === domainId)!;
   let domainLine = domain.label;
 
@@ -218,6 +277,19 @@ function buildWhatsAppMessage(
       domainLine = `${domain.label} (${domainInput.trim()})`;
     }
   }
+
+  return domainLine;
+}
+
+function buildWhatsAppMessage(
+  domainId: DomainOptionId,
+  domainInput: string,
+  pages: PageSelection,
+  features: FeatureSelection,
+  total: number,
+): string {
+  const domain = DOMAIN_OPTIONS.find((d) => d.id === domainId)!;
+  const domainLine = formatDomainLine(domainId, domainInput);
 
   const selectedPages = EXTRA_PAGES.filter((p) => pages[p.id]);
   const pagesLine =
@@ -243,10 +315,27 @@ function buildWhatsAppMessage(
 
   return (
     `Hola ${BUILDER_META.contactName}, armé mi presupuesto web modular:\n\n` +
-    `Paquete Esencial: ${formatCRCShort(BUILDER_PRICES.essentialPackage)}\n\n` +
+    `${SITE_BASE.summaryLabel}: ${formatCRCShort(BUILDER_PRICES.essentialPackage)}\n\n` +
     `Dominio: ${domainLine}${domain.price > 0 ? ` [+ ${formatCRCShort(domain.price)}]` : ""}\n\n` +
-    `Páginas Extra: ${pagesLine}${pagesExtra > 0 ? ` [+ ${formatCRCShort(pagesExtra)}]` : ""}\n\n` +
-    `Funcionalidades: ${featuresLine}${featuresExtra > 0 ? ` [+ ${formatCRCShort(featuresExtra)}]` : ""}\n` +
+    `${SUMMARY_LABELS.pages}: ${pagesLine}${pagesExtra > 0 ? ` [+ ${formatCRCShort(pagesExtra)}]` : ""}\n\n` +
+    `${SUMMARY_LABELS.features}: ${featuresLine}${featuresExtra > 0 ? ` [+ ${formatCRCShort(featuresExtra)}]` : ""}\n` +
+    `Total Desarrollo: ${formatCRCShort(total)}\n` +
+    `Quiero iniciar el proyecto, ¿cuál es el siguiente paso?`
+  );
+}
+
+function buildBaseWhatsAppMessage(
+  domainId: DomainOptionId,
+  domainInput: string,
+  total: number,
+): string {
+  const domain = DOMAIN_OPTIONS.find((d) => d.id === domainId)!;
+  const domainLine = formatDomainLine(domainId, domainInput);
+
+  return (
+    `Hola ${BUILDER_META.contactName}, quiero cotizar mi sitio web con la base:\n\n` +
+    `${SITE_BASE.summaryLabel}: ${formatCRCShort(BUILDER_PRICES.essentialPackage)}\n\n` +
+    `Dominio: ${domainLine}${domain.price > 0 ? ` [+ ${formatCRCShort(domain.price)}]` : ""}\n\n` +
     `Total Desarrollo: ${formatCRCShort(total)}\n` +
     `Quiero iniciar el proyecto, ¿cuál es el siguiente paso?`
   );
@@ -261,28 +350,33 @@ export default function ArmarMiWebPage() {
   const [features, setFeatures] = useState<FeatureSelection>(() =>
     Object.fromEntries(ADVANCED_FEATURES.map((f) => [f.id, false])),
   );
-  const [showStickyBar, setShowStickyBar] = useState(false);
+  const [stickyEligible, setStickyEligible] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [lastAdded, setLastAdded] = useState<string | null>(null);
-  const [showDomainDeferHint, setShowDomainDeferHint] = useState(false);
+  // const [showDomainDeferHint, setShowDomainDeferHint] = useState(false);
 
   const configuratorRef = useRef<HTMLElement>(null);
-  const heroRef = useRef<HTMLElement>(null);
-  const summaryInView = useInView(configuratorRef, { margin: "-20% 0px 0px 0px" });
+  const summaryCtaRef = useRef<HTMLAnchorElement>(null);
+  const summaryCtaInView = useInView(summaryCtaRef, { amount: 0.35, margin: "0px 0px -48px 0px" });
+  const showStickyBar = stickyEligible && !summaryCtaInView;
 
   useEffect(() => {
-    const onScroll = () => {
-      const heroBottom = heroRef.current?.getBoundingClientRect().bottom ?? 0;
-      setShowStickyBar(heroBottom < 80);
+    const updateSticky = () => {
+      setStickyEligible(window.innerWidth < 768 || window.scrollY > 300);
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    updateSticky();
+    window.addEventListener("scroll", updateSticky, { passive: true });
+    window.addEventListener("resize", updateSticky, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", updateSticky);
+      window.removeEventListener("resize", updateSticky);
+    };
   }, []);
 
   const domainPrice = DOMAIN_OPTIONS.find((d) => d.id === domainOption)?.price ?? 0;
   const hasPurchasedDomain = domainOption === "new-domain";
-  const maintenanceText = getMaintenanceAnnualText(hasPurchasedDomain);
+  const maintenanceSummary = getMaintenanceAnnualSummary(hasPurchasedDomain);
+  const maintenanceTooltip = getMaintenanceAnnualTooltip(hasPurchasedDomain);
 
   const pagesTotal = useMemo(
     () => EXTRA_PAGES.filter((p) => pages[p.id]).reduce((s, p) => s + p.price, 0),
@@ -295,6 +389,7 @@ export default function ArmarMiWebPage() {
   );
 
   const total = BUILDER_PRICES.essentialPackage + domainPrice + pagesTotal + featuresTotal;
+  const baseTotal = BUILDER_PRICES.essentialPackage + domainPrice;
 
   const selectedCount =
     1 +
@@ -304,10 +399,17 @@ export default function ArmarMiWebPage() {
 
   const waLink = useMemo(
     () =>
-      `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(
+      buildWaLink(
         buildWhatsAppMessage(domainOption, domainInput, pages, features, total),
-      )}`,
+      ),
     [domainOption, domainInput, pages, features, total],
+  );
+
+  const waLinkQuick = useMemo(() => buildWaLink(WA_MESSAGES.quick), []);
+
+  const waLinkBase = useMemo(
+    () => buildWaLink(buildBaseWhatsAppMessage(domainOption, domainInput, baseTotal)),
+    [domainOption, domainInput, baseTotal],
   );
 
   const togglePage = useCallback((id: string) => {
@@ -332,17 +434,16 @@ export default function ArmarMiWebPage() {
     return () => clearTimeout(t);
   }, [lastAdded]);
 
-  useEffect(() => {
-    setShowDomainDeferHint(false);
-    const t = setTimeout(() => setShowDomainDeferHint(true), 4000);
-    return () => clearTimeout(t);
-  }, [domainOption]);
+  // useEffect(() => {
+  //   setShowDomainDeferHint(false);
+  //   const t = setTimeout(() => setShowDomainDeferHint(true), 4000);
+  //   return () => clearTimeout(t);
+  // }, [domainOption]);
 
   return (
-    <PageLayout className="pb-32">
+    <PageLayout className="pb-28 md:pb-24">
       {/* Hero */}
       <section
-        ref={heroRef}
         className="relative overflow-hidden min-h-[88vh] flex flex-col items-center justify-center text-center px-5 pb-16"
       >
         <div className="hero-grid absolute inset-0 opacity-30" aria-hidden="true" />
@@ -390,22 +491,41 @@ export default function ArmarMiWebPage() {
             {BUILDER_META.subtitle}
           </p>
 
-          <motion.button
-            onClick={() => configuratorRef.current?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm transition-all duration-200 hover:scale-[1.03]"
-            style={{
-              background: "linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%)",
-              color: "white",
-              boxShadow: "0 4px 28px var(--accent-glow)",
-            }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            Empezar a configurar
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
-          </motion.button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <motion.a
+              href={waLinkQuick}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm w-full sm:w-auto"
+              style={{
+                background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
+                color: "white",
+                boxShadow: "0 4px 24px rgba(37, 211, 102, 0.35)",
+              }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <WhatsAppIcon size={18} />
+              {HERO_CTAS.whatsapp}
+            </motion.a>
+
+            <motion.button
+              onClick={() => configuratorRef.current?.scrollIntoView({ behavior: "smooth" })}
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm w-full sm:w-auto transition-all duration-200"
+              style={{
+                background: "transparent",
+                color: "var(--fg)",
+                border: "2px solid color-mix(in srgb, var(--accent) 40%, transparent)",
+              }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {HERO_CTAS.configurator}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
+            </motion.button>
+          </div>
 
           <div className="flex flex-wrap justify-center gap-2 mt-10">
             {["Pago único", "Panel de administración", "WhatsApp integrado", "SEO base", "100% responsivo"].map((t) => (
@@ -444,8 +564,8 @@ export default function ArmarMiWebPage() {
             />
             <SectionHeader
               step={1}
-              title="Empieza con el Paquete Esencial"
-              description={ESSENTIAL_PACKAGE.description}
+              title={SITE_BASE.stepTitle}
+              description={SITE_BASE.description}
             />
 
             <div
@@ -468,7 +588,7 @@ export default function ArmarMiWebPage() {
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold"
                 style={{ background: "rgba(34,197,94,0.12)", color: "#16a34a", border: "1px solid rgba(34,197,94,0.25)" }}
               >
-                ✓ Seleccionado
+                ✓ {SITE_BASE.priceLabel}
               </span>
             </div>
 
@@ -476,7 +596,7 @@ export default function ArmarMiWebPage() {
               ¿Qué incluye?
             </p>
             <div className="flex flex-wrap gap-2">
-              {ESSENTIAL_PACKAGE.chips.map((chip, i) => (
+              {SITE_BASE.chips.map((chip, i) => (
                 <motion.div
                   key={chip.label}
                   initial={{ opacity: 0, scale: 0.92 }}
@@ -546,6 +666,7 @@ export default function ArmarMiWebPage() {
               })}
             </div>
 
+            {/*
             <AnimatePresence>
               {(domainOption === "subdomain" ||
                 domainOption === "new-domain" ||
@@ -629,6 +750,7 @@ export default function ArmarMiWebPage() {
                 </motion.div>
               )}
             </AnimatePresence>
+            */}
           </div>
         </ScrollReveal>
 
@@ -645,11 +767,27 @@ export default function ArmarMiWebPage() {
             viewport={{ once: true }}
           >
             <p className="text-sm font-black mb-2" style={{ color: "var(--fg)" }}>
-              {BRIDGE_ESSENTIAL_ONLY.title}
+              {BRIDGE_SITE_BASE.title}
             </p>
-            <p className="text-xs md:text-sm leading-relaxed max-w-2xl mx-auto" style={{ color: "var(--fg-muted)" }}>
-              {BRIDGE_ESSENTIAL_ONLY.body}
+            <p className="text-xs md:text-sm leading-relaxed max-w-2xl mx-auto mb-5" style={{ color: "var(--fg-muted)" }}>
+              {BRIDGE_SITE_BASE.body}
             </p>
+            <motion.a
+              href={waLinkBase}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-sm"
+              style={{
+                background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
+                color: "white",
+                boxShadow: "0 4px 20px rgba(37, 211, 102, 0.3)",
+              }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <WhatsAppIcon size={18} />
+              {BRIDGE_SITE_BASE.waCta}
+            </motion.a>
           </motion.div>
         </ScrollReveal>
 
@@ -662,7 +800,7 @@ export default function ArmarMiWebPage() {
               description={EXTRA_PAGES_SECTION.description}
             />
 
-            <ModuleIncludesBanner />
+            <ModuleIncludesTooltips />
 
             {pagesTotal === 0 && (
               <motion.p
@@ -742,8 +880,6 @@ export default function ArmarMiWebPage() {
               description={ADVANCED_FEATURES_SECTION.description}
             />
 
-            <ModuleIncludesBanner />
-
             <div className="space-y-3">
               {ADVANCED_FEATURES.map((feat) => {
                 const isSelected = features[feat.id];
@@ -815,7 +951,7 @@ export default function ArmarMiWebPage() {
 
             <div className="space-y-2 my-6 text-sm" style={{ color: "var(--fg-muted)" }}>
               <div className="flex justify-between">
-                <span>Paquete Esencial</span>
+                <span>{SITE_BASE.summaryLabel}</span>
                 <span className="font-semibold tabular-nums" style={{ color: "var(--fg)" }}>
                   {formatCRC(BUILDER_PRICES.essentialPackage)}
                 </span>
@@ -828,7 +964,7 @@ export default function ArmarMiWebPage() {
               </div>
               {pagesTotal > 0 && (
                 <div className="flex justify-between">
-                  <span>Páginas extra ({EXTRA_PAGES.filter((p) => pages[p.id]).length})</span>
+                  <span>{SUMMARY_LABELS.pages} ({EXTRA_PAGES.filter((p) => pages[p.id]).length})</span>
                   <span className="font-semibold tabular-nums" style={{ color: "var(--fg)" }}>
                     {formatCRC(pagesTotal)}
                   </span>
@@ -836,7 +972,7 @@ export default function ArmarMiWebPage() {
               )}
               {featuresTotal > 0 && (
                 <div className="flex justify-between">
-                  <span>Funcionalidades ({ADVANCED_FEATURES.filter((f) => features[f.id]).length})</span>
+                  <span>{SUMMARY_LABELS.features} ({ADVANCED_FEATURES.filter((f) => features[f.id]).length})</span>
                   <span className="font-semibold tabular-nums" style={{ color: "var(--fg)" }}>
                     {formatCRC(featuresTotal)}
                   </span>
@@ -844,9 +980,36 @@ export default function ArmarMiWebPage() {
               )}
             </div>
 
-            <p className="text-xs leading-relaxed mb-2" style={{ color: "var(--fg-muted)" }}>
-              <strong style={{ color: "var(--fg)" }}>Mantenimiento Anual Transparente:</strong>{" "}
-              {maintenanceText} (Precios indicados no incluyen IVA)
+            <p className="text-xs mb-2 flex flex-wrap items-center gap-x-1.5" style={{ color: "var(--fg-muted)" }}>
+              <strong className="shrink-0" style={{ color: "var(--fg)" }}>Mantenimiento anual:</strong>
+              <span>{maintenanceSummary}</span>
+              <button
+                type="button"
+                className="group relative inline-flex items-center shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-sm"
+                aria-label="Más detalles sobre el mantenimiento anual"
+              >
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  className="opacity-60 group-hover:opacity-100 transition-opacity"
+                  style={{ color: "var(--accent)" }}
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4M12 8h.01" />
+                </svg>
+                <span
+                  role="tooltip"
+                  className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 px-3 py-2.5 rounded-xl text-[11px] font-normal leading-relaxed text-left opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 group-focus-visible:opacity-100 group-focus-visible:scale-100 transition-all duration-200 z-20 shadow-lg"
+                  style={{ background: "var(--surface)", border: "1px solid var(--border-strong)", color: "var(--fg-muted)" }}
+                >
+                  {maintenanceTooltip}
+                </span>
+              </button>
             </p>
             <p className="text-xs leading-relaxed mb-6" style={{ color: "var(--fg-muted)" }}>
               <strong style={{ color: "var(--fg)" }}>Proceso de Entrega:</strong> Entrega final en{" "}
@@ -855,6 +1018,7 @@ export default function ArmarMiWebPage() {
             </p>
 
             <motion.a
+              ref={summaryCtaRef}
               href={waLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -956,56 +1120,53 @@ export default function ArmarMiWebPage() {
       <AnimatePresence>
         {showStickyBar && (
           <motion.div
-            className="fixed bottom-0 left-0 right-0 z-40 px-4 py-3 glass"
-            style={{ borderTop: "1px solid var(--border)", boxShadow: "0 -8px 32px rgba(0,0,0,0.08)" }}
+            className="fixed bottom-0 left-0 right-0 z-40 px-4 pt-3 glass"
+            style={{
+              borderTop: "1px solid var(--border)",
+              boxShadow: "0 -8px 32px rgba(0,0,0,0.08)",
+              paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))",
+            }}
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ type: "spring", stiffness: 350, damping: 30 }}
           >
-            <div className="max-w-4xl mx-auto flex items-center justify-between gap-3">
-              <div className="min-w-0">
-                <p className="text-[10px] font-semibold uppercase tracking-wider truncate" style={{ color: "var(--fg-muted)" }}>
+            <div className="max-w-4xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 sm:gap-3">
+              <div className="min-w-0 text-center sm:text-left">
+                <p
+                  className="text-[10px] font-semibold uppercase tracking-wider"
+                  style={{ color: "var(--fg-muted)" }}
+                >
                   Total desarrollo
                 </p>
                 <motion.p
                   key={total}
-                  className="text-xl md:text-2xl font-black tabular-nums truncate gradient-text-animated"
-                  initial={{ scale: 0.9 }}
+                  className="text-2xl sm:text-xl md:text-2xl font-black tabular-nums gradient-text-animated leading-tight"
+                  initial={{ scale: 0.95 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 500, damping: 25 }}
                 >
                   {formatCRC(total)}
                 </motion.p>
+                <p className="text-[10px] font-medium" style={{ color: "var(--fg-muted)" }}>
+                  Pago único
+                </p>
               </div>
               <motion.a
                 href={waLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 inline-flex items-center gap-2 px-4 md:px-6 py-3 rounded-xl font-bold text-xs md:text-sm"
+                className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-5 md:px-6 py-3 rounded-xl font-bold text-sm"
                 style={{
                   background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
                   color: "white",
                   boxShadow: "0 4px 20px rgba(37, 211, 102, 0.35)",
                 }}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                animate={
-                  summaryInView
-                    ? {
-                        boxShadow: [
-                          "0 4px 20px rgba(37,211,102,0.35)",
-                          "0 4px 28px rgba(37,211,102,0.55)",
-                          "0 4px 20px rgba(37,211,102,0.35)",
-                        ],
-                      }
-                    : {}
-                }
-                transition={{ duration: 2, repeat: Infinity }}
+                whileHover={{ scale: 1.02, boxShadow: "0 6px 28px rgba(37, 211, 102, 0.45)" }}
+                whileTap={{ scale: 0.98 }}
               >
                 <WhatsAppIcon size={18} />
-                <span className="hidden sm:inline">Enviar por WhatsApp</span>
-                <span className="sm:hidden">WhatsApp</span>
+                Cotizar ahora
               </motion.a>
             </div>
           </motion.div>

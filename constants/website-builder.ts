@@ -5,7 +5,7 @@ export const WA_PHONE = "50686523185";
 export const BUILDER_META = {
   title: "Arma tu Sitio Web a tu Medida",
   subtitle:
-    "Paga solo por lo que necesitas. Sin suscripciones mensuales obligatorias. Escoge tus características y recibe tu presupuesto al instante por WhatsApp.",
+    "Paga solo por lo que necesitas. Sin mensualidades obligatorias. Escoge tus características y recibe tu presupuesto al instante por WhatsApp.",
   contactName: "Ediloaz",
 } as const;
 
@@ -23,20 +23,31 @@ export const BUILDER_PRICES = {
 /** Sufijo del subdominio gratuito, ej: minegocio.ediloaz.com */
 export const SUBDOMAIN_BASE = "ediloaz.com";
 
-export const ESSENTIAL_PACKAGE = {
-  title: "Paquete Esencial",
+export const SITE_BASE = {
+  stepTitle: "Todo sitio profesional empieza acá",
+  title: "La base de tu sitio",
+  summaryLabel: "Base del sitio",
   description:
-    "Tu base digital: diseño moderno, una sola página con todo lo esencial y lista para recibir clientes.",
+    "Tu web profesional arranca acá: diseño moderno, una página completa y lista para recibir clientes.",
+  priceLabel: "Incluido siempre",
   subdomainNote:
-    "El paquete Esencial se entrega bajo un subdominio gratuito (ejemplo: tuempresa.ediloaz.com).",
+    "La base se entrega bajo un subdominio gratuito (ejemplo: tuempresa.ediloaz.com).",
   chips: [
+    {
+      label: "Una página completa",
+      detail: "Inicio, resumen de servicios, galería básica (4-6 fotos), contacto y mapa simple — todo en un solo scroll.",
+    },
+    {
+      label: "WhatsApp flotante",
+      detail: "Tus clientes te contactan con un solo clic.",
+    },
     {
       label: "Diseño responsive",
       detail: "Tu web se ve impecable en celular, tablet y computadora.",
     },
     {
-      label: "Una página completa",
-      detail: "Inicio, resumen de servicios, galería básica (4-6 fotos), contacto y mapa simple — todo en un solo scroll.",
+      label: "Panel de administración",
+      detail: "Editá textos y fotos vos mismo, sin depender de nadie.",
     },
     {
       label: "Hosting + SSL 1 año",
@@ -47,16 +58,8 @@ export const ESSENTIAL_PACKAGE = {
       detail: "Configuración inicial para que Google empiece a indexarte.",
     },
     {
-      label: "WhatsApp flotante",
-      detail: "Tus clientes te contactan con un solo clic.",
-    },
-    {
       label: "Redes sociales",
       detail: "Enlaces a Facebook, Instagram y tus perfiles.",
-    },
-    {
-      label: "Panel de administración",
-      detail: "Editá textos y fotos vos mismo, sin depender de nadie.",
     },
   ],
 } as const;
@@ -83,13 +86,13 @@ export const DOMAIN_OPTIONS: DomainOption[] = [
     id: "new-domain",
     label: "Quiero comprar un Dominio Propio Nuevo",
     description: "Quiero mi propia dirección .com (ejemplo: minegocio.com)",
-    price: 20_000,
+    price: 15_000,
   },
   {
     id: "existing-domain",
     label: "Ya tengo mi propio Dominio",
     description: "Quiero usar un dominio que ya compré en otro proveedor",
-    price: 10_000,
+    price: 5_000,
   },
 ];
 
@@ -102,13 +105,27 @@ export interface ExtraPageOption {
   warning?: string;
 }
 
-export const BRIDGE_ESSENTIAL_ONLY = {
-  title: "¿Te alcanza con lo esencial?",
-  body: "Podés quedarte solo con el Paquete Esencial: un sitio de una sola página, directo y profesional. O seguí con los pasos 3 y 4 para un sitio web aún más completo.",
+export const BRIDGE_SITE_BASE = {
+  title: "¿Con la base te alcanza?",
+  body: "Podés quedarte solo con la base: un sitio de una sola página, directo y profesional. O seguí con los pasos 3 y 4 para un sitio web aún más completo.",
+  waCta: "Enviar mi cotización base por WhatsApp",
 } as const;
 
+export const HERO_CTAS = {
+  whatsapp: "Cotizar vía WhatsApp",
+  configurator: "Armar mi presupuesto",
+} as const;
+
+export const WA_MESSAGES = {
+  quick: `Hola ${BUILDER_META.contactName}, vi tu anuncio y quiero cotizar mi sitio web. ¿Cuál es el siguiente paso?`,
+} as const;
+
+export function buildWaLink(message: string): string {
+  return `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(message)}`;
+}
+
 export const MODULE_INCLUDES = {
-  title: "Todas las opciones incluyen",
+  title: "Incluido en cada página",
   items: [
     {
       icon: "✏️",
@@ -127,12 +144,17 @@ export const MODULE_INCLUDES = {
 
 export const EXTRA_PAGES_SECTION = {
   title: "Agregá páginas a tu sitio",
-  description: "Más espacio para contar tu historia. Ideal para PYMES, profesionales, artistas y emprendedores.",
+  description: "Más espacio para contar tu historia.",
 } as const;
 
 export const ADVANCED_FEATURES_SECTION = {
   title: "Potenciá tu sitio",
   description: "Herramientas técnicas con integraciones listas para usar.",
+} as const;
+
+export const SUMMARY_LABELS = {
+  pages: "Páginas a tu medida",
+  features: "Funcionalidades premium",
 } as const;
 
 /** Capturas en public/armar-mi-web/showcase/ — recomendado 1200×750 px (.png o .webp) */
@@ -197,9 +219,21 @@ export function getMaintenanceAnnualPrice(hasPurchasedDomain: boolean): number {
 export function getMaintenanceAnnualText(hasPurchasedDomain: boolean): string {
   const price = getMaintenanceAnnualPrice(hasPurchasedDomain);
   if (hasPurchasedDomain) {
-    return `Después del primer año, solo pagarás una anualidad fija de aprox. ${formatCRC(price)} que cubre Hosting, SSL y renovación de dominio .com. ¡Sin sorpresas mensuales!`;
+    return `Después del primer año, pagás una anualidad fija de ${formatCRC(price)} que cubre hosting, SSL y renovación de dominio .com. ¡Sin sorpresas mensuales!`;
   }
-  return `Después del primer año, solo pagarás una anualidad fija de aprox. ${formatCRC(price)} que cubre Hosting y SSL. ¡Sin sorpresas mensuales!`;
+  return `Después del primer año, pagás una anualidad fija de ${formatCRC(price)} que cubre hosting y SSL. ¡Sin sorpresas mensuales!`;
+}
+
+export function getMaintenanceAnnualSummary(hasPurchasedDomain: boolean): string {
+  const price = getMaintenanceAnnualPrice(hasPurchasedDomain);
+  if (hasPurchasedDomain) {
+    return `Anualidad fija de ${formatCRC(price)}/año (hosting, SSL y dominio .com). Sin mensualidades.`;
+  }
+  return `Anualidad fija de ${formatCRC(price)}/año (hosting y SSL). Sin mensualidades.`;
+}
+
+export function getMaintenanceAnnualTooltip(hasPurchasedDomain: boolean): string {
+  return `${getMaintenanceAnnualText(hasPurchasedDomain)} Precios indicados no incluyen IVA.`;
 }
 
 export const EXTRA_PAGES: ExtraPageOption[] = [
@@ -221,7 +255,7 @@ export const EXTRA_PAGES: ExtraPageOption[] = [
   {
     id: "services",
     defaultName: "Servicios",
-    title: "Servicios en profundidad",
+    title: "Servicios",
     description: "Cada servicio con detalle, fotos y botón de WhatsApp.",
     price: 10_000,
   },
@@ -249,7 +283,7 @@ export const EXTRA_PAGES: ExtraPageOption[] = [
   {
     id: "gallery",
     defaultName: "Galería",
-    title: "Galería extendida",
+    title: "Galería",
     description: "Fotos organizadas en álbumes o categorías.",
     price: 10_000,
   },
@@ -294,7 +328,7 @@ export const HIDDEN_DETAILS = [
   "Las páginas adicionales (excepto la página de inicio) se pueden editar desde el panel de administración.",
   "Soporte y ediciones posteriores se cotizan por aparte según tus necesidades.",
   `Entrega final en ${BUILDER_PRICES.deliveryWeeks} semana (previa entrega de todo tu contenido), con ${BUILDER_PRICES.revisionRounds} rondas de revisiones incluidas.`,
-  `Mantenimiento anual: desde aprox. ₡${BUILDER_PRICES.maintenanceAnnualBase.toLocaleString("es-CR")}/año (hosting + SSL) o ₡${BUILDER_PRICES.maintenanceAnnualWithDomain.toLocaleString("es-CR")}/año si incluye renovación de dominio .com comprado con nosotros.`,
+  `Mantenimiento anual: anualidad fija de ₡${BUILDER_PRICES.maintenanceAnnualBase.toLocaleString("es-CR")}/año (hosting + SSL) o ₡${BUILDER_PRICES.maintenanceAnnualWithDomain.toLocaleString("es-CR")}/año si incluye renovación de dominio .com comprado con nosotros.`,
   `El sitio web puede alcanzar hasta un máximo de ${BUILDER_PRICES.multimediaLimitMb} MB en multimedia (fotos e imágenes).`,
   "Todos los precios indicados no incluyen IVA.",
 ] as const;
