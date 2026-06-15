@@ -54,8 +54,8 @@ export const SITE_BASE = {
       detail: "Alojamiento y certificado de seguridad incluidos el primer año.",
     },
     {
-      label: "SEO de arranque",
-      detail: "Configuración inicial para que Google empiece a indexarte.",
+      label: "Te encuentran en Google",
+      detail: "SEO de arranque: configuración inicial para que tu negocio aparezca en Google cuando te buscan.",
     },
     {
       label: "Redes sociales",
@@ -107,17 +107,31 @@ export interface ExtraPageOption {
 
 export const BRIDGE_SITE_BASE = {
   title: "¿Con la base te alcanza?",
-  body: "Podés quedarte solo con la base: un sitio de una sola página, directo y profesional. O seguí con los pasos 3 y 4 para un sitio web aún más completo.",
-  waCta: "Enviar mi cotización base por WhatsApp",
+  body: "Podés quedarte solo con la base, o seguí con los pasos 3 y 4 para un sitio aún más completo.",
+  waCta: "Cotizar por WhatsApp",
 } as const;
 
 export const HERO_CTAS = {
-  whatsapp: "Cotizar vía WhatsApp",
-  configurator: "Armar mi presupuesto",
+  whatsapp: "Quiero mi web por WhatsApp",
+  configurator: "Ver opciones y precios",
+} as const;
+
+export const WA_CTAS = {
+  step1: "Cotizar la base por WhatsApp",
+  summary: "Pedir mi web por WhatsApp",
+  sticky: "Escribir por WhatsApp",
+  showcase: "Quiero una web como estas",
+} as const;
+
+export const WA_TRUST = {
+  hero: "Te respondemos en minutos · Sin compromiso",
+  underCta: "Sin compromiso · Respuesta rápida",
 } as const;
 
 export const WA_MESSAGES = {
-  quick: `Hola ${BUILDER_META.contactName}, vi tu anuncio y quiero cotizar mi sitio web. ¿Cuál es el siguiente paso?`,
+  quick: `Hola ${BUILDER_META.contactName}, vi tu anuncio y quiero cotizar mi sitio web (desde ₡50.000). ¿Cuál es el siguiente paso?`,
+  baseOnly: `Hola ${BUILDER_META.contactName}, me interesa la base del sitio (₡50.000). ¿Cuál es el siguiente paso?`,
+  showcase: `Hola ${BUILDER_META.contactName}, vi tu portafolio y quiero una web profesional. ¿Cuál es el siguiente paso?`,
 } as const;
 
 export function buildWaLink(message: string): string {
