@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { BUILDER_PRICES } from "@/constants/website-builder";
+
+const basePriceLabel = `₡${BUILDER_PRICES.essentialPackage.toLocaleString("es-CR")}`;
 
 export const metadata: Metadata = {
   title: "Arma tu Sitio Web a tu Medida | Ediloaz – Costa Rica",
   description:
-    "Armá tu sitio web profesional en Costa Rica. Paga solo por lo que necesitas, sin mensualidades. Cotizá al instante por WhatsApp desde ₡50,000.",
+    `Armá tu sitio web profesional en Costa Rica. Paga solo por lo que necesitas, sin mensualidades. Cotizá al instante por WhatsApp desde ${basePriceLabel}.`,
   openGraph: {
     title: "Arma tu Sitio Web Profesional en Costa Rica | Ediloaz",
     description:

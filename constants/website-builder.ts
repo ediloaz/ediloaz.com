@@ -10,7 +10,7 @@ export const BUILDER_META = {
 } as const;
 
 export const BUILDER_PRICES = {
-  essentialPackage: 50_000,
+  essentialPackage: 47_900,
   /** Con renovación de dominio .com (si compró dominio propio) */
   maintenanceAnnualWithDomain: 40_000,
   /** Solo hosting + SSL (sin dominio propio comprado) */
@@ -139,8 +139,8 @@ export const WA_TRUST = {
 } as const;
 
 export const WA_MESSAGES = {
-  quick: `Hola ${BUILDER_META.contactName}, vi tu anuncio y quiero cotizar mi sitio web (desde ₡50.000). ¿Cuál es el siguiente paso?`,
-  baseOnly: `Hola ${BUILDER_META.contactName}, me interesa la base del sitio (₡50.000). ¿Cuál es el siguiente paso?`,
+  quick: `Hola ${BUILDER_META.contactName}, vi tu anuncio y quiero cotizar mi sitio web (desde ₡${BUILDER_PRICES.essentialPackage.toLocaleString("es-CR")}). ¿Cuál es el siguiente paso?`,
+  baseOnly: `Hola ${BUILDER_META.contactName}, me interesa la base del sitio (₡${BUILDER_PRICES.essentialPackage.toLocaleString("es-CR")}). ¿Cuál es el siguiente paso?`,
   showcase: `Hola ${BUILDER_META.contactName}, vi tu portafolio y quiero una web profesional. ¿Cuál es el siguiente paso?`,
 } as const;
 
