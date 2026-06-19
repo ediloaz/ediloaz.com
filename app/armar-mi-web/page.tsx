@@ -17,6 +17,7 @@ import {
   ADVANCED_FEATURES_SECTION,
   SUMMARY_LABELS,
   BRIDGE_SITE_BASE,
+  HERO_BADGES,
   HERO_CTAS,
   WA_CTAS,
   WA_TRUST,
@@ -112,7 +113,17 @@ function SectionHeader({
   );
 }
 
-function PriceTag({ price, selected }: { price: number; selected?: boolean }) {
+function PriceTag({
+  price,
+  selected,
+  zeroLabel,
+}: {
+  price: number;
+  selected?: boolean;
+  zeroLabel?: string;
+}) {
+  const label = price === 0 ? (zeroLabel ?? "+ ₡0") : `+ ${formatCRC(price)}`;
+
   return (
     <span
       className="shrink-0 text-xs font-bold px-2.5 py-1 rounded-lg tabular-nums transition-all duration-200"
@@ -122,7 +133,7 @@ function PriceTag({ price, selected }: { price: number; selected?: boolean }) {
         border: `1px solid ${selected ? "color-mix(in srgb, var(--accent) 35%, transparent)" : "var(--border)"}`,
       }}
     >
-      {price === 0 ? "+ ₡0" : `+ ${formatCRC(price)}`}
+      {label}
     </span>
   );
 }
@@ -620,10 +631,12 @@ export default function ArmarMiWebPage() {
   const total = BUILDER_PRICES.essentialPackage + domainPrice + pagesTotal + featuresTotal;
   const baseTotal = BUILDER_PRICES.essentialPackage + domainPrice;
 
+  const selectedPagesCount = EXTRA_PAGES.filter((p) => pages[p.id]).length;
+
   const selectedCount =
     1 +
     (domainPrice > 0 ? 1 : 0) +
-    EXTRA_PAGES.filter((p) => pages[p.id]).length +
+    selectedPagesCount +
     ADVANCED_FEATURES.filter((f) => features[f.id]).length;
 
   const waLink = useMemo(
@@ -756,7 +769,7 @@ export default function ArmarMiWebPage() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-2 mt-8">
-            {["Pago único", "Panel de administración", "WhatsApp integrado", "Te encuentran en Google", "100% responsivo"].map((t) => (
+            {HERO_BADGES.map((t) => (
               <span
                 key={t}
                 className="px-3 py-1 rounded-md text-[11px] font-semibold"
@@ -1029,7 +1042,7 @@ export default function ArmarMiWebPage() {
 
             <ModuleIncludesTooltips />
 
-            {pagesTotal === 0 && (
+            {selectedPagesCount === 0 && (
               <motion.p
                 className="text-xs mb-4 px-3 py-2 rounded-lg"
                 style={{ background: "var(--accent-glow)", color: "var(--accent)" }}
@@ -1088,7 +1101,7 @@ export default function ArmarMiWebPage() {
                             )}
                           </div>
                         </div>
-                        <PriceTag price={page.price} selected={isSelected} />
+                        <PriceTag price={page.price} selected={isSelected} zeroLabel={page.freeLabel} />
                       </div>
                     </button>
                   </motion.div>
@@ -1142,6 +1155,11 @@ export default function ArmarMiWebPage() {
                           <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--fg-muted)" }}>
                             {feat.description}
                           </p>
+                          {feat.warning && (
+                            <p className="text-[11px] mt-1.5" style={{ color: "var(--fg-muted)" }}>
+                              {feat.warning}
+                            </p>
+                          )}
                         </div>
                       </div>
                       <PriceTag price={feat.price} selected={isSelected} />
@@ -1189,9 +1207,9 @@ export default function ArmarMiWebPage() {
                   {domainPrice === 0 ? "₡0" : formatCRC(domainPrice)}
                 </span>
               </div>
-              {pagesTotal > 0 && (
+              {selectedPagesCount > 0 && (
                 <div className="flex justify-between">
-                  <span>{SUMMARY_LABELS.pages} ({EXTRA_PAGES.filter((p) => pages[p.id]).length})</span>
+                  <span>{SUMMARY_LABELS.pages} ({selectedPagesCount})</span>
                   <span className="font-semibold tabular-nums" style={{ color: "var(--fg)" }}>
                     {formatCRC(pagesTotal)}
                   </span>

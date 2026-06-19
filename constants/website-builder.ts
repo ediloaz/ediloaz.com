@@ -54,8 +54,8 @@ export const SITE_BASE = {
       detail: "Alojamiento y certificado de seguridad incluidos el primer año.",
     },
     {
-      label: "Te encuentran en Google",
-      detail: "SEO de arranque: configuración inicial para que tu negocio aparezca en Google cuando te buscan.",
+      label: "Te encuentran en internet",
+      detail: "Tu web preparada desde el día uno para que quien busca online llegue a tu negocio, no a la competencia.",
     },
     {
       label: "Redes sociales",
@@ -86,7 +86,7 @@ export const DOMAIN_OPTIONS: DomainOption[] = [
     id: "new-domain",
     label: "Quiero comprar un Dominio Propio Nuevo",
     description: "Quiero mi propia dirección .com (ejemplo: minegocio.com)",
-    price: 15_000,
+    price: 10_000,
   },
   {
     id: "existing-domain",
@@ -102,6 +102,8 @@ export interface ExtraPageOption {
   title: string;
   description: string;
   price: number;
+  /** Texto del badge cuando price es 0 (ej. regalía) */
+  freeLabel?: string;
   warning?: string;
 }
 
@@ -110,6 +112,14 @@ export const BRIDGE_SITE_BASE = {
   body: "Podés quedarte solo con la base, o seguí con los pasos 3 y 4 para un sitio aún más completo.",
   waCta: "Cotizar por WhatsApp",
 } as const;
+
+export const HERO_BADGES = [
+  "Pago único",
+  "Panel de administración",
+  "WhatsApp integrado",
+  "Te encuentran en internet",
+  "100% responsivo",
+] as const;
 
 export const HERO_CTAS = {
   whatsapp: "Quiero mi web por WhatsApp",
@@ -260,13 +270,6 @@ export function getMaintenanceAnnualTooltip(hasPurchasedDomain: boolean): string
 
 export const EXTRA_PAGES: ExtraPageOption[] = [
   {
-    id: "about",
-    defaultName: "Sobre nosotros",
-    title: "Sobre nosotros",
-    description: "Historia, misión y visión con espacio dedicado.",
-    price: 10_000,
-  },
-  {
     id: "products",
     defaultName: "Productos",
     title: "Catálogo de productos",
@@ -279,13 +282,6 @@ export const EXTRA_PAGES: ExtraPageOption[] = [
     defaultName: "Servicios",
     title: "Servicios",
     description: "Cada servicio con detalle, fotos y botón de WhatsApp.",
-    price: 10_000,
-  },
-  {
-    id: "faq",
-    defaultName: "Preguntas Frecuentes",
-    title: "Preguntas frecuentes",
-    description: "Resolvé dudas comunes y ahorrá tiempo de soporte.",
     price: 10_000,
   },
   {
@@ -310,11 +306,34 @@ export const EXTRA_PAGES: ExtraPageOption[] = [
     price: 10_000,
   },
   {
+    id: "faq",
+    defaultName: "Preguntas Frecuentes",
+    title: "Preguntas frecuentes",
+    description: "Resolvé dudas comunes y ahorrá tiempo de soporte.",
+    price: 5_000,
+  },
+  {
     id: "promotions",
     defaultName: "Promociones",
     title: "Promociones",
     description: "Ofertas y descuentos vigentes, bien presentados.",
-    price: 10_000,
+    price: 5_000,
+  },
+  {
+    id: "contact",
+    defaultName: "Contacto",
+    title: "Contacto",
+    description: "Teléfono, redes sociales, correo y mapa con tu ubicación.",
+    price: 5_000,
+  },
+  {
+    id: "about",
+    defaultName: "Sobre nosotros",
+    title: "Sobre nosotros",
+    description: "Historia, misión y visión con espacio dedicado.",
+    price: 0,
+    freeLabel: "Regalía",
+    warning: "Regalía incluida: puedes escoger esta página sin costo adicional.",
   },
 ];
 
@@ -323,26 +342,29 @@ export interface AdvancedFeatureOption {
   title: string;
   description: string;
   price: number;
+  warning?: string;
 }
 
 export const ADVANCED_FEATURES: AdvancedFeatureOption[] = [
   {
     id: "contact-pro",
     title: "Contacto Pro",
-    description: "Formulario avanzado, anti-spam y mapa de Google Maps.",
-    price: 15_000,
+    description:
+      "Incluye todo lo de Contacto, más formulario avanzado para captar clientes del tráfico de internet y protección anti-spam.",
+    price: 10_000,
   },
   {
     id: "blog",
     title: "Blog",
-    description: "Publicá artículos ilimitados para atraer tráfico desde Google.",
-    price: 20_000,
+    description: "Publicá artículos ilimitados y haz que más personas lleguen a tu web desde internet.",
+    price: 15_000,
   },
   {
     id: "bookings",
     title: "Reservaciones (Cal.com)",
     description: "Tus clientes agendan citas solos según tu disponibilidad.",
-    price: 30_000,
+    price: 25_000,
+    warning: "Trabaja de la mano con Cal.com, con una cuenta activa en su plataforma.",
   },
 ];
 
