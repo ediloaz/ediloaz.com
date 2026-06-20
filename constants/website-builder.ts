@@ -5,7 +5,8 @@ export const WA_PHONE = "50686523185";
 export const BUILDER_META = {
   title: "Arma tu Sitio Web a tu Medida",
   subtitle:
-    "Paga solo por lo que necesitas. Sin mensualidades obligatorias. Escoge tus características y recibe tu presupuesto al instante por WhatsApp.",
+    "Paga solo por lo que necesitas. Sin mensualidades. Escoge tus características y recibe tu presupuesto al instante por WhatsApp.",
+  heroPriceSuffix: "sin mensualidades",
   contactName: "Ediloaz",
 } as const;
 
@@ -114,7 +115,7 @@ export const BRIDGE_SITE_BASE = {
 } as const;
 
 export const HERO_BADGES = [
-  "Pago único",
+  "Sin mensualidades",
   "Panel de administración",
   "WhatsApp integrado",
   "Te encuentran en internet",

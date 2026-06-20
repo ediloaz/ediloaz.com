@@ -726,7 +726,7 @@ export default function ArmarMiWebPage() {
             transition={{ delay: 0.2 }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" style={{ animation: "pulse-glow 2s ease infinite" }} />
-            Cotizador modular · Pago único · Sin suscripciones
+            Cotizador modular · Sin mensualidades · Presupuesto al instante
           </motion.div>
 
           <h1 className="text-[clamp(2rem,7vw,4.2rem)] font-black tracking-tight leading-[1.08] mb-5">
@@ -738,7 +738,7 @@ export default function ArmarMiWebPage() {
           </p>
 
           <p className="text-lg md:text-xl font-black tabular-nums mb-6 gradient-text-animated">
-            Desde {formatCRC(BUILDER_PRICES.essentialPackage)} · pago único
+            Desde {formatCRC(BUILDER_PRICES.essentialPackage)} · {BUILDER_META.heroPriceSuffix}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg sm:max-w-none mx-auto">
