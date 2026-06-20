@@ -209,7 +209,7 @@ export const SHOWCASE_SITES: ShowcaseSite[] = [
     niche: "Yoga & bienestar · San José",
     highlight: "Servicios, testimonios y reservas por WhatsApp",
     url: "https://alma-libre-studio.ediloaz.com/",
-    image: "/armar-mi-web/showcase/alma-libre-studio.png",
+    image: "/armar-mi-web/showcase/alma-libre-studio.jpg",
   },
   {
     id: "calculadora-laboral",
@@ -242,7 +242,7 @@ export const SHOWCASE_SITES: ShowcaseSite[] = [
     niche: "Reparación & servicios IT",
     highlight: "Servicios, trabajos realizados y contacto por WhatsApp",
     url: "https://www.jgconextions.com/",
-    image: "/armar-mi-web/showcase/jgconextions.png",
+    image: "/armar-mi-web/showcase/jgconextions.jpg",
   },
 ];
 
