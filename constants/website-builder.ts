@@ -239,7 +239,7 @@ export const SHOWCASE_SITES: ShowcaseSite[] = [
   {
     id: "jgconextions",
     name: "JG CONEXTIONS",
-    niche: "Reparación & servicios IT · Heredia y Puriscal",
+    niche: "Reparación & servicios IT",
     highlight: "Servicios, trabajos realizados y contacto por WhatsApp",
     url: "https://www.jgconextions.com/",
     image: "/armar-mi-web/showcase/jgconextions.png",
