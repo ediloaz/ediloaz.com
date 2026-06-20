@@ -212,13 +212,22 @@ export const SHOWCASE_SITES: ShowcaseSite[] = [
     image: "/armar-mi-web/showcase/alma-libre-studio.png",
   },
   {
+    id: "calculadora-laboral",
+    name: "Calculadora Laboral",
+    niche: "Calculadora Laboral · CR",
+    highlight: "Aplicación web a la medida, con 8 calculadoras laborales",
+    url: "https://calculadora-laboral.ediloaz.com/",
+    image: "/armar-mi-web/showcase/calculadora-laboral.jpg",
+  },
+  {
     id: "octane",
     name: "Octane Mecánica",
     niche: "Taller automotriz · Escazú",
     highlight: "Galería antes/después y cotización vía WhatsApp",
     url: "https://octane.ediloaz.com/",
-    image: "/armar-mi-web/showcase/octane-mecanica.png",
+    image: "/armar-mi-web/showcase/octane-mecanica.jpg",
   },
+  
   {
     id: "presagio",
     name: "Presagio",
