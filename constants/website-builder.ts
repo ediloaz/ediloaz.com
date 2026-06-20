@@ -186,7 +186,7 @@ export const SUMMARY_LABELS = {
   features: "Funcionalidades premium",
 } as const;
 
-/** Capturas en public/armar-mi-web/showcase/ — recomendado 1200×750 px (.png o .webp) */
+/** Capturas en public/armar-mi-web/showcase/ — 16:9, recomendado 1280×720 px o 1600×900 px (.png o .webp) */
 export const SHOWCASE_SECTION = {
   title: "Sitios reales que ya entregamos",
   description:
@@ -225,7 +225,7 @@ export const SHOWCASE_SITES: ShowcaseSite[] = [
     niche: "Experiencias & picnic · Puriscal",
     highlight: "Experiencias, galería, y reservaciones",
     url: "https://presagio.ediloaz.com/",
-    image: "/armar-mi-web/showcase/presagio.png",
+    image: "/armar-mi-web/showcase/presagio.jpg",
   },
   {
     id: "jgconextions",

@@ -370,6 +370,7 @@ function ShowcaseCarousel({ sites }: { sites: typeof SHOWCASE_SITES }) {
           border: "1px solid var(--border-strong)",
           color: "var(--fg)",
           boxShadow: "0 4px 20px rgba(0,0,0,0.12)",
+          cursor: "pointer",
         }}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
@@ -387,6 +388,7 @@ function ShowcaseCarousel({ sites }: { sites: typeof SHOWCASE_SITES }) {
           border: "1px solid var(--border-strong)",
           color: "var(--fg)",
           boxShadow: "0 4px 20px rgba(0,0,0,0.12)",
+          cursor: "pointer",
         }}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
@@ -434,10 +436,86 @@ function ShowcaseCarousel({ sites }: { sites: typeof SHOWCASE_SITES }) {
             style={{
               width: i === activeDot ? 20 : 6,
               background: i === activeDot ? "var(--accent)" : "var(--border-strong)",
+              cursor: i === activeDot ? "default" : "pointer",
             }}
           />
         ))}
       </div>
+    </div>
+  );
+}
+
+function showcaseDisplayUrl(url: string): string {
+  try {
+    const { hostname, pathname } = new URL(url);
+    const path = pathname === "/" ? "" : pathname;
+
+    const ediloazSuffix = `.${SUBDOMAIN_BASE}`;
+    let displayHost = hostname;
+
+    if (hostname.endsWith(ediloazSuffix)) {
+      const slug = hostname.slice(0, -ediloazSuffix.length);
+      displayHost = `${slug}.com`;
+    } else if (hostname.startsWith("www.")) {
+      displayHost = hostname.slice(4);
+    }
+
+    return displayHost + path;
+  } catch {
+    return url.replace(/^https?:\/\//, "");
+  }
+}
+
+function BrowserFrame({
+  url,
+  children,
+}: {
+  url: string;
+  children: React.ReactNode;
+}) {
+  const displayUrl = showcaseDisplayUrl(url);
+
+  return (
+    <div>
+      <div
+        className="flex items-center gap-2.5 px-3 py-2.5"
+        style={{
+          background: "color-mix(in srgb, var(--bg-subtle) 88%, var(--surface))",
+          borderBottom: "1px solid var(--border)",
+        }}
+      >
+        <div className="flex items-center gap-1.5 shrink-0 pl-0.5" aria-hidden="true">
+          <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#ff5f57" }} />
+          <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#febc2e" }} />
+          <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#28c840" }} />
+        </div>
+        <div
+          className="flex min-w-0 flex-1 items-center gap-1.5 rounded-md px-2.5 py-1.5"
+          style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
+        >
+          <svg
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            className="shrink-0 opacity-45"
+            style={{ color: "var(--fg-muted)" }}
+            aria-hidden="true"
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0110 0v4" />
+          </svg>
+          <span
+            className="truncate text-[11px] font-medium leading-none"
+            style={{ color: "var(--fg-muted)" }}
+          >
+            {displayUrl}
+          </span>
+        </div>
+      </div>
+      {children}
     </div>
   );
 }
@@ -454,38 +532,32 @@ function ShowcaseCard({ site }: { site: (typeof SHOWCASE_SITES)[number] }) {
       style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
       whileHover={{ y: -4 }}
     >
-      <div className="relative aspect-[16/10] overflow-hidden" style={{ background: "var(--bg-subtle)" }}>
-        {!imgError ? (
-          <Image
-            src={site.image}
-            alt={`Captura del sitio web ${site.name}`}
-            fill
-            className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <div
-            className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 text-center"
-            style={{ background: "linear-gradient(135deg, var(--accent-glow), var(--bg-subtle))" }}
-          >
-            <span className="text-2xl" aria-hidden="true">🌐</span>
-            <p className="text-xs font-semibold" style={{ color: "var(--fg-muted)" }}>
-              Subí la captura en
-              <br />
-              <code className="text-[10px]">{site.image}</code>
-            </p>
-          </div>
-        )}
-        <div
-          className="absolute inset-x-0 top-0 flex items-center gap-1.5 px-3 py-2"
-          style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.45), transparent)" }}
-        >
-          <span className="w-2 h-2 rounded-full bg-red-400/90" />
-          <span className="w-2 h-2 rounded-full bg-yellow-400/90" />
-          <span className="w-2 h-2 rounded-full bg-green-400/90" />
+      <BrowserFrame url={site.url}>
+        <div className="relative aspect-video overflow-hidden" style={{ background: "var(--bg-subtle)" }}>
+          {!imgError ? (
+            <Image
+              src={site.image}
+              alt={`Captura del sitio web ${site.name}`}
+              fill
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 text-center"
+              style={{ background: "linear-gradient(135deg, var(--accent-glow), var(--bg-subtle))" }}
+            >
+              <span className="text-2xl" aria-hidden="true">🌐</span>
+              <p className="text-xs font-semibold" style={{ color: "var(--fg-muted)" }}>
+                Subí la captura en
+                <br />
+                <code className="text-[10px]">{site.image}</code>
+              </p>
+            </div>
+          )}
         </div>
-      </div>
+      </BrowserFrame>
       <div className="p-4">
         <p className="text-[11px] font-semibold uppercase tracking-wider mb-1" style={{ color: "var(--accent)" }}>
           {site.niche}
