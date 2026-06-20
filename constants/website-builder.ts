@@ -25,11 +25,15 @@ export const BUILDER_PRICES = {
 export const SUBDOMAIN_BASE = "ediloaz.com";
 
 export const SITE_BASE = {
-  stepTitle: "Todo sitio profesional empieza acá",
+  stepTitle: "Una sola página — tu landing a medida",
   title: "La base de tu sitio",
-  summaryLabel: "Base del sitio",
+  summaryLabel: "Base del sitio (1 página)",
   description:
-    "Tu web profesional arranca acá: diseño moderno, una página completa y lista para recibir clientes.",
+    "Incluido siempre en tu cotización. Si eliges solo esto, tu web es una landing page personalizada: todo lo esencial en un solo scroll.",
+  onePageCallout: {
+    title: "1 sola página · tipo landing page",
+    detail: "Inicio, productos o servicios, galería y contacto en un scroll. ¿Quieres páginas separadas? Las agregás en los siguientes pasos.",
+  },
   priceLabel: "Incluido siempre",
   subdomainNote:
     "La base se entrega bajo un subdominio gratuito (ejemplo: tuempresa.ediloaz.com).",
@@ -109,8 +113,8 @@ export interface ExtraPageOption {
 }
 
 export const BRIDGE_SITE_BASE = {
-  title: "¿Con la base te alcanza?",
-  body: "Podés quedarte solo con la base, o seguí con los pasos 3 y 4 para un sitio aún más completo.",
+  title: "¿Solo la landing page te alcanza?",
+  body: "Podés quedarte con una sola página, o seguir bajando para agregar más páginas y funciones extra.",
   waCta: "Cotizar por WhatsApp",
 } as const;
 

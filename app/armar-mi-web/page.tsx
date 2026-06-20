@@ -810,6 +810,21 @@ export default function ArmarMiWebPage() {
             />
 
             <div
+              className="mb-6 p-4 md:p-5 rounded-2xl"
+              style={{
+                background: "color-mix(in srgb, var(--accent) 8%, var(--bg-subtle))",
+                border: "2px solid color-mix(in srgb, var(--accent) 35%, transparent)",
+              }}
+            >
+              <p className="text-sm md:text-base font-black mb-1" style={{ color: "var(--fg)" }}>
+                {SITE_BASE.onePageCallout.title}
+              </p>
+              <p className="text-xs md:text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                {SITE_BASE.onePageCallout.detail}
+              </p>
+            </div>
+
+            <div
               className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 p-5 rounded-2xl"
               style={{
                 background: "linear-gradient(135deg, var(--accent-glow), transparent)",
