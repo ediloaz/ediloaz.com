@@ -4,22 +4,22 @@ import BlogContent from "@/components/blog/BlogContent";
 import { OG_IMAGE } from "@/lib/metadata";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Blog de React, Next.js y arquitectura",
   description:
-    "Artículos extensos sobre arquitectura de software, legal-tech, cloud AWS, mobile-first, documentación técnica, carrera y cultura de ingeniería — por Edisson López (Costa Rica).",
+    "Guías prácticas de React, Next.js y TypeScript, más arquitectura de software, cloud AWS y carrera técnica — por Edisson López, desarrollador Full Stack Senior en Costa Rica.",
   keywords: [
+    "blog react español",
+    "next.js en español",
+    "react 19",
+    "next.js 16",
     "blog desarrollo software",
     "arquitectura software español",
-    "Next.js Costa Rica",
-    "AWS legal tech",
     "ingeniería de software LATAM",
-    "artículos técnicos largos",
-    "blog arquitectura y frontend",
   ],
   openGraph: {
-    title: "Blog · ediloaz",
+    title: "Blog de React, Next.js y arquitectura · ediloaz",
     description:
-      "Guías y reflexiones sobre código, producto, nube y trabajo en equipo — optimizadas para desarrolladores y líderes técnicos.",
+      "Guías prácticas de React y Next.js, arquitectura de software y carrera técnica, escritas por un desarrollador Full Stack Senior.",
     url: "https://www.ediloaz.com/blog",
     type: "website",
     siteName: "ediloaz",
