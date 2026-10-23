@@ -5,6 +5,7 @@ import { ArrowLeft, Github, Sparkles, ExternalLink } from "lucide-react";
 import PageLayout from "@/components/page-layout";
 import { PROJECTS, getProjectBySlug } from "../projects-data";
 import DemoFrame from "../components/demo-frame";
+import { OG_IMAGE } from "@/lib/metadata";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -25,9 +26,23 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     };
   }
 
+  const url = `https://www.ediloaz.com/projects/${project.slug}`;
+  const title = `${project.name} — Proyecto en ${project.technologies.slice(0, 2).join(" y ")}`;
+
   return {
-    title: `${project.name} · Demo`,
+    title,
     description: project.shortDescription,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description: project.shortDescription,
+      url,
+      type: "website",
+      siteName: "ediloaz",
+      images: project.imageUrl ? [project.imageUrl] : [OG_IMAGE],
+    },
   };
 }
 
@@ -53,6 +68,16 @@ export default async function ProjectDemoPage({ params }: ProjectPageProps) {
             <p className="text-base text-zinc-600 dark:text-zinc-300">
               {project.shortDescription}
             </p>
+            <ul className="flex flex-wrap gap-2" aria-label="Tecnologías">
+              {project.technologies.map((tech) => (
+                <li
+                  key={tech}
+                  className="rounded-md border border-zinc-200/80 dark:border-white/10 px-2.5 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-300"
+                >
+                  {tech}
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="w-full md:w-auto">
@@ -72,20 +97,22 @@ export default async function ProjectDemoPage({ params }: ProjectPageProps) {
                     <span>Volver al catálogo</span>
                   </div>
                 </Link>
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex flex-1 items-center justify-center gap-3 rounded-xl border border-transparent bg-zinc-900 text-white px-5 py-3 text-center font-semibold transition-all hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-50"
-                >
-                  <Github className="h-5 w-5" />
-                  <div className="leading-tight">
-                    <p className="text-sm font-semibold">Ver en GitHub</p>
-                    <p className="text-[11px] text-white/70 dark:text-zinc-500">
-                      Código abierto y documentación
-                    </p>
-                  </div>
-                </a>
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex flex-1 items-center justify-center gap-3 rounded-xl border border-transparent bg-zinc-900 text-white px-5 py-3 text-center font-semibold transition-all hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-50"
+                  >
+                    <Github className="h-5 w-5" />
+                    <div className="leading-tight">
+                      <p className="text-sm font-semibold">Ver en GitHub</p>
+                      <p className="text-[11px] text-white/70 dark:text-zinc-500">
+                        Código abierto y documentación
+                      </p>
+                    </div>
+                  </a>
+                )}
                 <a
                   href={project.demoUrl}
                   target="_blank"

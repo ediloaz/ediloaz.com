@@ -3,32 +3,17 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
+import { EXPERIENCE } from "@/constants/experience";
 
 const ITEMS = [
-  {
-    color: "#4f8ef7",
-    tag: "Actual",
-    company: "Ibylit",
-    role: "Desarrollador Full Stack Senior",
-    desc: "Plataformas B2B seguras y soluciones de alto tráfico para clientes corporativos.",
+  ...EXPERIENCE.slice(0, 3).map((job) => ({
+    color: job.color,
+    tag: job.current ? "Actual" : "Experiencia",
+    company: job.company,
+    role: job.role,
+    desc: job.summary,
     link: "/cv#experiencia-profesional",
-  },
-  {
-    color: "#7c3aed",
-    tag: "Experiencia",
-    company: "Advision Development",
-    role: "Full Stack Developer",
-    desc: "Desarrollo de experiencias digitales y sistemas de gestión a medida.",
-    link: "/cv#experiencia-profesional",
-  },
-  {
-    color: "#06b6d4",
-    tag: "Experiencia",
-    company: "Data GIS",
-    role: "Desarrollador Web",
-    desc: "Herramientas web para valuadores inmobiliarios con integración de datos geoespaciales.",
-    link: "/cv#experiencia-profesional",
-  },
+  })),
   {
     color: "#10b981",
     tag: "Formación",

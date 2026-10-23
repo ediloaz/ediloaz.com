@@ -6,6 +6,8 @@ export interface Project {
   githubUrl: string;
   demoUrl: string;
   imageUrl?: string;
+  /** Se muestra en la sección compacta de side projects del inicio */
+  featured?: boolean;
 }
 
 export const PROJECTS: Project[] = [
@@ -18,6 +20,7 @@ export const PROJECTS: Project[] = [
     githubUrl: "",
     demoUrl: "https://calculadora-laboral.ediloaz.com",
     imageUrl: "/projects/calculadora-laboral.png",
+    featured: true,
   },
   {
     slug: "world-flags-quiz",
@@ -27,6 +30,7 @@ export const PROJECTS: Project[] = [
     githubUrl: "https://github.com/ediloaz/world-flags-quiz",
     demoUrl: "https://world-flags-quiz.ediloaz.com",
     imageUrl: "/projects/world-flags-quiz.png",
+    featured: true,
   },
   {
     slug: "plataforma-de-registro-y-listado-de-usuarios",
@@ -42,7 +46,7 @@ export const PROJECTS: Project[] = [
     name: "Nutri Counter",
     shortDescription: "Es una aplicación web para tracker alimentos macros, te calcula automáticamente las calorías y te lleva un registro e historial",
     technologies: ["React", "Next.js", "TypeScript"],
-    githubUrl: "https://github.com/ediloaz/nutri-counter",
+    githubUrl: "",
     demoUrl: "https://nutri-counter.vercel.app/",
     imageUrl: "/projects/nutri-counter.png",
   },

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import PageLayout from "@/components/page-layout";
 import AdSenseBanner from "@/components/adsense/AdSenseBanner";
 import ContactClient from "@/components/contact-client";
+import { OG_IMAGE } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
     url: "https://www.ediloaz.com/contact",
     type: "website",
     siteName: "ediloaz",
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary",

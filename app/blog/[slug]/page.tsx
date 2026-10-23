@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import PageLayout from "@/components/page-layout";
 import BlogPost from "@/components/blog/BlogPost";
 import { getBlogPostBySlug, blogPosts } from "@/lib/blog-data";
+import { OG_IMAGE } from "@/lib/metadata";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -38,6 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.publishDate,
       url: `https://www.ediloaz.com/blog/${post.slug}`,
       siteName: "ediloaz",
+      images: [OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",

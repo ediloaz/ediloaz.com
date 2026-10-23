@@ -4,7 +4,7 @@ import { BUILDER_PRICES } from "@/constants/website-builder";
 const basePriceLabel = `₡${BUILDER_PRICES.essentialPackage.toLocaleString("es-CR")}`;
 
 export const metadata: Metadata = {
-  title: "Arma tu Sitio Web a tu Medida | Ediloaz – Costa Rica",
+  title: { absolute: "Arma tu Sitio Web a tu Medida | Ediloaz – Costa Rica" },
   description:
     `Armá tu sitio web profesional en Costa Rica. Paga solo por lo que necesitas, sin mensualidades. Cotizá al instante por WhatsApp desde ${basePriceLabel}.`,
   openGraph: {
@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     title: "Arma tu Sitio Web a tu Medida | Ediloaz",
     description:
       "Paga solo por lo que necesitas. Cotizá tu web profesional al instante por WhatsApp.",
+  },
+  alternates: {
+    canonical: "https://www.ediloaz.com/armar-mi-web",
   },
 };
 

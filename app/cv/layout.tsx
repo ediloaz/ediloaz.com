@@ -1,9 +1,10 @@
 import { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/metadata";
 
 export const metadata: Metadata = {
-  title: "CV",
+  title: "CV — Desarrollador Full Stack Senior",
   description:
-    "CV completo de Edisson López, Desarrollador Full Stack. Experiencia profesional, educación, certificaciones y habilidades técnicas en React, Next.js, .NET, C# y más.",
+    "CV de Edisson López, Desarrollador Full Stack Senior con experiencia en Ibylit, Advision Development y Data GIS. React, Next.js, TypeScript, C#/.NET, AWS y más.",
   keywords: [
     "CV",
     "curriculum vitae",
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
     url: "https://www.ediloaz.com/cv",
     type: "profile",
     siteName: "ediloaz",
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary",

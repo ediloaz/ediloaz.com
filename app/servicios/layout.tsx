@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Servicios Web | Ediloaz – Sitios que venden para tu negocio",
+  title: { absolute: "Servicios Web | Ediloaz – Sitios que venden para tu negocio" },
   description:
     "Construimos máquinas de venta digitales para tu negocio. Landing pages, sitios corporativos y webs con automatizaciones. Entrega en 1-2 semanas desde ₡80,000.",
   openGraph: {
@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Servicios Web | Ediloaz",
     description: "Sitios web profesionales para tu negocio. Entrega en 1-2 semanas.",
+  },
+  alternates: {
+    canonical: "https://www.ediloaz.com/servicios",
   },
 };
 

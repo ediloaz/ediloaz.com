@@ -46,6 +46,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.85,
     },
+    {
+      url: `${baseUrl}/servicios`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/servicios/adicionales`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/armar-mi-web`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
   ]
 
   // Páginas de proyectos

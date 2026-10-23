@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import CursorSpotlight from "@/components/cursor-spotlight";
 import Script from "next/script";
+import { getYearsOfExperience } from "@/constants/experience";
+import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/metadata";
 
 const FACEBOOK_PIXEL_ID = "859892180038418";
 
@@ -35,12 +37,12 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.ediloaz.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "ediloaz — Edisson López",
-    template: "%s · ediloaz",
+    default: HOME_TITLE,
+    template: "%s · Edisson López",
   },
-  description: "Edisson López — Desarrollador Full-Stack",
+  description: HOME_DESCRIPTION,
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -52,35 +54,28 @@ export const metadata: Metadata = {
     ],
     shortcut: "/favicon.ico",
   },
+  // La imagen OG sale de app/opengraph-image.tsx; el canonical lo define cada página
+  // (si se pusiera acá, todas las páginas heredarían el del inicio).
   openGraph: {
     type: "website",
-    url: "https://www.ediloaz.com",
-    title: "ediloaz — Edisson López",
-    description: "Portafolio, proyectos y contacto.",
-    images: [
-      {
-        url: "/og.png",
-        width:  512, // Recommended: 1200x630
-        height: 512,
-        alt: "ediloaz — Portafolio de Edisson López",
-      },
-    ],
+    url: SITE_URL,
+    siteName: "ediloaz",
+    locale: "es_CR",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: "ediloaz — Edisson López",
-    description: "Portafolio, proyectos y contacto.",
-    images: ["/og.png"],
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     site: "@ediloaz",
     creator: "@ediloaz",
   },
-  alternates: { canonical: "https://www.ediloaz.com" },
   robots: { index: true, follow: true },
-  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "ediloaz — Edisson López",
+    title: "Edisson López",
     // startupImage: [{ url: "/apple-splash-1170-2532.png", media: "(device-width: 390px)" }], // opcional
   },
   authors: [{ name: "Edisson López", url: "https://www.ediloaz.com" }],
@@ -128,14 +123,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   name: "Edisson López",
                   alternateName: "ediloaz",
                   url: "https://www.ediloaz.com",
-                  image: "https://www.ediloaz.com/og.png",
-                  jobTitle: "Full Stack Developer",
+                  image: "https://www.ediloaz.com/images/profile-photo.png",
+                  email: "mailto:ediloaz@gmail.com",
+                  jobTitle: "Desarrollador Full Stack Senior",
                   description:
-                    "Edisson López es un desarrollador Full Stack en Costa Rica especializado en React, Next.js, .NET y arquitecturas modernas.",
+                    `Edisson López es un desarrollador Full Stack Senior en Costa Rica con ${getYearsOfExperience()}+ años de experiencia, especializado en React, Next.js, TypeScript y .NET.`,
                   worksFor: {
                     "@type": "Organization",
                     name: "Ibylit"
                   },
+                  alumniOf: {
+                    "@type": "CollegeOrUniversity",
+                    name: "Instituto Tecnológico de Costa Rica",
+                    sameAs: "https://www.tec.ac.cr"
+                  },
+                  knowsLanguage: ["es", "en"],
                   nationality: {
                     "@type": "Country",
                     name: "Costa Rica"
@@ -150,10 +152,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   },
                   knowsAbout: [
                     "Desarrollo web",
+                    "Desarrollo frontend",
                     "Full Stack Development",
                     "React",
                     "Next.js",
+                    "TypeScript",
+                    "JavaScript",
+                    "Node.js",
+                    "C#",
                     ".NET",
+                    "AWS",
                     "Arquitectura de software",
                     "APIs REST",
                     "SQL Server"
@@ -170,28 +178,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   "@type": "WebSite",
                   "@id": "https://www.ediloaz.com/#website",
                   url: "https://www.ediloaz.com",
-                  name: "ediloaz — Edisson López",
+                  name: "Edisson López — Desarrollador Full Stack Senior",
                   description:
-                    "Portafolio y sitio personal de Edisson López, desarrollador Full Stack en Costa Rica especializado en React, Next.js y .NET.",
+                    "Portafolio y sitio personal de Edisson López, desarrollador Full Stack Senior en Costa Rica especializado en React, Next.js y .NET.",
                   inLanguage: "es-CR",
                   publisher: {
                     "@id": "https://www.ediloaz.com/#person"
                   }
-                },
-                {
-                  "@type": "WebPage",
-                  "@id": "https://www.ediloaz.com/#webpage",
-                  url: "https://www.ediloaz.com",
-                  name: "Inicio — ediloaz",
-                  isPartOf: {
-                    "@id": "https://www.ediloaz.com/#website"
-                  },
-                  about: {
-                    "@id": "https://www.ediloaz.com/#person"
-                  },
-                  description:
-                    "Página principal del portafolio de Edisson López, desarrollador Full Stack en Costa Rica.",
-                  inLanguage: "es-CR"
                 }
               ]
             })

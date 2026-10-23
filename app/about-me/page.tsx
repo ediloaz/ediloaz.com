@@ -4,6 +4,7 @@ import TechnologiesSection from "@/components/technologies-section";
 import AdSenseBanner from "@/components/adsense/AdSenseBanner";
 import AdSenseInFeed from "@/components/adsense/AdSenseInFeed";
 import { ExperienceTimeline } from "@/components/experience-timeline";
+import { OG_IMAGE } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   title: "Sobre Mí",
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
     url: "https://www.ediloaz.com/about-me",
     type: "profile",
     siteName: "ediloaz",
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary",

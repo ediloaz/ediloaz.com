@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageLayout from "@/components/page-layout";
 import BlogContent from "@/components/blog/BlogContent";
+import { OG_IMAGE } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
     url: "https://www.ediloaz.com/blog",
     type: "website",
     siteName: "ediloaz",
+    images: [OG_IMAGE],
   },
   alternates: {
     canonical: "https://www.ediloaz.com/blog",

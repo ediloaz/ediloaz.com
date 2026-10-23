@@ -1,15 +1,29 @@
-"use client";
-
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Navbar, Footer } from "@/components";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { PROJECTS } from "./projects/projects-data";
-import ProjectCard from "./projects/project-card";
-import { technologies } from "@/constants/technologies";
 import TechnologiesSection from "@/components/technologies-section";
 import { NeuralNetworkBg } from "@/components/neural-network-bg";
 import { TechFlowSection } from "@/components/tech-flow-section";
-import { ExperienceTimeline } from "@/components/experience-timeline";
+import { EXPERIENCE, getYearsOfExperience } from "@/constants/experience";
+import { HOME_TITLE, SITE_URL } from "@/lib/metadata";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
+const profilePageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${SITE_URL}/#webpage`,
+  url: SITE_URL,
+  name: HOME_TITLE,
+  inLanguage: "es-CR",
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  mainEntity: { "@id": `${SITE_URL}/#person` },
+};
 
 // ===== ICON PRIMITIVES =====
 
@@ -173,21 +187,28 @@ function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) 
 
 // ===== HOME PAGE =====
 export default function Home() {
-  const yearsOfExperience = new Date().getFullYear() - 2018;
+  const yearsOfExperience = getYearsOfExperience();
+  const featuredProjects = PROJECTS.filter((project) => project.featured);
 
   const stats = [
-    { value: `${PROJECTS.length}+`, label: "Proyectos" },
-    { value: `${technologies.filter((t) => t.mastery === "domino").length}+`, label: "Tecnologías" },
-    { value: `${yearsOfExperience}+`, label: "Años exp." },
-    { value: "Full", label: "Stack" },
+    { value: `${yearsOfExperience}+`, label: "Años de experiencia" },
+    { value: "Senior", label: "Full Stack en Ibylit" },
+    { value: "2×", label: "Top performer en Advision" },
+    { value: "#1", label: "Dev de Costa Rica en Workana" },
+  ];
+
+  const facts = [
+    { label: "Formación", value: "Ingeniería en Computación · TEC" },
+    { label: "Idiomas", value: "Español nativo · Inglés B2+" },
+    { label: "Modalidad", value: "Remoto desde Costa Rica (GMT-6)" },
   ];
 
   const specialties = [
-    { label: "Aplicaciones web completas", Icon: IconGlobe },
-    { label: "APIs RESTful y GraphQL", Icon: IconCode },
+    { label: "Frontend con React, Next.js y TypeScript", Icon: IconGlobe },
+    { label: "APIs REST y GraphQL con .NET y Node.js", Icon: IconCode },
     { label: "Bases de datos relacionales y NoSQL", Icon: IconDatabase },
     { label: "Arquitectura de software", Icon: IconLayers },
-    { label: "DevOps y despliegue en la nube", Icon: IconCloud },
+    { label: "Cloud y despliegue en AWS", Icon: IconCloud },
     { label: "Testing y calidad de código", Icon: IconCheck },
   ];
 
@@ -224,6 +245,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen" style={{ background: "var(--bg)" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageJsonLd) }}
+      />
       <Navbar />
 
       {/* ===== HERO ===== */}
@@ -279,6 +304,12 @@ export default function Home() {
                     Edisson
                   </span>
                   <span className="block gradient-text-animated">López</span>
+                  <span
+                    className="block mt-5 text-xl md:text-2xl font-semibold leading-snug tracking-normal"
+                    style={{ color: "var(--fg)" }}
+                  >
+                    Desarrollador Full Stack Senior · React y .NET
+                  </span>
                 </h1>
               </ScrollReveal>
 
@@ -287,27 +318,26 @@ export default function Home() {
                   className="text-lg leading-relaxed max-w-lg mb-8"
                   style={{ color: "var(--fg-muted)" }}
                 >
-                  Desarrollador{" "}
+                  {yearsOfExperience}+ años construyendo productos web en empresas de
+                  software. Hoy desarrollo plataformas{" "}
                   <strong style={{ color: "var(--fg)", fontWeight: 600 }}>
-                    Full Stack
+                    SaaS B2B en Ibylit
                   </strong>{" "}
-                  especializado en crear soluciones web robustas y escalables.
-                  Transformo ideas en aplicaciones funcionales con tecnologías
-                  modernas.
+                  con React, C# y AWS; antes, frontends en React para sitios como
+                  sportsbookreview.com.
                 </p>
               </ScrollReveal>
 
               <ScrollReveal delay={300}>
                 <div className="flex flex-wrap gap-3 mb-12">
-                  <Link
-                    href="/projects"
+                  <a
+                    href="#experiencia"
                     className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-200 shadow-md hover:opacity-85 hover:-translate-y-0.5"
                     style={{ background: "var(--fg)", color: "var(--bg)" }}
-                    aria-label="Ver todos los proyectos"
                   >
-                    Ver Proyectos
+                    Ver experiencia
                     <IconArrow className="w-4 h-4" />
-                  </Link>
+                  </a>
                   <a
                     href="/cv/cv.pdf"
                     download
@@ -378,19 +408,6 @@ export default function Home() {
                   alt="Edisson López - Desarrollador Full Stack"
                   className="relative z-10 w-full object-contain object-bottom"
                   style={{ maxHeight: "420px" }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = "none";
-                    const parent = target.parentElement;
-                    if (parent) {
-                      parent.innerHTML = `
-                        <div style="width:380px;height:420px;display:flex;align-items:center;justify-content:center">
-                          <svg width="72" height="72" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" style="color:#7a8499">
-                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                          </svg>
-                        </div>`;
-                    }
-                  }}
                 />
 
                 {/* Floating code tag */}
@@ -411,79 +428,162 @@ export default function Home() {
               </div>
             </ScrollReveal>
           </div>
+        </div>
 
-          {/* Scroll indicator */}
-          <div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 scroll-indicator"
-            aria-hidden="true"
+        {/* Scroll indicator — anclado al fondo del hero para no pisar las stats */}
+        <div
+          className="absolute z-10 bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 scroll-indicator"
+          aria-hidden="true"
+        >
+          <span
+            className="text-[10px] tracking-widest uppercase"
+            style={{ color: "var(--fg-muted)" }}
           >
-            <span
-              className="text-[10px] tracking-widest uppercase"
-              style={{ color: "var(--fg-muted)" }}
-            >
-              Scroll
-            </span>
-            <svg
-              width="16"
-              height="16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              viewBox="0 0 24 24"
-              style={{ color: "var(--fg-muted)" }}
-            >
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
+            Scroll
+          </span>
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            viewBox="0 0 24 24"
+            style={{ color: "var(--fg-muted)" }}
+          >
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </div>
+      </section>
+
+      {/* ===== EXPERIENCE ===== */}
+      <section
+        id="experiencia"
+        className="py-24 px-5 scroll-mt-16"
+        style={{ background: "var(--bg)" }}
+      >
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-[300px_1fr] gap-12 lg:gap-16">
+          {/* Intro (sticky on desktop) */}
+          <div className="lg:sticky lg:top-28 self-start">
+            <ScrollReveal>
+              <SectionHeading eyebrow="Trayectoria" title="Experiencia profesional" />
+              <p
+                className="text-base leading-relaxed -mt-6 mb-8"
+                style={{ color: "var(--fg-muted)" }}
+              >
+                {yearsOfExperience}+ años construyendo productos web en equipos ágiles:
+                frontend en React, backend en C#/.NET y Node.js, y nube en AWS.
+              </p>
+              <dl className="space-y-4 mb-8">
+                {facts.map(({ label, value }) => (
+                  <div key={label}>
+                    <dt
+                      className="text-xs font-semibold tracking-widest uppercase mb-1"
+                      style={{ color: "var(--fg-muted)" }}
+                    >
+                      {label}
+                    </dt>
+                    <dd className="text-sm font-medium" style={{ color: "var(--fg)" }}>
+                      {value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <Link
+                href="/cv"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:opacity-75"
+                style={{
+                  color: "var(--accent)",
+                  border: "1px solid var(--border-strong)",
+                  background: "transparent",
+                }}
+              >
+                Ver CV completo
+                <IconArrow className="w-4 h-4" />
+              </Link>
+            </ScrollReveal>
           </div>
+
+          {/* Roles */}
+          <ol className="space-y-5">
+            {EXPERIENCE.map((job, index) => (
+              <li key={job.company}>
+                <ScrollReveal delay={index * 80}>
+                  <article className="surface-card rounded-2xl p-6 md:p-7">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-1.5">
+                      <h3
+                        className="text-lg font-semibold tracking-tight"
+                        style={{ color: "var(--fg)" }}
+                      >
+                        {job.role}
+                      </h3>
+                      <span className="text-xs font-mono" style={{ color: "var(--fg-muted)" }}>
+                        {job.period}
+                      </span>
+                    </div>
+                    <p className="text-sm mb-4" style={{ color: "var(--fg-muted)" }}>
+                      <span className="font-semibold" style={{ color: "var(--accent)" }}>
+                        {job.company}
+                      </span>
+                      {" · "}
+                      {job.context}
+                      {job.current && (
+                        <span
+                          className="inline-flex items-center gap-1.5 ml-2 px-2 py-0.5 rounded-full text-[11px] font-medium align-middle"
+                          style={{ border: "1px solid var(--border)" }}
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          Actual
+                        </span>
+                      )}
+                    </p>
+                    <ul className="space-y-2 mb-5">
+                      {job.highlights.map((highlight) => (
+                        <li
+                          key={highlight}
+                          className="flex gap-3 text-sm leading-relaxed"
+                          style={{ color: "var(--fg-muted)" }}
+                        >
+                          <span
+                            className="mt-2 w-1.5 h-1.5 rounded-full shrink-0"
+                            style={{ background: job.color }}
+                            aria-hidden="true"
+                          />
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
+                    {job.sites && (
+                      <p className="text-xs mb-4" style={{ color: "var(--fg-muted)" }}>
+                        Sitios: {job.sites.join(" · ")}
+                      </p>
+                    )}
+                    <ul className="flex flex-wrap gap-1.5" aria-label={`Tecnologías en ${job.company}`}>
+                      {job.stack.map((tech) => (
+                        <li
+                          key={tech}
+                          className="px-2 py-1 rounded-md text-[11px] font-medium"
+                          style={{
+                            background: "var(--bg-subtle)",
+                            border: "1px solid var(--border)",
+                            color: "var(--fg-muted)",
+                          }}
+                        >
+                          {tech}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </ScrollReveal>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
       {/* ===== TECH FLOW (code-driven SVG architecture animation) ===== */}
       <TechFlowSection />
-
-      {/* ===== PROJECTS ===== */}
-      <section
-        className="py-24 px-5"
-        style={{ background: "var(--bg)" }}
-      >
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal>
-            <SectionHeading eyebrow="Portafolio" title="Proyectos Públicos" />
-            <p
-              className="text-base leading-relaxed max-w-xl -mt-6 mb-12"
-              style={{ color: "var(--fg-muted)" }}
-            >
-              Desarrollados en tiempo libre para explorar tecnologías y demostrar habilidades.
-            </p>
-          </ScrollReveal>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-            {PROJECTS.slice(0, 3).map((project, index) => (
-              <ScrollReveal key={project.slug} delay={index * 80}>
-                <ProjectCard project={project} index={index} />
-              </ScrollReveal>
-            ))}
-          </div>
-
-          <ScrollReveal delay={300}>
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:opacity-75"
-              style={{
-                color: "var(--accent)",
-                border: "1px solid var(--border-strong)",
-                background: "transparent",
-              }}
-              aria-label="Ver todos los proyectos"
-            >
-              Ver todos los proyectos
-              <IconArrow className="w-4 h-4" />
-            </Link>
-          </ScrollReveal>
-        </div>
-      </section>
 
       {/* ===== ABOUT ===== */}
       <section
@@ -503,10 +603,10 @@ export default function Home() {
                 className="text-base leading-relaxed mb-4"
                 style={{ color: "var(--fg-muted)" }}
               >
-                Soy Edisson López, un desarrollador Full Stack apasionado por crear
-                soluciones tecnológicas innovadoras. Con experiencia en múltiples
-                lenguajes y frameworks, me especializo en desarrollar aplicaciones
-                web completas.
+                Soy Edisson López, ingeniero en Computación del Tecnológico de Costa
+                Rica y desarrollador Full Stack con foco en frontend: React, Next.js y
+                TypeScript del lado del cliente; C#/.NET y Node.js del lado del
+                servidor.
               </p>
               <p
                 className="text-base leading-relaxed mb-4"
@@ -525,7 +625,7 @@ export default function Home() {
                 , mantenible y escalable, siempre buscando las mejores prácticas.
               </p>
               <p
-                className="text-base leading-relaxed mb-8"
+                className="text-base leading-relaxed mb-4"
                 style={{ color: "var(--fg-muted)" }}
               >
                 <mark
@@ -540,31 +640,28 @@ export default function Home() {
                 : equilibro tiempos para entregar funcionalidad sólida en plazos
                 razonables y favorecer el avance del proyecto.
               </p>
+              <p
+                className="text-base leading-relaxed"
+                style={{ color: "var(--fg-muted)" }}
+              >
+                Trabajo con equipos ágiles (Scrum y Kanban), hablo inglés a nivel B2+ y
+                disfruto la mentoría y el pair-programming.
+              </p>
+            </ScrollReveal>
 
-              {/* Specialties grid */}
-              <h4
+            {/* Specialties + photo (mobile only) */}
+            <ScrollReveal delay={100}>
+              <h3
                 className="text-sm font-semibold tracking-wide uppercase mb-4"
                 style={{ color: "var(--fg-muted)" }}
               >
                 Especialidades
-              </h4>
+              </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {specialties.map(({ label, Icon }) => (
                   <div
                     key={label}
-                    className="group flex items-center gap-3 p-3 rounded-xl transition-all duration-200"
-                    style={{
-                      border: "1px solid var(--border)",
-                      background: "var(--surface)",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor = "color-mix(in srgb, var(--accent) 30%, transparent)";
-                      (e.currentTarget as HTMLElement).style.background = "var(--surface-hover)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-                      (e.currentTarget as HTMLElement).style.background = "var(--surface)";
-                    }}
+                    className="surface-card flex items-center gap-3 p-3 rounded-xl"
                   >
                     <div
                       className="shrink-0 w-7 h-7 rounded-lg flex items-center justify-center"
@@ -581,38 +678,96 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+
+              <div
+                className="relative overflow-hidden rounded-2xl mt-6 lg:hidden"
+                style={{
+                  border: "1px solid var(--border)",
+                  background: "var(--surface)",
+                }}
+              >
+                <img
+                  src="/images/profile-photo.png"
+                  alt="Edisson López"
+                  className="w-full aspect-[4/3] object-cover object-top"
+                />
+              </div>
             </ScrollReveal>
-
-            {/* Experience + Education — animated timeline */}
-            <div>
-              <ExperienceTimeline />
-
-              {/* Photo card (mobile only) */}
-              <ScrollReveal delay={300} className="mt-4 lg:hidden">
-                <div
-                  className="relative overflow-hidden rounded-2xl"
-                  style={{
-                    border: "1px solid var(--border)",
-                    background: "var(--surface)",
-                  }}
-                >
-                  <img
-                    src="/images/profile-photo.png"
-                    alt="Edisson López"
-                    className="w-full aspect-[4/3] object-cover object-top"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.parentElement!.style.display = "none";
-                    }}
-                  />
-                </div>
-              </ScrollReveal>
-            </div>
           </div>
         </div>
       </section>
 
       <TechnologiesSection />
+
+      {/* ===== SIDE PROJECTS ===== */}
+      <section
+        id="proyectos"
+        className="py-24 px-5 scroll-mt-16"
+        style={{ background: "var(--bg)" }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <SectionHeading eyebrow="Side projects" title="Proyectos personales" />
+            <p
+              className="text-base leading-relaxed max-w-xl -mt-6 mb-10"
+              style={{ color: "var(--fg-muted)" }}
+            >
+              Hechos en tiempo libre para explorar tecnologías.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid sm:grid-cols-2 gap-4 mb-8">
+            {featuredProjects.map((project, index) => (
+              <ScrollReveal key={project.slug} delay={index * 80} className="h-full">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="surface-card group flex h-full items-center gap-4 p-4 rounded-2xl"
+                >
+                  {project.imageUrl && (
+                    <Image
+                      src={project.imageUrl}
+                      alt=""
+                      width={112}
+                      height={70}
+                      className="shrink-0 rounded-lg object-cover object-top"
+                      style={{ border: "1px solid var(--border)" }}
+                    />
+                  )}
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-sm mb-1 transition-colors duration-200 group-hover:text-[var(--accent)]">
+                      {project.name}
+                    </h3>
+                    <p
+                      className="text-xs leading-relaxed mb-1.5 line-clamp-2"
+                      style={{ color: "var(--fg-muted)" }}
+                    >
+                      {project.shortDescription}
+                    </p>
+                    <p className="text-[11px] font-mono" style={{ color: "var(--fg-muted)" }}>
+                      {project.technologies.join(" · ")}
+                    </p>
+                  </div>
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal delay={200}>
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:opacity-75"
+              style={{
+                color: "var(--accent)",
+                border: "1px solid var(--border-strong)",
+                background: "transparent",
+              }}
+            >
+              Ver todos los proyectos
+              <IconArrow className="w-4 h-4" />
+            </Link>
+          </ScrollReveal>
+        </div>
+      </section>
 
       {/* ===== QUICK NAV ===== */}
       <section
@@ -643,12 +798,9 @@ export default function Home() {
                   <div className={`w-10 h-10 rounded-xl mb-4 flex items-center justify-center ${colorClass}`}>
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h4
-                    className="font-semibold text-sm mb-1.5 transition-colors duration-200 group-hover:text-[var(--accent)]"
-                    style={{ color: "var(--fg)" }}
-                  >
+                  <h3 className="font-semibold text-sm mb-1.5 transition-colors duration-200 group-hover:text-[var(--accent)]">
                     {label}
-                  </h4>
+                  </h3>
                   <p className="text-xs leading-relaxed" style={{ color: "var(--fg-muted)" }}>
                     {desc}
                   </p>
@@ -677,7 +829,7 @@ export default function Home() {
               className="text-3xl md:text-4xl font-bold tracking-tight mb-5"
               style={{ color: "var(--fg)" }}
             >
-              ¿Tienes un proyecto?
+              ¿Tienes un proyecto o una vacante?
             </h2>
             <p
               className="leading-relaxed mb-10 max-w-md mx-auto"

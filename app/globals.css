@@ -181,6 +181,17 @@ body {
     0 8px 32px color-mix(in srgb, var(--accent-glow) 60%, transparent);
 }
 
+.surface-card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.surface-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  background: var(--surface-hover);
+}
+
 .scroll-indicator {
   animation: scroll-hint 2.2s ease-in-out infinite;
 }

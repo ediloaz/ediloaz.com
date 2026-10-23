@@ -3,6 +3,7 @@ import PageLayout from "@/components/page-layout";
 import { PROJECTS } from "./projects-data";
 import { technologies } from "@/constants/technologies";
 import ProjectsAnimatedPage from "./projects-animated-page";
+import { OG_IMAGE } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   title: "Proyectos",
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
     url: "https://www.ediloaz.com/projects",
     type: "website",
     siteName: "ediloaz",
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
