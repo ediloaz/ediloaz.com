@@ -7,86 +7,94 @@ export type Experience = {
   summary: string;
   highlights: string[];
   stack: string[];
-  /** Sitios públicos en los que trabajé */
-  sites?: string[];
   color: string;
   current?: boolean;
 };
 
-/** Año de inicio profesional, base del "X+ años de experiencia" */
-export const CAREER_START_YEAR = 2018;
+/** Inicio en Data GIS (dic 2018): base del "X+ años de experiencia" del CV */
+const CAREER_START = { year: 2018, month: 11 };
 
-export const getYearsOfExperience = () => new Date().getFullYear() - CAREER_START_YEAR;
+export const getYearsOfExperience = () => {
+  const now = new Date();
+  const years = now.getFullYear() - CAREER_START.year;
+  return now.getMonth() < CAREER_START.month ? years - 1 : years;
+};
+
+export const CAREER_HIGHLIGHTS = [
+  "Bajé la carga de facturas de 30 s a ~300 ms (~100× más rápido) en una plataforma fintech B2B optimizando consultas SQL y endpoints de la API.",
+  "Construí y mantuve los frontends de 4 plataformas de datos deportivos en tiempo real con ~400K visitas mensuales combinadas.",
+  "Llevé IA a producción: lancé una funcionalidad basada en la API de OpenAI y automaticé flujos del equipo con Claude.",
+  "Elevo la calidad del equipo como mentor, revisor de código y compañero de pair-programming que desbloquea a otros.",
+];
 
 export const EXPERIENCE: Experience[] = [
   {
     company: "Ibylit",
-    role: "Senior Fullstack Engineer",
-    period: "2024 — Actualidad",
-    context: "Startup SaaS B2B fintech · San José, Costa Rica",
-    summary: "Plataformas B2B seguras y soluciones de alto tráfico para clientes corporativos.",
+    role: "Senior Full Stack Engineer",
+    period: "Ene 2024 — Actualidad",
+    context: "Startup SaaS fintech B2B",
+    summary: "Plataforma fintech B2B: APIs en C# / ASP.NET Core, frontend en React e IA en producción.",
     highlights: [
-      "Extiendo plataformas white-label B2B con servicios backend en C# y frontends en React, asegurando cumplimiento normativo.",
-      "Encabecé la integración de notificaciones y personalizaciones clave para clientes estratégicos.",
-      "Entregué funcionalidades críticas antes del calendario previsto, acelerando la adopción de la plataforma.",
+      "Diseño y construyo APIs REST en C# / ASP.NET Core y esquemas de SQL Server para una plataforma fintech B2B con clientes financieros internacionales, incluyendo Argentina.",
+      "Bajé la carga de facturas de 30 s a ~300 ms (~100× más rápido) optimizando consultas SQL y endpoints de la API.",
+      "Integré la API de OpenAI para lanzar una nueva funcionalidad de producto basada en IA.",
+      "Mejoré la confiabilidad con alertas de Sentry + Slack y reduje trabajo manual del equipo con automatizaciones basadas en Claude.",
     ],
-    stack: ["React", "C#", "AWS", "SQL Server"],
+    stack: ["React", "C#", "ASP.NET Core", "SQL Server", "AWS"],
     color: "#4f8ef7",
     current: true,
   },
   {
     company: "Advision Development",
-    role: "Frontend Engineer",
-    period: "2021 — 2023",
-    context: "Proyectos web deportivos",
-    summary: "Desarrollo de experiencias digitales y sistemas de gestión a medida.",
+    role: "Mid-Senior Frontend Engineer",
+    period: "Ene 2021 — Oct 2023",
+    context: "Plataformas de datos deportivos en vivo para sportsbooks de EE. UU.",
+    summary: "Frontends de 4 plataformas deportivas en tiempo real con ~400K visitas al mes.",
     highlights: [
-      "Reconocido como top performer del departamento de software dos años consecutivos.",
-      "Lancé la primera versión de bookmakersreview.com un 15% antes de lo planificado.",
-      "Implementé funcionalidades en React desde diseños de Figma y di mentoría y pair-programming al equipo.",
+      "Construí y mantuve los frontends de 4 plataformas en tiempo real (OddsTrader, TheRX, Bookmakers Review y Sportsbook Review) con ~400K visitas mensuales combinadas.",
+      "Entregué features y hotfixes en una organización grande: 7 equipos de desarrollo, más QA y diseño dedicados.",
+      "Desarrollé endpoints en Node.js y PHP/WordPress que servían cuotas en vivo, marcadores y contenido editorial a los frontends en React.",
     ],
-    stack: ["React", "JavaScript", "Node.js", "AWS", "Docker"],
-    sites: ["therx.com", "oddstrader.com", "bookmakersreview.com", "sportsbookreview.com"],
+    stack: ["React", "Node.js", "PHP", "WordPress", "AWS"],
     color: "#7c3aed",
   },
   {
     company: "Data GIS",
     role: "Full Stack Engineer",
-    period: "2019 — 2021",
+    period: "Dic 2018 — Ene 2021",
     context: "SaaS de inteligencia geoespacial inmobiliaria",
-    summary: "Herramientas web para valuadores inmobiliarios con integración de datos geoespaciales.",
+    summary: "Herramienta de valoración geoespacial para peritos, con mapas interactivos y ArcGIS.",
     highlights: [
-      "Diseñé herramientas para peritos valuadores combinando React y Python.",
-      "Optimicé los tiempos de carga e interacción en un 40%.",
-      "Participé en todo el ciclo del producto: descubrimiento, prototipos, bases de datos, QA y despliegue.",
+      "Construí una herramienta de valoración geoespacial para peritos: mapas interactivos y valoración automatizada.",
+      "La integré con sistemas internos y con ArcGIS (una dependencia central), centralizando los datos de valoración.",
+      "Alimenté una base de datos compartida que se reutilizó en otros proyectos de la empresa, haciendo a los peritos más rápidos y precisos.",
     ],
-    stack: ["React", "Python", "MySQL", "AWS"],
+    stack: ["React", "JavaScript", "Python", "Flask", "MySQL"],
     color: "#06b6d4",
   },
   {
-    company: "Workana",
-    role: "Freelance Software Engineer",
-    period: "2017 — 2019",
-    context: "Plataforma freelance internacional",
-    summary: "Aplicaciones web, de escritorio y móviles para clientes internacionales.",
+    company: "Tecnológico de Costa Rica",
+    role: "Web Developer (pasantía)",
+    period: "Jul 2017 — Ago 2019",
+    context: "Sistema web interno de la universidad",
+    summary: "Sistema web interno desarrollado de punta a punta junto a un órgano directivo.",
     highlights: [
-      "15 proyectos completados con calificación perfecta y múltiples recomendaciones.",
-      "Clasificado como el desarrollador #1 de Costa Rica en la plataforma el 90% del tiempo.",
+      "Lideré de punta a punta el desarrollo de un sistema web interno, trabajando directamente con un órgano directivo de la universidad.",
     ],
-    stack: ["React", "ASP.NET", "Python"],
-    color: "#f59e0b",
+    stack: ["ASP.NET", "SQL", "jQuery", "Bootstrap"],
+    color: "#10b981",
   },
   {
-    company: "Tecnológico de Costa Rica",
-    role: "Web Developer",
-    period: "2018 — 2019",
-    context: "Sistema interno de la universidad",
-    summary: "Sistema de Gestión de Movilidad Internacional en ASP.NET y SQL Server.",
+    company: "Workana",
+    role: "Software Developer",
+    period: "Ene 2017 — Dic 2018",
+    context: "Plataforma freelance",
+    summary: "Aplicaciones de escritorio, móviles y web para clientes internacionales.",
     highlights: [
-      "Diseñé y desarrollé el Sistema de Gestión de Movilidad Internacional, reconocido oficialmente por el TEC.",
-      "Optimicé consultas en un 25% mediante el rediseño de la base de datos.",
+      "Entregué aplicaciones de escritorio, apps móviles y funcionalidades web para clientes internacionales.",
+      "Completé 15 proyectos con las mejores calificaciones, con excelentes reseñas y recomendaciones.",
     ],
-    stack: ["ASP.NET", "SQL Server"],
-    color: "#10b981",
+    stack: [],
+    color: "#f59e0b",
   },
 ];

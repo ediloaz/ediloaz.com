@@ -1,9 +1,8 @@
 import { Metadata } from "next";
 import PageLayout from "@/components/page-layout";
 import TechnologiesSection from "@/components/technologies-section";
-import AdSenseBanner from "@/components/adsense/AdSenseBanner";
-import AdSenseInFeed from "@/components/adsense/AdSenseInFeed";
 import { ExperienceTimeline } from "@/components/experience-timeline";
+import { getYearsOfExperience } from "@/constants/experience";
 import { OG_IMAGE } from "@/lib/metadata";
 
 export const metadata: Metadata = {
@@ -63,25 +62,16 @@ export default function AboutMe() {
               ¿Quién soy?
             </h2>
             <p className="text-base leading-relaxed mb-4" style={{ color: "var(--fg-muted)" }}>
-              Soy Edisson López, un desarrollador Full Stack apasionado por crear soluciones
-              tecnológicas innovadoras que mejoren la vida de las personas. Con experiencia
-              en múltiples lenguajes y frameworks, me especializo en desarrollar aplicaciones
-              web completas desde el frontend hasta el backend.
+              Soy Edisson López, desarrollador Full Stack Senior con {getYearsOfExperience()}+ años
+              llevando aplicaciones web a producción en fintech, deportes y SaaS geoespacial.
+              Me especializo en frontend con React, Next.js y TypeScript, y tengo experiencia
+              sólida de backend en C# / ASP.NET Core, SQL, Node.js y Python.
             </p>
             <p className="text-base leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-              Mi enfoque se centra en escribir código limpio, mantenible y escalable, siempre
-              buscando las mejores prácticas y las tecnologías más actuales del mercado.
+              Mi enfoque se centra en escribir código limpio, mantenible y escalable, y en
+              llevar cada feature de punta a punta: de los requerimientos al deploy.
             </p>
           </div>
-
-          {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID &&
-            process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST && (
-              <AdSenseBanner
-                clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}
-                slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST}
-                className="mb-8"
-              />
-            )}
 
           {/* Timeline card */}
           <div
@@ -99,21 +89,6 @@ export default function AboutMe() {
 
           <TechnologiesSection sectionId="tecnologias" />
         </div>
-
-        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID &&
-          process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_LIST && (
-            <div
-              className="w-full mt-16 pt-12 pb-4"
-              style={{ borderTop: "1px solid var(--border)" }}
-            >
-              <div className="max-w-7xl mx-auto px-4 w-full">
-                <AdSenseInFeed
-                  clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ""}
-                  slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_LIST || ""}
-                />
-              </div>
-            </div>
-          )}
       </section>
     </PageLayout>
   );

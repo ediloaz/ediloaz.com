@@ -162,6 +162,15 @@ function IconRocket({ className }: { className?: string }) {
   );
 }
 
+function IconSparkles({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z" />
+      <path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z" />
+    </svg>
+  );
+}
+
 // ===== SECTION HEADING =====
 function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
@@ -192,24 +201,27 @@ export default function Home() {
 
   const stats = [
     { value: `${yearsOfExperience}+`, label: "Años de experiencia" },
-    { value: "Senior", label: "Full Stack en Ibylit" },
-    { value: "2×", label: "Top performer en Advision" },
-    { value: "#1", label: "Dev de Costa Rica en Workana" },
+    { value: "~100×", label: "Más rápido (30 s → 300 ms)" },
+    { value: "~400K", label: "Visitas/mes en deportes" },
+    { value: "AWS", label: "Certificado en IA y Cloud" },
   ];
 
   const facts = [
     { label: "Formación", value: "Ingeniería en Computación · TEC" },
-    { label: "Idiomas", value: "Español nativo · Inglés B2+" },
-    { label: "Modalidad", value: "Remoto desde Costa Rica (GMT-6)" },
+    { label: "Certificaciones", value: "AWS AI Practitioner · AWS Cloud Practitioner" },
+    { label: "Idiomas", value: "Español nativo · Inglés profesional (B2+)" },
+    { label: "Modalidad", value: "Remoto desde Costa Rica (UTC-6)" },
   ];
 
   const specialties = [
     { label: "Frontend con React, Next.js y TypeScript", Icon: IconGlobe },
-    { label: "APIs REST y GraphQL con .NET y Node.js", Icon: IconCode },
-    { label: "Bases de datos relacionales y NoSQL", Icon: IconDatabase },
-    { label: "Arquitectura de software", Icon: IconLayers },
+    { label: "APIs REST y GraphQL con ASP.NET Core y Node.js", Icon: IconCode },
+    { label: "SQL Server, PostgreSQL y MySQL", Icon: IconDatabase },
+    { label: "Rendimiento de punta a punta: SQL, APIs y UI", Icon: IconRocket },
+    { label: "IA en producción: OpenAI API y Claude", Icon: IconSparkles },
     { label: "Cloud y despliegue en AWS", Icon: IconCloud },
-    { label: "Testing y calidad de código", Icon: IconCheck },
+    { label: "Testing con Jest, React Testing Library y Playwright", Icon: IconCheck },
+    { label: "Arquitectura de software", Icon: IconLayers },
   ];
 
   const navCards = [
@@ -318,13 +330,13 @@ export default function Home() {
                   className="text-lg leading-relaxed max-w-lg mb-8"
                   style={{ color: "var(--fg-muted)" }}
                 >
-                  {yearsOfExperience}+ años construyendo productos web en empresas de
-                  software. Hoy desarrollo plataformas{" "}
+                  {yearsOfExperience}+ años llevando aplicaciones web a producción en
+                  fintech, deportes y SaaS geoespacial. Hoy construyo una plataforma{" "}
                   <strong style={{ color: "var(--fg)", fontWeight: 600 }}>
-                    SaaS B2B en Ibylit
+                    fintech B2B en Ibylit
                   </strong>{" "}
-                  con React, C# y AWS; antes, frontends en React para sitios como
-                  sportsbookreview.com.
+                  con React, C# / ASP.NET Core y AWS; antes, los frontends de 4
+                  plataformas deportivas en tiempo real con ~400K visitas al mes.
                 </p>
               </ScrollReveal>
 
@@ -472,8 +484,9 @@ export default function Home() {
                 className="text-base leading-relaxed -mt-6 mb-8"
                 style={{ color: "var(--fg-muted)" }}
               >
-                {yearsOfExperience}+ años construyendo productos web en equipos ágiles:
-                frontend en React, backend en C#/.NET y Node.js, y nube en AWS.
+                Especialista frontend en React, Next.js y TypeScript, con backend sólido
+                en C# / ASP.NET Core, SQL, Node.js y Python. Llevo features de punta a
+                punta: de los requerimientos al deploy.
               </p>
               <dl className="space-y-4 mb-8">
                 {facts.map(({ label, value }) => (
@@ -538,7 +551,7 @@ export default function Home() {
                         </span>
                       )}
                     </p>
-                    <ul className="space-y-2 mb-5">
+                    <ul className={`space-y-2 ${job.stack.length > 0 ? "mb-5" : ""}`}>
                       {job.highlights.map((highlight) => (
                         <li
                           key={highlight}
@@ -554,26 +567,23 @@ export default function Home() {
                         </li>
                       ))}
                     </ul>
-                    {job.sites && (
-                      <p className="text-xs mb-4" style={{ color: "var(--fg-muted)" }}>
-                        Sitios: {job.sites.join(" · ")}
-                      </p>
+                    {job.stack.length > 0 && (
+                      <ul className="flex flex-wrap gap-1.5" aria-label={`Tecnologías en ${job.company}`}>
+                        {job.stack.map((tech) => (
+                          <li
+                            key={tech}
+                            className="px-2 py-1 rounded-md text-[11px] font-medium"
+                            style={{
+                              background: "var(--bg-subtle)",
+                              border: "1px solid var(--border)",
+                              color: "var(--fg-muted)",
+                            }}
+                          >
+                            {tech}
+                          </li>
+                        ))}
+                      </ul>
                     )}
-                    <ul className="flex flex-wrap gap-1.5" aria-label={`Tecnologías en ${job.company}`}>
-                      {job.stack.map((tech) => (
-                        <li
-                          key={tech}
-                          className="px-2 py-1 rounded-md text-[11px] font-medium"
-                          style={{
-                            background: "var(--bg-subtle)",
-                            border: "1px solid var(--border)",
-                            color: "var(--fg-muted)",
-                          }}
-                        >
-                          {tech}
-                        </li>
-                      ))}
-                    </ul>
                   </article>
                 </ScrollReveal>
               </li>
@@ -605,8 +615,9 @@ export default function Home() {
               >
                 Soy Edisson López, ingeniero en Computación del Tecnológico de Costa
                 Rica y desarrollador Full Stack con foco en frontend: React, Next.js y
-                TypeScript del lado del cliente; C#/.NET y Node.js del lado del
-                servidor.
+                TypeScript del lado del cliente; C# / ASP.NET Core, Node.js y Python del
+                lado del servidor. Tengo las certificaciones AWS Certified AI
+                Practitioner y Cloud Practitioner.
               </p>
               <p
                 className="text-base leading-relaxed mb-4"
@@ -644,8 +655,9 @@ export default function Home() {
                 className="text-base leading-relaxed"
                 style={{ color: "var(--fg-muted)" }}
               >
-                Trabajo con equipos ágiles (Scrum y Kanban), hablo inglés a nivel B2+ y
-                disfruto la mentoría y el pair-programming.
+                Trabajo con equipos distribuidos e internacionales (Scrum y Kanban),
+                hablo inglés a nivel profesional (B2+) y disfruto la mentoría, el code
+                review y el pair-programming.
               </p>
             </ScrollReveal>
 

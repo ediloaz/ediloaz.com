@@ -9,10 +9,12 @@ type BlogPostProps = {
 export default function BlogPost({ post }: BlogPostProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
+    // publishDate es "YYYY-MM-DD" (medianoche UTC): formatear en UTC evita mostrar el día anterior en UTC-6
     return date.toLocaleDateString("es-CR", {
       year: "numeric",
       month: "long",
       day: "numeric",
+      timeZone: "UTC",
     });
   };
 

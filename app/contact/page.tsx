@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import PageLayout from "@/components/page-layout";
-import AdSenseBanner from "@/components/adsense/AdSenseBanner";
 import ContactClient from "@/components/contact-client";
 import { OG_IMAGE } from "@/lib/metadata";
 
@@ -40,15 +39,6 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <PageLayout>
-      {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID &&
-        process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST && (
-          <div className="px-4 pt-8">
-            <AdSenseBanner
-              clientId={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}
-              slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BLOG_POST}
-            />
-          </div>
-        )}
       <ContactClient />
     </PageLayout>
   );

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import CursorSpotlight from "@/components/cursor-spotlight";
+import { WhatsAppLeadTracking } from "@/components/whatsapp-lead-tracking";
 import Script from "next/script";
 import { getYearsOfExperience } from "@/constants/experience";
 import { HOME_DESCRIPTION, HOME_TITLE, SITE_URL } from "@/lib/metadata";
@@ -88,9 +89,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Obtener el client ID de AdSense desde variables de entorno
-  const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
@@ -137,6 +135,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     name: "Instituto Tecnológico de Costa Rica",
                     sameAs: "https://www.tec.ac.cr"
                   },
+                  hasCredential: [
+                    {
+                      "@type": "EducationalOccupationalCredential",
+                      name: "AWS Certified AI Practitioner",
+                      credentialCategory: "certification",
+                      url: "https://www.credly.com/badges/622f33e9-ecbe-47cc-87c4-298faa32953f",
+                      recognizedBy: { "@type": "Organization", name: "Amazon Web Services" }
+                    },
+                    {
+                      "@type": "EducationalOccupationalCredential",
+                      name: "AWS Certified Cloud Practitioner",
+                      credentialCategory: "certification",
+                      recognizedBy: { "@type": "Organization", name: "Amazon Web Services" }
+                    }
+                  ],
                   knowsLanguage: ["es", "en"],
                   nationality: {
                     "@type": "Country",
@@ -161,7 +174,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     "Node.js",
                     "C#",
                     ".NET",
+                    "ASP.NET Core",
                     "AWS",
+                    "Inteligencia artificial aplicada",
                     "Arquitectura de software",
                     "APIs REST",
                     "SQL Server"
@@ -169,6 +184,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   sameAs: [
                     "https://www.linkedin.com/in/ediloaz",
                     "https://github.com/ediloaz",
+                    "https://www.credly.com/users/ediloaz",
                     "https://medium.com/@ediloaz",
                     "https://dev.to/ediloaz",
                     "https://twitter.com/ediloaz"
@@ -190,15 +206,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             })
           }}
         />
-        {adsenseClientId && (
-          <Script
-            id="adsense-init"
-            strategy="beforeInteractive"
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
-            crossOrigin="anonymous"
-            async
-          />
-        )}
         <script
           dangerouslySetInnerHTML={{
             __html: themeInitScript,
@@ -206,6 +213,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <ThemeProvider>
           <CursorSpotlight />
+          <WhatsAppLeadTracking />
           {children}
         </ThemeProvider>
       </body>
